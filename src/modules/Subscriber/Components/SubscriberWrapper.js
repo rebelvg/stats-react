@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 
 import streamsTable from '../../Shared/Tables/StreamsTable';
 import subscribersTable from '../../Shared/Tables/SubscribersTable';
+import defaultFilterMethod from '../../Shared/Methods/TableFilter';
 
 class StreamWrapper extends Component {
     render() {
@@ -30,6 +31,7 @@ class StreamWrapper extends Component {
                 columns={streamsTable}
                 data={streams}
                 minRows={0}
+                defaultFilterMethod={defaultFilterMethod}
                 filterable
             />
         </div>);
