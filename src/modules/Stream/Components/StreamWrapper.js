@@ -3,7 +3,7 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 import moment from "moment";
 import {Link} from 'react-router-dom';
-import {LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer} from 'recharts';
+import {LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer} from 'recharts';
 import _ from 'lodash';
 
 import streamsTable from '../../Shared/Tables/StreamsTable';
@@ -28,17 +28,20 @@ class StreamWrapper extends Component {
                 sortable={false}
             />
 
-            <ResponsiveContainer width='99%' height={450}>
-                <LineChart data={_.map(events, (event) => {
-                    event.time = moment(event.time).format('ddd HH:mm');
-                    event.subscribersCount = event.subscribers.length;
-                    return event;
-                })}>
+            <ResponsiveContainer width='100%' height={450}>
+                <LineChart
+                    data={_.map(events, (event) => {
+                        event.time = moment(event.time).format('ddd HH:mm');
+                        event.subscribersCount = event.subscribers.length;
+                        return event;
+                    })}
+                    margin={{top: 20, right: 50, left: 5, bottom: 5}}
+                >
                     <XAxis dataKey="time"/>
                     <YAxis/>
                     <Tooltip/>
                     <Legend/>
-                    <Line type="monotone" dataKey="subscribersCount" stroke="#82ca9d"/>
+                    <Line name="Viewers" type="monotone" dataKey="subscribersCount" stroke="#82ca9d"/>
                 </LineChart>
             </ResponsiveContainer>
 
