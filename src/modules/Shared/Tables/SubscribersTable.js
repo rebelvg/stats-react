@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import moment from "moment";
 import {Link} from 'react-router-dom';
+import humanize from 'humanize-plus';
 
 const tableConfig = [
     {
@@ -27,21 +28,24 @@ const tableConfig = [
         }
     },
     {
-        Header: 'Bitrate (kbps)',
-        accessor: 'bitrate'
-    },
-    {
-        Header: 'MBs',
-        accessor: 'bytes',
+        Header: 'Bitrate',
+        accessor: 'bitrate',
         Cell: (props) => {
-            return Math.ceil(props.value / 1024 / 1024);
+            return `${props.value} kbps`;
         }
     },
     {
-        Header: 'Duration (Minutes)',
+        Header: 'Net Traffic',
+        accessor: 'bytes',
+        Cell: (props) => {
+            return humanize.fileSize(props.value);
+        }
+    },
+    {
+        Header: 'Duration',
         accessor: 'duration',
         Cell: (props) => {
-            return Math.ceil(props.value / 60);
+            return moment.duration(props.value, 'seconds').humanize();
         }
     },
     {
