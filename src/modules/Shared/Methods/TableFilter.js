@@ -2,7 +2,7 @@ import _ from 'lodash';
 import strtotime from 'locutus/php/datetime/strtotime';
 
 let defaultFilterMethod = (filter, row, column) => {
-    const strings = ['app', 'channel', 'ip'];
+    const strings = ['app', 'channel', 'ip', 'protocol'];
     const numbers = {
         bitrate: 1,
         bytes: 1024 * 1024,
