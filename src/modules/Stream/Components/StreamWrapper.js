@@ -14,11 +14,13 @@ const tickFormatter = (tick) => moment.unix(tick).format('ddd HH:mm');
 
 class StreamWrapper extends Component {
     render() {
-        const {stream = null, subscribers = [], events = []} = this.props;
+        const {stream = null, subscribers = [], events = [], relatedStreams = []} = this.props;
 
         let streams = [];
 
         if (stream) streams.push(stream);
+
+        relatedStreams.forEach(stream => streams.push(stream));
 
         return (<div>
             Stream
