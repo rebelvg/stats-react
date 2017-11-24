@@ -14,11 +14,13 @@ const tableConfig = [
     },
     {
         Header: 'App',
-        accessor: 'app'
+        accessor: 'app',
+        minWidth: 40
     },
     {
         Header: 'Channel',
-        accessor: 'channel'
+        accessor: 'channel',
+        minWidth: 40
     },
     {
         Header: 'Last Update',
@@ -32,25 +34,39 @@ const tableConfig = [
         accessor: 'bitrate',
         Cell: (props) => {
             return `${props.value} kbps`;
-        }
+        },
+        minWidth: 40
     },
     {
         Header: 'Net Traffic',
         accessor: 'bytes',
         Cell: (props) => {
             return humanize.fileSize(props.value);
-        }
+        },
+        minWidth: 40
     },
     {
         Header: 'Duration',
         accessor: 'duration',
         Cell: (props) => {
             return moment.duration(props.value, 'seconds').humanize();
-        }
+        },
+        minWidth: 40
+    },
+    {
+        Header: 'Protocol',
+        accessor: 'protocol',
+        minWidth: 40
     },
     {
         Header: 'IP',
-        accessor: 'ip'
+        accessor: 'ip',
+        Cell: (props) => {
+            if (!props.original.location) return props.value;
+            if (props.original.location.api.status !== 'success') return `${props.value} (${props.original.location.api.message})`;
+
+            return `${props.value} (${props.original.location.api.countryCode}/${props.original.location.api.city})`;
+        }
     }
 ];
 
