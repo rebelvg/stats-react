@@ -7,7 +7,8 @@ let defaultFilterMethod = (filter, row, column) => {
         bitrate: 1,
         bytes: 1024 * 1024,
         duration: 60,
-        viewersCount: 1
+        totalConnectionsCount: 1,
+        peakViewersCount: 1
     };
     const dates = ['connectCreated', 'connectUpdated'];
 

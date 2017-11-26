@@ -65,7 +65,12 @@ const tableConfig = [
     },
     {
         Header: 'Connections',
-        accessor: 'viewersCount',
+        accessor: 'totalConnectionsCount',
+        minWidth: 40
+    },
+    {
+        Header: 'Peak Viewers',
+        accessor: 'peakViewersCount',
         minWidth: 40
     }
 ];
