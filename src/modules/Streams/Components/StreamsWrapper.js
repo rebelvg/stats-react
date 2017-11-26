@@ -4,19 +4,19 @@ import "react-table/react-table.css";
 import moment from "moment";
 import {Link} from 'react-router-dom';
 
-import tableConfig from '../../Shared/Tables/StreamsTable';
+import streamsTable from '../../Shared/Tables/StreamsTable';
 
-class StreamWrapper extends Component {
+class StreamWrappers extends Component {
     fetchData = (state, instance) => {
         this.props.getData(state.pageSize, state.page, state.filtered, state.sorted);
     };
 
     render() {
-        const {streams = [], pages = 1, isLoading = false} = this.props;
+        const {streams = [], options = {}, pages = 1, isLoading = false} = this.props;
 
         return (<div>
             <ReactTable
-                columns={tableConfig}
+                columns={streamsTable(options)}
                 data={streams}
                 onFetchData={this.fetchData}
                 pages={pages}
@@ -30,4 +30,4 @@ class StreamWrapper extends Component {
     }
 }
 
-export default StreamWrapper;
+export default StreamWrappers;

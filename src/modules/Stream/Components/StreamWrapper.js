@@ -25,7 +25,7 @@ class StreamWrapper extends Component {
         return (<div>
             Stream
             <ReactTable
-                columns={streamsTable}
+                columns={streamsTable()}
                 data={streams}
                 showPagination={false}
                 minRows={0}
@@ -52,7 +52,7 @@ class StreamWrapper extends Component {
 
             Subscribers: {subscribers.length}
             <ReactTable
-                columns={subscribersTable}
+                columns={subscribersTable()}
                 data={subscribers}
                 minRows={0}
                 defaultFilterMethod={defaultFilterMethod}

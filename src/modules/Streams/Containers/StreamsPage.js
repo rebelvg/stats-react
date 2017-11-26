@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import StreamWrapper from '../Components/StreamsWrapper';
+import StreamWrappers from '../Components/StreamsWrapper';
 import {getStreamsAction, getError, getData, getLoading} from '../../../redux/streams';
 
 @connect(
@@ -18,13 +18,14 @@ class StreamsPage extends Component {
     }
 
     render() {
-        const {streams, total, limit, page, pages} = this.props.data;
+        const {streams, options, total, limit, page, pages} = this.props.data;
         const {isLoading} = this.props;
 
         return (
             <div>
-                <StreamWrapper
+                <StreamWrappers
                     streams={streams}
+                    options={options}
                     getData={this.props.getStreamsAction}
                     pages={pages}
                     isLoading={isLoading}

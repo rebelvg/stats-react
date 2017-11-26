@@ -4,19 +4,19 @@ import "react-table/react-table.css";
 import moment from "moment";
 import {Link} from 'react-router-dom';
 
-import tableConfig from '../../Shared/Tables/SubscribersTable';
+import subscribersTable from '../../Shared/Tables/SubscribersTable';
 
-class SubscriberWrapper extends Component {
+class SubscribersWrapper extends Component {
     fetchData = (state, instance) => {
         this.props.getData(state.pageSize, state.page, state.filtered, state.sorted);
     };
 
     render() {
-        const {subscribers = [], pages = 1, isLoading = false} = this.props;
+        const {subscribers = [], options = {}, pages = 1, isLoading = false} = this.props;
 
         return (<div>
             <ReactTable
-                columns={tableConfig}
+                columns={subscribersTable(options)}
                 data={subscribers}
                 onFetchData={this.fetchData}
                 pages={pages}
@@ -30,4 +30,4 @@ class SubscriberWrapper extends Component {
     }
 }
 
-export default SubscriberWrapper;
+export default SubscribersWrapper;

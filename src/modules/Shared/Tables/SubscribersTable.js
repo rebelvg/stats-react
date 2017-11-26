@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import moment from "moment";
 import {Link} from 'react-router-dom';
 import humanize from 'humanize-plus';
+import _ from 'lodash';
 
 const tableConfig = [
     {
@@ -54,11 +55,6 @@ const tableConfig = [
         minWidth: 40
     },
     {
-        Header: 'Protocol',
-        accessor: 'protocol',
-        minWidth: 40
-    },
-    {
         Header: 'IP',
         accessor: 'ip',
         Cell: (props) => {
@@ -67,7 +63,84 @@ const tableConfig = [
 
             return `${props.value} (${props.original.location.api.countryCode}/${props.original.location.api.city})`;
         }
-    }
+    },
+    {
+        Header: 'Protocol',
+        accessor: 'protocol',
+        minWidth: 40
+    },
 ];
 
-export default tableConfig;
+function tableConfigOptions(options = {}) {
+    tableConfig[1].Filter = ({filter, onChange}) =>
+        <div>
+            <input
+                list="apps"
+                name="apps"
+                onChange={event => onChange(event.target.value)}
+                style={{width: "100%"}}
+                value={filter ? filter.value : ''}
+            />
+            <datalist id="apps">
+                <option value=""></option>
+                {_.map(options.apps, (app) => {
+                    return <option value={app}>{app}</option>;
+                })}
+            </datalist>
+        </div>;
+
+    tableConfig[2].Filter = ({filter, onChange}) =>
+        <div>
+            <input
+                list="channels"
+                name="channels"
+                onChange={event => onChange(event.target.value)}
+                style={{width: "100%"}}
+                value={filter ? filter.value : ''}
+            />
+            <datalist id="channels">
+                <option value=""></option>
+                {_.map(options.channels, (channel) => {
+                    return <option value={channel}>{channel}</option>;
+                })}
+            </datalist>
+        </div>;
+
+    tableConfig[7].Filter = ({filter, onChange}) =>
+        <div>
+            <input
+                list="countries"
+                name="countries"
+                onChange={event => onChange(event.target.value)}
+                style={{width: "100%"}}
+                value={filter ? filter.value : ''}
+            />
+            <datalist id="countries">
+                <option value=""></option>
+                {_.map(options.countries, (country) => {
+                    return <option value={country}>{country}</option>;
+                })}
+            </datalist>
+        </div>;
+
+    tableConfig[8].Filter = ({filter, onChange}) =>
+        <div>
+            <input
+                list="protocols"
+                name="protocols"
+                onChange={event => onChange(event.target.value)}
+                style={{width: "100%"}}
+                value={filter ? filter.value : ''}
+            />
+            <datalist id="protocols">
+                <option value=""></option>
+                {_.map(options.protocols, (protocol) => {
+                    return <option value={protocol}>{protocol}</option>;
+                })}
+            </datalist>
+        </div>;
+
+    return tableConfig;
+}
+
+export default tableConfigOptions;

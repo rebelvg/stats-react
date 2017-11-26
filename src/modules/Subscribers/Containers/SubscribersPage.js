@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import SubscriberWrapper from '../Components/SubscribersWrapper';
+import SubscribersWrapper from '../Components/SubscribersWrapper';
 import {getSubscribersAction, getError, getData, getLoading} from '../../../redux/subscribers';
 
 @connect(
@@ -18,13 +18,14 @@ class SubscribersPage extends Component {
     }
 
     render() {
-        const {subscribers, total, limit, page, pages} = this.props.data;
+        const {subscribers, options, total, limit, page, pages} = this.props.data;
         const {isLoading} = this.props;
 
         return (
             <div>
-                <SubscriberWrapper
+                <SubscribersWrapper
                     subscribers={subscribers}
+                    options={options}
                     getData={this.props.getSubscribersAction}
                     pages={pages}
                     isLoading={isLoading}
