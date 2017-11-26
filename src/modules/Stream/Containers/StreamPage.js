@@ -19,6 +19,15 @@ class StreamPage extends Component {
         this.props.getStreamAction(id);
     }
 
+    componentWillReceiveProps(nextProps) {
+        const id = this.props.match.params.id;
+        const newId = nextProps.match.params.id;
+
+        if (newId !== id) {
+            this.props.getStreamAction(newId);
+        }
+    }
+
     render() {
         const {stream, subscribers, relatedStreams} = this.props.data;
         const {events} = this.props;
