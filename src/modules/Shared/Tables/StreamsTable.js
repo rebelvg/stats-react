@@ -9,7 +9,9 @@ const tableConfig = [
         Header: 'Connect Created',
         accessor: 'connectCreated',
         Cell: (props) => {
-            return <Link to={'/streams/' + props.original._id}>{moment(props.value).format('D/MMM/YY HH:mm')}</Link>;
+            return <Link
+                to={'/streams/' + props.original._id}>{moment(props.value).format('ddd D/MMM/YY HH:mm')}
+            </Link>;
         }
     },
     {
@@ -26,7 +28,7 @@ const tableConfig = [
         Header: 'Last Update',
         accessor: 'connectUpdated',
         Cell: (props) => {
-            return props.original.isLive ? 'Live!' : moment(props.value).format('D/MMM/YY HH:mm');
+            return props.original.isLive ? 'Live!' : moment(props.value).format('ddd D/MMM/YY HH:mm');
         }
     },
     {
