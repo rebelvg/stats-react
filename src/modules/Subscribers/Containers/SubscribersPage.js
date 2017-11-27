@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import humanize from 'humanize-plus';
+import moment from "moment";
 
 import SubscribersWrapper from '../Components/SubscribersWrapper';
 import {getSubscribersAction, getError, getData, getLoading} from '../../../redux/subscribers';
@@ -18,7 +20,8 @@ class SubscribersPage extends Component {
     }
 
     render() {
-        const {subscribers, options, total, limit, page, pages} = this.props.data;
+        const {subscribers = [], options = {}, info = {}, total, limit, page, pages} = this.props.data;
+        const {totalBytes, totalDuration, totalIPs} = info;
         const {isLoading} = this.props;
 
         return (
@@ -31,6 +34,10 @@ class SubscribersPage extends Component {
                     isLoading={isLoading}
                 />
 
+                <div>Total Traffic: {humanize.fileSize(totalBytes)}</div>
+                <div>Total Duration: {moment.duration(totalDuration, 'seconds').humanize()}</div>
+                <div>Unique IPs: {totalIPs}</div>
+                <br/>
                 <div>Showing: {subscribers.length}</div>
                 <div>Total: {total}</div>
                 <div>Limit: {limit}</div>
