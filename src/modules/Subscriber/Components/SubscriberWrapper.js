@@ -3,6 +3,7 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 import moment from "moment";
 import {Link} from 'react-router-dom';
+import _ from 'lodash';
 
 import streamsTable from '../../Shared/Tables/StreamsTable';
 import subscribersTable from '../../Shared/Tables/SubscribersTable';
@@ -28,7 +29,12 @@ class StreamWrapper extends Component {
 
             Streams: {streams.length}
             <ReactTable
-                columns={streamsTable()}
+                columns={streamsTable({
+                    apps: _.chain(streams).map('app').uniq().value(),
+                    channels: _.chain(streams).map('channel').uniq().value(),
+                    countries: _.chain(streams).map('location.api.country').compact().uniq().value()
+                        .concat(_.chain(streams).map('location.api.message').compact().uniq().value())
+                })}
                 data={streams}
                 minRows={0}
                 defaultFilterMethod={defaultFilterMethod}

@@ -52,7 +52,13 @@ class StreamWrapper extends Component {
 
             Subscribers: {subscribers.length}
             <ReactTable
-                columns={subscribersTable()}
+                columns={subscribersTable({
+                    apps: _.chain(subscribers).map('app').uniq().value(),
+                    channels: _.chain(subscribers).map('channel').uniq().value(),
+                    countries: _.chain(subscribers).map('location.api.country').compact().uniq().value()
+                        .concat(_.chain(subscribers).map('location.api.message').compact().uniq().value()),
+                    protocols: _.chain(subscribers).map('protocol').uniq().value()
+                })}
                 data={subscribers}
                 minRows={0}
                 defaultFilterMethod={defaultFilterMethod}
