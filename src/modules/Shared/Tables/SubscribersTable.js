@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import humanize from 'humanize-plus';
 import _ from 'lodash';
 
-let tableConfig = [
+const tableConfigTemplate = [
     {
         Header: 'Connect Created',
         accessor: 'connectCreated',
@@ -73,7 +73,7 @@ let tableConfig = [
 ];
 
 function tableConfigOptions(options = {}, disableFiltering = []) {
-    tableConfig = _.cloneDeep(tableConfig);
+    let tableConfig = _.cloneDeep(tableConfigTemplate);
 
     _.forEach(disableFiltering, (columnName) => {
         let tableColumn = _.find(tableConfig, ['accessor', columnName]);
