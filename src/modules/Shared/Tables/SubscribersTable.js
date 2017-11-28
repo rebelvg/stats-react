@@ -72,7 +72,17 @@ const tableConfig = [
     },
 ];
 
-function tableConfigOptions(options = {}) {
+function tableConfigOptions(options = {}, disableFiltering = []) {
+
+
+    _.forEach(disableFiltering, (columnName) => {
+        let tableColumn = _.find(tableConfig, ['accessor', columnName]);
+
+        if (tableColumn) {
+            tableColumn.filterable = false;
+        }
+    });
+
     tableConfig[1].Filter = ({filter, onChange}) =>
         <div>
             <input

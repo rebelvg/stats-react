@@ -1,16 +1,37 @@
 import {handleActions} from 'redux-actions';
 import axios from 'axios';
+import _ from "lodash";
 
 const GET_STREAM = 'stream.get',
     GET_STREAM_SUCCESS = 'stream.get.success',
     GET_STREAM_FAILED = 'stream.get.failed';
 
 //ACTIONS
-export function getStreamAction(id) {
+export function getStreamAction(id, limit = 20, currentPage = 0, filters = [], sorts = []) {
     return (dispatch) => {
         dispatch({type: GET_STREAM});
 
-        Promise.all([axios.get('/api/streams/' + id), axios.get('/api/streams/' + id + '/graph')]).then(res => {
+        let params = {};
+
+        _.forEach(filters, (filter) => {
+            params[filter.id] = filter.value;
+        });
+
+        params.sort = [];
+
+        _.forEach(sorts, (sort) => {
+            if (sort.desc) {
+                params.sort.push(`-${sort.id}`);
+            } else {
+                params.sort.push(sort.id);
+            }
+        });
+
+        Promise.all([axios.get('/api/streams/' + id, {
+            params: params
+        }), axios.get('/api/streams/' + id + '/graph', {
+            params: params
+        })]).then(res => {
                 dispatch({type: GET_STREAM_SUCCESS, data: res[0].data, events: res[1].data.events});
             }
         ).catch(e => {

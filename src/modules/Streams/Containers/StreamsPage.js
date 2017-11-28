@@ -29,8 +29,8 @@ class StreamsPage extends Component {
                 <StreamWrappers
                     streams={streams}
                     options={options}
-                    getData={this.props.getStreamsAction}
                     pages={pages}
+                    getData={this.props.getStreamsAction}
                     isLoading={isLoading}
                 />
 

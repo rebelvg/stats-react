@@ -29,8 +29,8 @@ class SubscribersPage extends Component {
                 <SubscribersWrapper
                     subscribers={subscribers}
                     options={options}
-                    getData={this.props.getSubscribersAction}
                     pages={pages}
+                    getData={this.props.getSubscribersAction}
                     isLoading={isLoading}
                 />
 

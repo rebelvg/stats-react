@@ -29,15 +29,18 @@ class StreamPage extends Component {
     }
 
     render() {
-        const {stream, subscribers, relatedStreams} = this.props.data;
+        const {stream, subscribers, options, relatedStreams} = this.props.data;
         const {events} = this.props;
 
         return <div>
             <StreamWrapper
                 stream={stream}
                 subscribers={subscribers}
-                events={events}
+                options={options}
                 relatedStreams={relatedStreams}
+                events={events}
+                getData={this.props.getStreamAction}
+                streamId={this.props.match.params.id}
             />
 
             <button onClick={() => {

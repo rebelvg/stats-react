@@ -13,8 +13,12 @@ import defaultFilterMethod from '../../Shared/Methods/TableFilter';
 const tickFormatter = (tick) => moment.unix(tick).format('ddd HH:mm');
 
 class StreamWrapper extends Component {
+    fetchData = (state, instance) => {
+        this.props.getData(this.props.streamId, state.pageSize, state.page, state.filtered, state.sorted);
+    };
+
     render() {
-        const {stream = null, subscribers = [], events = [], relatedStreams = []} = this.props;
+        const {stream = null, subscribers = [], options = {}, relatedStreams = [], events = [],} = this.props;
 
         let streams = [];
 
@@ -52,17 +56,14 @@ class StreamWrapper extends Component {
 
             Subscribers: {subscribers.length}
             <ReactTable
-                columns={subscribersTable({
-                    apps: _.chain(subscribers).map('app').uniq().value(),
-                    channels: _.chain(subscribers).map('channel').uniq().value(),
-                    countries: _.chain(subscribers).map('location.api.country').compact().uniq().value()
-                        .concat(_.chain(subscribers).map('location.api.message').compact().uniq().value()),
-                    protocols: _.chain(subscribers).map('protocol').uniq().value()
-                })}
+                columns={subscribersTable(options, ['app', 'channel'])}
                 data={subscribers}
+                onFetchData={this.fetchData}
+                showPagination={false}
+                showPageSizeOptions={false}
                 minRows={0}
-                defaultFilterMethod={defaultFilterMethod}
                 filterable
+                manual
             />
         </div>);
     }
