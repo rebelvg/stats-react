@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import humanize from 'humanize-plus';
 import _ from 'lodash';
 
-const tableConfig = [
+let tableConfig = [
     {
         Header: 'Connect Created',
         accessor: 'connectCreated',
@@ -73,7 +73,7 @@ const tableConfig = [
 ];
 
 function tableConfigOptions(options = {}, disableFiltering = []) {
-
+    tableConfig = _.cloneDeep(tableConfig);
 
     _.forEach(disableFiltering, (columnName) => {
         let tableColumn = _.find(tableConfig, ['accessor', columnName]);
@@ -83,73 +83,89 @@ function tableConfigOptions(options = {}, disableFiltering = []) {
         }
     });
 
-    tableConfig[1].Filter = ({filter, onChange}) =>
-        <div>
-            <input
-                list="apps"
-                name="apps"
-                onChange={event => onChange(event.target.value)}
-                style={{width: "100%"}}
-                value={filter ? filter.value : ''}
-            />
-            <datalist id="apps">
-                <option value=""></option>
-                {_.map(options.apps, (app) => {
-                    return <option value={app}>{app}</option>;
-                })}
-            </datalist>
-        </div>;
+    let appsTableColumn = _.find(tableConfig, ['accessor', 'app']);
 
-    tableConfig[2].Filter = ({filter, onChange}) =>
-        <div>
-            <input
-                list="channels"
-                name="channels"
-                onChange={event => onChange(event.target.value)}
-                style={{width: "100%"}}
-                value={filter ? filter.value : ''}
-            />
-            <datalist id="channels">
-                <option value=""></option>
-                {_.map(options.channels, (channel) => {
-                    return <option value={channel}>{channel}</option>;
-                })}
-            </datalist>
-        </div>;
+    if (appsTableColumn) {
+        appsTableColumn.Filter = ({filter, onChange}) =>
+            <div>
+                <input
+                    list="apps"
+                    name="apps"
+                    onChange={event => onChange(event.target.value)}
+                    style={{width: "100%"}}
+                    value={filter ? filter.value : ''}
+                />
+                <datalist id="apps">
+                    <option value=""></option>
+                    {_.map(options.apps, (app) => {
+                        return <option value={app}>{app}</option>;
+                    })}
+                </datalist>
+            </div>;
+    }
 
-    tableConfig[7].Filter = ({filter, onChange}) =>
-        <div>
-            <input
-                list="countries"
-                name="countries"
-                onChange={event => onChange(event.target.value)}
-                style={{width: "100%"}}
-                value={filter ? filter.value : ''}
-            />
-            <datalist id="countries">
-                <option value=""></option>
-                {_.map(options.countries, (country) => {
-                    return <option value={country}>{country}</option>;
-                })}
-            </datalist>
-        </div>;
+    let channelsTableColumn = _.find(tableConfig, ['accessor', 'channel']);
 
-    tableConfig[8].Filter = ({filter, onChange}) =>
-        <div>
-            <input
-                list="protocols"
-                name="protocols"
-                onChange={event => onChange(event.target.value)}
-                style={{width: "100%"}}
-                value={filter ? filter.value : ''}
-            />
-            <datalist id="protocols">
-                <option value=""></option>
-                {_.map(options.protocols, (protocol) => {
-                    return <option value={protocol}>{protocol}</option>;
-                })}
-            </datalist>
-        </div>;
+    if (channelsTableColumn) {
+        channelsTableColumn.Filter = ({filter, onChange}) =>
+            <div>
+                <input
+                    list="channels"
+                    name="channels"
+                    onChange={event => onChange(event.target.value)}
+                    style={{width: "100%"}}
+                    value={filter ? filter.value : ''}
+                />
+                <datalist id="channels">
+                    <option value=""></option>
+                    {_.map(options.channels, (channel) => {
+                        return <option value={channel}>{channel}</option>;
+                    })}
+                </datalist>
+            </div>;
+    }
+
+    let countriesTableConfig = _.find(tableConfig, ['accessor', 'ip']);
+
+    if (countriesTableConfig) {
+        countriesTableConfig.Filter = ({filter, onChange}) =>
+            <div>
+                <input
+                    list="countries"
+                    name="countries"
+                    onChange={event => onChange(event.target.value)}
+                    style={{width: "100%"}}
+                    value={filter ? filter.value : ''}
+                />
+                <datalist id="countries">
+                    <option value=""></option>
+                    {_.map(options.countries, (country) => {
+                        return <option value={country}>{country}</option>;
+                    })}
+                </datalist>
+            </div>;
+    }
+
+    let protocolsTableColumn = _.find(tableConfig, ['accessor', 'protocol']);
+
+    if (protocolsTableColumn) {
+        protocolsTableColumn.Filter = ({filter, onChange}) =>
+            <div>
+                <input
+                    list="protocols"
+                    name="protocols"
+                    onChange={event => onChange(event.target.value)}
+                    style={{width: "100%"}}
+                    value={filter ? filter.value : ''}
+                />
+                <datalist id="protocols">
+                    <option value=""></option>
+                    {_.map(options.protocols, (protocol) => {
+                        return <option value={protocol}>{protocol}</option>;
+                    })}
+                </datalist>
+            </div>;
+    }
 
     return tableConfig;
 }
