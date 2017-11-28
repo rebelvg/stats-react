@@ -5,6 +5,7 @@ import moment from "moment";
 import {Link} from 'react-router-dom';
 import {LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer} from 'recharts';
 import _ from 'lodash';
+import humanize from 'humanize-plus';
 
 import streamsTable from '../../Shared/Tables/StreamsTable';
 import subscribersTable from '../../Shared/Tables/SubscribersTable';
@@ -18,7 +19,8 @@ class StreamWrapper extends Component {
     };
 
     render() {
-        const {stream = null, subscribers = [], options = {}, relatedStreams = [], events = [],} = this.props;
+        const {stream = null, subscribers = [], options = {}, info = {}, relatedStreams = [], events = [],} = this.props;
+        const {totalBytes, totalDuration, totalPeakViewers, totalIPs} = info;
 
         let streams = [];
 
@@ -55,6 +57,10 @@ class StreamWrapper extends Component {
             </ResponsiveContainer>
 
             Subscribers: {subscribers.length}
+            <div>Total Traffic: {humanize.fileSize(totalBytes)}</div>
+            <div>Total Duration: {moment.duration(totalDuration, 'seconds').humanize()}</div>
+            <div>Total Peak Viewers: {totalPeakViewers}</div>
+            <div>Unique IPs: {totalIPs}</div>
             <ReactTable
                 columns={subscribersTable(options, ['app', 'channel'])}
                 data={subscribers}

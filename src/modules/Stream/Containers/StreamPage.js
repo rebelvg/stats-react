@@ -29,7 +29,7 @@ class StreamPage extends Component {
     }
 
     render() {
-        const {stream, subscribers, options, relatedStreams} = this.props.data;
+        const {stream, subscribers, options, info, relatedStreams} = this.props.data;
         const {events} = this.props;
 
         return <div>
@@ -37,6 +37,7 @@ class StreamPage extends Component {
                 stream={stream}
                 subscribers={subscribers}
                 options={options}
+                info={info}
                 relatedStreams={relatedStreams}
                 events={events}
                 getData={this.props.getStreamAction}
