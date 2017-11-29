@@ -24,7 +24,6 @@ let defaultFilterMethod = (filter, row, column) => {
             return _.gte(strtotime(row[filter.id]), strtotime(filter.value));
         }
         case ips.includes(filter.id): {
-            console.log(row._original);
             return (new RegExp(filter.value, 'gi').test(row._original.ip))
                 || !row._original.location
                 || (new RegExp(filter.value, 'gi').test(row._original.location.api.country))

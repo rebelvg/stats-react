@@ -22,7 +22,9 @@ class StreamsPage extends Component {
         const {search} = this.props.location;
         const {isLoading} = this.props;
 
-        let searchParams = queryString.parse(search);
+        let searchParams = queryString.parse(search, {
+            arrayFormat: 'bracket'
+        });
 
         return (
             <div>
