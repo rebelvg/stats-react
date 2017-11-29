@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import humanize from 'humanize-plus';
 import moment from 'moment';
+import queryString from 'query-string';
 
-import StreamWrappers from '../Components/StreamsWrapper';
+import StreamsWrapper from '../Components/StreamsWrapper';
 import {getStreamsAction, getError, getData, getLoading} from '../../../redux/streams';
 
 @connect(
@@ -15,22 +16,22 @@ import {getStreamsAction, getError, getData, getLoading} from '../../../redux/st
     {getStreamsAction}
 )
 class StreamsPage extends Component {
-    componentDidMount() {
-        this.props.getStreamsAction();
-    }
-
     render() {
         const {streams = [], options = {}, info = {}, total, limit, page, pages} = this.props.data;
         const {totalBytes, totalDuration, totalConnections, totalPeakViewers, totalIPs} = info;
+        const {search} = this.props.location;
         const {isLoading} = this.props;
+
+        let searchParams = queryString.parse(search);
 
         return (
             <div>
-                <StreamWrappers
+                <StreamsWrapper
                     streams={streams}
                     options={options}
                     pages={pages}
                     getData={this.props.getStreamsAction}
+                    searchParams={searchParams}
                     isLoading={isLoading}
                 />
 

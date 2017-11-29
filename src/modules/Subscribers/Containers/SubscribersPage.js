@@ -15,10 +15,6 @@ import {getSubscribersAction, getError, getData, getLoading} from '../../../redu
     {getSubscribersAction}
 )
 class SubscribersPage extends Component {
-    componentDidMount() {
-        this.props.getSubscribersAction();
-    }
-
     render() {
         const {subscribers = [], options = {}, info = {}, total, limit, page, pages} = this.props.data;
         const {totalBytes, totalDuration, totalIPs} = info;
