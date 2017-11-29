@@ -10,7 +10,14 @@ class SubscribersWrapper extends Component {
     };
 
     render() {
-        const {subscribers = [], options = {}, pages = 1, isLoading = false} = this.props;
+        const {subscribers = [], options = {}, pages = 1, searchParams = {}, isLoading = false} = this.props;
+
+        let defaultFiltered = _.map(searchParams, (paramKey, paramValue) => {
+            return {
+                id: paramValue,
+                value: paramKey
+            };
+        });
 
         return (<div>
             <ReactTable
@@ -21,6 +28,7 @@ class SubscribersWrapper extends Component {
                 loading={isLoading}
                 defaultPageSize={20}
                 minRows={0}
+                defaultFiltered={defaultFiltered}
                 filterable
                 manual
             />

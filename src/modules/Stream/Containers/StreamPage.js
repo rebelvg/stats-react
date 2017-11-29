@@ -13,12 +13,6 @@ import {getStreamAction, getError, getData, getEvents} from '../../../redux/stre
     {getStreamAction}
 )
 class StreamPage extends Component {
-    componentDidMount() {
-        const id = this.props.match.params.id;
-
-        this.props.getStreamAction(id);
-    }
-
     componentWillReceiveProps(nextProps) {
         const id = this.props.match.params.id;
         const newId = nextProps.match.params.id;
