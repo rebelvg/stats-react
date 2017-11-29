@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import ReactTable from "react-table";
-import "react-table/react-table.css";
-import moment from "moment";
-import {Link} from 'react-router-dom';
+import ReactTable from 'react-table';
+import 'react-table/react-table.css';
 import _ from 'lodash';
 
 import streamsTable from '../../Shared/Tables/StreamsTable';

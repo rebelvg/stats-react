@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import humanize from 'humanize-plus';
-import moment from "moment";
+import moment from 'moment';
 
 import StreamWrappers from '../Components/StreamsWrapper';
 import {getStreamsAction, getError, getData, getLoading} from '../../../redux/streams';

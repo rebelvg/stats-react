@@ -4,7 +4,7 @@ class ChannelsPage extends Component {
     render() {
         return (
             <div>
-                ChannelsPage
+                GraphsPage
             </div>
         );
     }

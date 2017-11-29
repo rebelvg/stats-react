@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import moment from "moment";
+import moment from 'moment';
 import {Link} from 'react-router-dom';
 import humanize from 'humanize-plus';
 import _ from 'lodash';

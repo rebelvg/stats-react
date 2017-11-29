@@ -1,11 +1,12 @@
-import React from 'react'
-import {Route} from 'react-router-dom'
-import HomePage from './modules/Home/Containers/HomePage/HomePage'
-import StreamsPage from './modules/Streams/Containers/StreamsPage'
-import StreamPage from './modules/Stream/Containers/StreamPage'
-import SubscribersPage from './modules/Subscribers/Containers/SubscribersPage'
-import SubscriberPage from './modules/Subscriber/Containers/SubscriberPage'
-import ChannelsPage from './modules/Channels/Containers/ChannelsPage'
+import React from 'react';
+import {Route} from 'react-router-dom';
+import HomePage from './modules/Home/Containers/HomePage/HomePage';
+import StreamsPage from './modules/Streams/Containers/StreamsPage';
+import StreamPage from './modules/Stream/Containers/StreamPage';
+import SubscribersPage from './modules/Subscribers/Containers/SubscribersPage';
+import SubscriberPage from './modules/Subscriber/Containers/SubscriberPage';
+import ChannelsPage from './modules/Channels/Containers/ChannelsPage';
+import GraphsPage from './modules/Graphs/Containers/GraphsPage';
 
 const Routes = () => (
     <div>
@@ -15,6 +16,7 @@ const Routes = () => (
         <Route exact path='/subscribers' component={SubscribersPage}/>
         <Route exact path='/subscribers/:id' component={SubscriberPage}/>
         <Route exact path='/channels/' component={ChannelsPage}/>
+        <Route exact path='/graphs/' component={GraphsPage}/>
     </div>
 );
 

@@ -1,6 +1,6 @@
 import {handleActions} from 'redux-actions';
 import axios from 'axios';
-import _ from "lodash";
+import _ from 'lodash';
 
 const GET_STREAMS = 'streams.get',
     GET_STREAMS_SUCCESS = 'streams.get.success',

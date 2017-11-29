@@ -1,6 +1,6 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import styled from 'styled-components'
+import React from 'react';
+import {Link} from 'react-router-dom';
+import styled from 'styled-components';
 
 const Header = () => (
     <HeaderWrap>
@@ -8,6 +8,7 @@ const Header = () => (
         <StyledLink to="/streams">Streams</StyledLink>
         <StyledLink to="/subscribers">Subscribers</StyledLink>
         <StyledLink to="/channels">Channels</StyledLink>
+        <StyledLink to="/graphs">Graphs</StyledLink>
     </HeaderWrap>
 );
 

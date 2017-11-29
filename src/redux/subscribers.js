@@ -1,6 +1,6 @@
 import {handleActions} from 'redux-actions';
 import axios from 'axios';
-import _ from "lodash";
+import _ from 'lodash';
 
 const GET_SUBSCRIBERS = 'subscribers.get',
     GET_SUBSCRIBERS_SUCCESS = 'subscribers.get.success',
