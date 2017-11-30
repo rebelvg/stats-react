@@ -28,7 +28,7 @@ class SubscribersPage extends Component {
                     options={options}
                     pages={pages}
                     getData={this.props.getSubscribersAction}
-                    searchParams={searchParams}
+                    searchParams={{}}
                     isLoading={isLoading}
                 />
 
