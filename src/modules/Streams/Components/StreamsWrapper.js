@@ -35,7 +35,7 @@ class StreamsWrapper extends Component {
             }
         });
 
-        query = qs.stringify(query);
+        query = qs.stringify(query, {arrayFormat: 'brackets'});
 
         history.push({
             pathname: '/streams',
