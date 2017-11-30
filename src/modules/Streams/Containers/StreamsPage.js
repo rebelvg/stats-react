@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import humanize from 'humanize-plus';
 import moment from 'moment';
-import queryString from 'query-string';
+import qs from 'qs';
 
 import StreamsWrapper from '../Components/StreamsWrapper';
 import {getStreamsAction, getError, getData, getLoading} from '../../../redux/streams';
@@ -22,9 +22,7 @@ class StreamsPage extends Component {
         const {search} = this.props.location;
         const {isLoading} = this.props;
 
-        let searchParams = queryString.parse(search, {
-            arrayFormat: 'bracket'
-        });
+        let searchParams = qs.parse(search, {ignoreQueryPrefix: true});
 
         return (
             <div>

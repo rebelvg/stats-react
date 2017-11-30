@@ -3,11 +3,15 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import _ from 'lodash';
 import createHistory from 'history/createBrowserHistory';
-import queryString from 'query-string';
+import qs from 'qs';
 
 import streamsTable from '../../Shared/Tables/StreamsTable';
 
 class StreamsWrapper extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     fetchData = (state, instance) => {
         this.props.getData(state.pageSize, state.page, state.filtered, state.sorted);
 
@@ -15,12 +19,10 @@ class StreamsWrapper extends Component {
 
         let query = {};
 
-        if (state.page > 0) {
-            query.page = state.page + 1;
-        }
-
         _.forEach(state.filtered, (filter) => {
-            query[filter.id] = filter.value;
+            if (!query.filter) query.filter = {};
+
+            query.filter[filter.id] = filter.value;
         });
 
         _.forEach(state.sorted, (sort) => {
@@ -33,9 +35,7 @@ class StreamsWrapper extends Component {
             }
         });
 
-        query = queryString.stringify(query, {
-            arrayFormat: 'bracket'
-        });
+        query = qs.stringify(query);
 
         history.push({
             pathname: '/streams',
@@ -46,18 +46,14 @@ class StreamsWrapper extends Component {
     render() {
         const {streams = [], options = {}, pages = 1, searchParams = {}, isLoading = false} = this.props;
 
-        let sorts = searchParams.sort;
-
-        delete searchParams.sort;
-
-        let defaultFiltered = _.map(searchParams, (paramKey, paramValue) => {
+        let defaultFiltered = _.map(searchParams.filter, (paramKey, paramValue) => {
             return {
                 id: paramValue,
                 value: paramKey
             };
         });
 
-        let defaultSorted = _.map(sorts, (sort) => {
+        let defaultSorted = _.map(searchParams.sort, (sort) => {
             return {
                 desc: _.startsWith(sort, '-'),
                 id: _.replace(sort, /^-/, '')
@@ -75,6 +71,18 @@ class StreamsWrapper extends Component {
                 minRows={0}
                 defaultFiltered={defaultFiltered}
                 defaultSorted={defaultSorted}
+                className="-striped -highlight"
+                showPaginationTop
+                onPageChange={(pageIndex) => {
+                    this.setState({
+                        page: pageIndex
+                    });
+                }}
+                onPageSizeChange={(pageSize, pageIndex) => {
+                    this.setState({
+                        pageSize: pageSize
+                    });
+                }}
                 filterable
                 manual
             />

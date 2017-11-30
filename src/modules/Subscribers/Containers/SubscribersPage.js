@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import humanize from 'humanize-plus';
 import moment from 'moment';
-import queryString from 'query-string';
 
 import SubscribersWrapper from '../Components/SubscribersWrapper';
 import {getSubscribersAction, getError, getData, getLoading} from '../../../redux/subscribers';
@@ -21,8 +20,6 @@ class SubscribersPage extends Component {
         const {totalBytes, totalDuration, totalIPs} = info;
         const {search} = this.props.location;
         const {isLoading} = this.props;
-
-        let searchParams = queryString.parse(search);
 
         return (
             <div>
