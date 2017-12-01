@@ -10,22 +10,71 @@ import streamsTable from '../../Shared/Tables/StreamsTable';
 class StreamsWrapper extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            page: 0,
+            pageSize: 20,
+            filtered: [],
+            sorted: []
+        };
+
+        let page = parseInt(props.searchParams.page);
+
+        if (!isNaN(page)) {
+            this.state.page = page - 1;
+        }
+
+        let pageSize = parseInt(props.searchParams.pageSize);
+
+        if (!isNaN(pageSize)) {
+            this.state.pageSize = pageSize;
+        }
+
+        this.state.filtered = _.map(props.searchParams.filter, (paramKey, paramValue) => {
+            return {
+                id: paramValue,
+                value: paramKey
+            };
+        });
+
+        this.state.sorted = _.map(props.searchParams.sort, (sort) => {
+            return {
+                desc: _.startsWith(sort, '-'),
+                id: _.replace(sort, /^-/, '')
+            }
+        });
     }
 
-    fetchData = (state, instance) => {
-        this.props.getData(state.pageSize, state.page, state.filtered, state.sorted);
+    fetchData = () => {
+        this.props.getData(this.state.pageSize, this.state.page, this.state.filtered, this.state.sorted);
 
+        this.buildQuery();
+    };
+
+    componentDidMount() {
+        this.fetchData();
+    }
+
+    buildQuery = () => {
         const history = createHistory();
 
         let query = {};
 
-        _.forEach(state.filtered, (filter) => {
+        if (this.state.page > 0) {
+            query.page = this.state.page + 1;
+        }
+
+        if (this.state.pageSize !== 20) {
+            query.pageSize = this.state.pageSize;
+        }
+
+        _.forEach(this.state.filtered, (filter) => {
             if (!query.filter) query.filter = {};
 
             query.filter[filter.id] = filter.value;
         });
 
-        _.forEach(state.sorted, (sort) => {
+        _.forEach(this.state.sorted, (sort) => {
             if (!query.sort) query.sort = [];
 
             if (sort.desc) {
@@ -43,46 +92,59 @@ class StreamsWrapper extends Component {
         });
     };
 
+    handlePageChange = (pageIndex) => {
+        this.setState({
+            page: pageIndex
+        }, () => {
+            this.fetchData();
+        });
+    };
+
+    handlePageSizeChange = (pageSize, pageIndex) => {
+        this.setState({
+            pageSize: pageSize
+        }, () => {
+            this.fetchData();
+        });
+    };
+
+    handleFilteredChange = (column, value) => {
+        this.setState({
+            page: 0,
+            filtered: column
+        }, () => {
+            this.fetchData();
+        });
+    };
+
+    handleSortedChange = (newSorted, column, shiftKey) => {
+        this.setState({
+            sorted: newSorted
+        }, () => {
+            this.fetchData();
+        });
+    };
+
     render() {
         const {streams = [], options = {}, pages = 1, searchParams = {}, isLoading = false} = this.props;
-
-        let defaultFiltered = _.map(searchParams.filter, (paramKey, paramValue) => {
-            return {
-                id: paramValue,
-                value: paramKey
-            };
-        });
-
-        let defaultSorted = _.map(searchParams.sort, (sort) => {
-            return {
-                desc: _.startsWith(sort, '-'),
-                id: _.replace(sort, /^-/, '')
-            }
-        });
 
         return (<div>
             <ReactTable
                 columns={streamsTable(options)}
+                page={this.state.page}
                 data={streams}
-                onFetchData={this.fetchData}
                 pages={pages}
                 loading={isLoading}
-                defaultPageSize={20}
+                defaultPageSize={this.state.pageSize}
                 minRows={0}
-                defaultFiltered={defaultFiltered}
-                defaultSorted={defaultSorted}
+                defaultFiltered={this.state.filtered}
+                defaultSorted={this.state.sorted}
                 className="-striped -highlight"
                 showPaginationTop
-                onPageChange={(pageIndex) => {
-                    this.setState({
-                        page: pageIndex
-                    });
-                }}
-                onPageSizeChange={(pageSize, pageIndex) => {
-                    this.setState({
-                        pageSize: pageSize
-                    });
-                }}
+                onPageChange={this.handlePageChange}
+                onPageSizeChange={this.handlePageSizeChange}
+                onFilteredChange={this.handleFilteredChange}
+                onSortedChange={this.handleSortedChange}
                 filterable
                 manual
             />
