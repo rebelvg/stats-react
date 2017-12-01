@@ -25,13 +25,19 @@ class StreamWrapper extends Component {
 
         if (stream) streams.push(stream);
 
-        relatedStreams.forEach(stream => streams.push(stream));
-
         return (<div>
             Stream
             <ReactTable
                 columns={streamsTable()}
                 data={streams}
+                showPagination={false}
+                minRows={0}
+                sortable={false}
+            />
+            Related Streams: {relatedStreams.length}
+            <ReactTable
+                columns={streamsTable()}
+                data={relatedStreams}
                 showPagination={false}
                 minRows={0}
                 sortable={false}
