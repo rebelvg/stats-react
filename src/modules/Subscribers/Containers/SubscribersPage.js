@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import humanize from 'humanize-plus';
 import moment from 'moment';
+import qs from 'qs';
 
 import SubscribersWrapper from '../Components/SubscribersWrapper';
 import {getSubscribersAction, getError, getData, getLoading} from '../../../redux/subscribers';
@@ -21,6 +22,8 @@ class SubscribersPage extends Component {
         const {search} = this.props.location;
         const {isLoading} = this.props;
 
+        let searchParams = qs.parse(search, {ignoreQueryPrefix: true});
+
         return (
             <div>
                 <SubscribersWrapper
@@ -28,7 +31,7 @@ class SubscribersPage extends Component {
                     options={options}
                     pages={pages}
                     getData={this.props.getSubscribersAction}
-                    searchParams={{}}
+                    searchParams={searchParams}
                     isLoading={isLoading}
                 />
 
