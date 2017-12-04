@@ -3,6 +3,7 @@ import moment from 'moment';
 import {Link} from 'react-router-dom';
 import humanize from 'humanize-plus';
 import _ from 'lodash';
+import humanizeDuration from 'humanize-duration';
 
 const tableConfigTemplate = [
     {
@@ -51,7 +52,23 @@ const tableConfigTemplate = [
         Header: 'Duration',
         accessor: 'duration',
         Cell: (props) => {
-            return moment.duration(props.value, 'seconds').humanize();
+            return humanizeDuration(props.value * 1000, {
+                round: true,
+                largest: 2,
+                language: 'shortEn',
+                languages: {
+                    shortEn: {
+                        y: 'y',
+                        mo: 'mo',
+                        w: 'w',
+                        d: 'd',
+                        h: 'h',
+                        m: 'm',
+                        s: 'sec',
+                        ms: 'ms'
+                    }
+                }
+            });
         },
         minWidth: 40
     },

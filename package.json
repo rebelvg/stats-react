@@ -24,6 +24,7 @@
     "file-loader": "^1.1.5",
     "history": "^4.7.2",
     "html-webpack-plugin": "^2.30.1",
+    "humanize-duration": "^3.12.0",
     "humanize-plus": "^1.8.2",
     "locutus": "^2.0.9",
     "lodash": "^4.17.4",
