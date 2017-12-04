@@ -5,6 +5,9 @@ import moment from 'moment';
 import {LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer} from 'recharts';
 import _ from 'lodash';
 import humanize from 'humanize-plus';
+import createHistory from 'history/createBrowserHistory';
+import qs from 'qs';
+import humanizeDuration from 'humanize-duration';
 
 import streamsTable from '../../Shared/Tables/StreamsTable';
 import subscribersTable from '../../Shared/Tables/SubscribersTable';
@@ -13,8 +16,82 @@ import defaultFilterMethod from '../../Shared/Methods/TableFilter';
 const tickFormatter = (tick) => moment.unix(tick).format('ddd HH:mm');
 
 class StreamWrapper extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            filtered: [],
+            sorted: []
+        };
+
+        this.state.filtered = _.map(props.searchParams.filter, (paramKey, paramValue) => {
+            return {
+                id: paramValue,
+                value: paramKey
+            };
+        });
+
+        this.state.sorted = _.map(props.searchParams.sort, (sort) => {
+            return {
+                desc: _.startsWith(sort, '-'),
+                id: _.replace(sort, /^-/, '')
+            }
+        });
+    }
+
     fetchData = (state, instance) => {
-        this.props.getData(this.props.streamId, state.pageSize, state.page, state.filtered, state.sorted);
+        this.props.getData(this.props.streamId, undefined, undefined, this.state.filtered, this.state.sorted);
+
+        this.buildQuery();
+    };
+
+    componentDidMount() {
+        this.fetchData();
+    }
+
+    buildQuery = () => {
+        const history = createHistory();
+
+        let query = {};
+
+        _.forEach(this.state.filtered, (filter) => {
+            if (!query.filter) query.filter = {};
+
+            query.filter[filter.id] = filter.value;
+        });
+
+        _.forEach(this.state.sorted, (sort) => {
+            if (!query.sort) query.sort = [];
+
+            if (sort.desc) {
+                query.sort.push(`-${sort.id}`);
+            } else {
+                query.sort.push(sort.id);
+            }
+        });
+
+        query = qs.stringify(query, {arrayFormat: 'brackets'});
+
+        history.push({
+            search: query
+        });
+    };
+
+    handleFilteredChange = (column, value) => {
+        this.setState({
+            page: 0,
+            filtered: column
+        }, () => {
+            this.fetchData();
+        });
+    };
+
+    handleSortedChange = (newSorted, column, shiftKey) => {
+        this.setState({
+            sorted: newSorted
+        }, () => {
+            this.fetchData();
+        });
     };
 
     render() {
@@ -63,16 +140,23 @@ class StreamWrapper extends Component {
 
             Subscribers: {subscribers.length}
             <div>Total Traffic: {humanize.fileSize(totalBytes)}</div>
-            <div>Total Duration: {moment.duration(totalDuration, 'seconds').humanize()}</div>
+            <div>Total Duration: {humanizeDuration(totalDuration * 1000, {
+                round: true,
+                largest: 3
+            })}</div>
             <div>Total Peak Viewers: {totalPeakViewers}</div>
             <div>Unique IPs: {totalIPs}</div>
             <ReactTable
                 columns={subscribersTable(options, ['app', 'channel'])}
                 data={subscribers}
-                onFetchData={this.fetchData}
                 showPagination={false}
                 showPageSizeOptions={false}
                 minRows={0}
+                defaultFiltered={this.state.filtered}
+                defaultSorted={this.state.sorted}
+                className="-striped -highlight"
+                onFilteredChange={this.handleFilteredChange}
+                onSortedChange={this.handleSortedChange}
                 filterable
                 manual
             />

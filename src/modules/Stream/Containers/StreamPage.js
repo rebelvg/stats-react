@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import qs from 'qs';
 
 import StreamWrapper from '../Components/StreamWrapper';
 import {getStreamAction, getError, getData, getEvents} from '../../../redux/stream';
@@ -24,7 +25,10 @@ class StreamPage extends Component {
 
     render() {
         const {stream, subscribers, options, info, relatedStreams} = this.props.data;
+        const {search} = this.props.location;
         const {events} = this.props;
+
+        let searchParams = qs.parse(search, {ignoreQueryPrefix: true});
 
         return <div>
             <StreamWrapper
@@ -36,6 +40,7 @@ class StreamPage extends Component {
                 events={events}
                 getData={this.props.getStreamAction}
                 streamId={this.props.match.params.id}
+                searchParams={searchParams}
             />
 
             <button onClick={() => {

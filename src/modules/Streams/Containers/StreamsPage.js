@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import humanize from 'humanize-plus';
 import moment from 'moment';
 import qs from 'qs';
+import humanizeDuration from 'humanize-duration';
 
 import StreamsWrapper from '../Components/StreamsWrapper';
 import {getStreamsAction, getError, getData, getLoading} from '../../../redux/streams';
@@ -36,7 +37,10 @@ class StreamsPage extends Component {
                 />
 
                 <div>Total Traffic: {humanize.fileSize(totalBytes)}</div>
-                <div>Total Duration: {moment.duration(totalDuration, 'seconds').humanize()}</div>
+                <div>Total Duration: {humanizeDuration(totalDuration * 1000, {
+                    round: true,
+                    largest: 3
+                })}</div>
                 <div>Total Connections: {totalConnections}</div>
                 <div>Total Peak Viewers: {totalPeakViewers}</div>
                 <div>Unique IPs: {totalIPs}</div>

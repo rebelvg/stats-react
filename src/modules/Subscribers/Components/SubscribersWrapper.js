@@ -87,7 +87,6 @@ class SubscribersWrapper extends Component {
         query = qs.stringify(query, {arrayFormat: 'brackets'});
 
         history.push({
-            pathname: '/subscribers',
             search: query
         });
     };

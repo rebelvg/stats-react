@@ -87,7 +87,6 @@ class StreamsWrapper extends Component {
         query = qs.stringify(query, {arrayFormat: 'brackets'});
 
         history.push({
-            pathname: '/streams',
             search: query
         });
     };

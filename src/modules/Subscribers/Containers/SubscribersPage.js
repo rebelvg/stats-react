@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import humanize from 'humanize-plus';
 import moment from 'moment';
 import qs from 'qs';
+import humanizeDuration from 'humanize-duration';
 
 import SubscribersWrapper from '../Components/SubscribersWrapper';
 import {getSubscribersAction, getError, getData, getLoading} from '../../../redux/subscribers';
@@ -36,7 +37,10 @@ class SubscribersPage extends Component {
                 />
 
                 <div>Total Traffic: {humanize.fileSize(totalBytes)}</div>
-                <div>Total Duration: {moment.duration(totalDuration, 'seconds').humanize()}</div>
+                <div>Total Duration: {humanizeDuration(totalDuration * 1000, {
+                    round: true,
+                    largest: 3
+                })}</div>
                 <div>Unique IPs: {totalIPs}</div>
                 <br/>
                 <div>Showing: {subscribers.length}</div>
