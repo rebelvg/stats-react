@@ -134,7 +134,7 @@ class StreamWrapper extends Component {
                     <YAxis/>
                     <Tooltip labelFormatter={(value) => moment.unix(value).format('ddd HH:mm')}/>
                     <Legend/>
-                    <Line name="Viewers" type="monotone" dataKey="subscribersCount" stroke="#82ca9d"/>
+                    <Line name="Viewers" type="stepAfter" dataKey="subscribersCount" stroke="#82ca9d"/>
                 </LineChart>
             </ResponsiveContainer>
 
