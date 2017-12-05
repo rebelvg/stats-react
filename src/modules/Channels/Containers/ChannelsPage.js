@@ -36,11 +36,17 @@ class ChannelsPage extends Component {
     render() {
         const servers = this.props.data;
 
+        console.log(servers);
+
+        if (_.isEmpty(servers)) return <div>No servers online.</div>;
+
         return (
             <div>
                 {
                     Object.entries(servers).map((serversObj) => {
                         const [serverName, serverObj] = serversObj;
+
+                        if (_.isEmpty(serverObj)) return <div>No channels online for {serverName}.</div>;
 
                         return Object.entries(serverObj).map((appsObj) => {
                             const [appName, appObj] = appsObj;
