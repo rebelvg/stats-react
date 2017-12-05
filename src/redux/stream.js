@@ -2,14 +2,14 @@ import {handleActions} from 'redux-actions';
 import axios from 'axios';
 import _ from 'lodash';
 
-const GET_STREAM = 'stream.get',
-    GET_STREAM_SUCCESS = 'stream.get.success',
-    GET_STREAM_FAILED = 'stream.get.failed';
+const ACTION_GET = 'get',
+    ACTION_GET_SUCCESS = 'get.success',
+    ACTION_GET_FAILED = 'get.failed';
 
 //ACTIONS
 export function getStreamAction(id, limit = 20, currentPage = 0, filters = [], sorts = []) {
     return (dispatch) => {
-        dispatch({type: GET_STREAM});
+        dispatch({type: ACTION_GET});
 
         let params = {};
 
@@ -32,10 +32,10 @@ export function getStreamAction(id, limit = 20, currentPage = 0, filters = [], s
         }), axios.get('/api/streams/' + id + '/graph', {
             params: params
         })]).then(res => {
-                dispatch({type: GET_STREAM_SUCCESS, data: res[0].data, events: res[1].data.events});
+                dispatch({type: ACTION_GET_SUCCESS, data: res[0].data, events: res[1].data.events});
             }
         ).catch(e => {
-            dispatch({type: GET_STREAM_FAILED, error: e});
+            dispatch({type: ACTION_GET_FAILED, error: e});
         });
     }
 }
@@ -48,10 +48,10 @@ const initialState = {
 };
 
 const reducer = handleActions({
-    [GET_STREAM_SUCCESS]: (state, action) => {
+    [ACTION_GET_SUCCESS]: (state, action) => {
         return {...state, data: action.data, events: action.events};
     },
-    [GET_STREAM_FAILED]: (state, action) => {
+    [ACTION_GET_FAILED]: (state, action) => {
         return {...state, error: action.error};
     }
 }, initialState);

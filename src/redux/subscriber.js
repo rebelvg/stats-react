@@ -1,19 +1,19 @@
 import {handleActions} from 'redux-actions';
 import axios from 'axios';
 
-const GET_SUBSCRIBER = 'subscriber.get',
-    GET_SUBSCRIBER_SUCCESS = 'subscriber.get.success',
-    GET_SUBSCRIBER_FAILED = 'subscriber.get.failed';
+const ACTION_GET = 'get',
+    ACTION_GET_SUCCESS = 'get.success',
+    ACTION_GET_FAILED = 'get.failed';
 
 //ACTIONS
 export function getSubscriberAction(id) {
     return (dispatch) => {
-        dispatch({type: GET_SUBSCRIBER});
+        dispatch({type: ACTION_GET});
 
         axios.get('/api/subscribers/' + id).then(res => {
-            dispatch({type: GET_SUBSCRIBER_SUCCESS, data: res.data});
+            dispatch({type: ACTION_GET_SUCCESS, data: res.data});
         }).catch(e => {
-            dispatch({type: GET_SUBSCRIBER_FAILED, error: e});
+            dispatch({type: ACTION_GET_FAILED, error: e});
         });
     }
 }
@@ -25,10 +25,10 @@ const initialState = {
 };
 
 const reducer = handleActions({
-    [GET_SUBSCRIBER_SUCCESS]: (state, action) => {
+    [ACTION_GET_SUCCESS]: (state, action) => {
         return {...state, data: action.data};
     },
-    [GET_SUBSCRIBER_FAILED]: (state, action) => {
+    [ACTION_GET_FAILED]: (state, action) => {
         return {...state, error: action.error};
     }
 }, initialState);
