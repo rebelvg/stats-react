@@ -37,17 +37,11 @@ class ChannelsPage extends Component {
         return (
             <div>
                 {
-                    Object.entries(servers).map((serversObj) => {
-                        const [serverName, serverObj] = serversObj;
-
+                    Object.entries(servers).map(([serverName, serverObj]) => {
                         if (_.isEmpty(serverObj)) return <div>No channels online for {serverName}.</div>;
 
-                        return Object.entries(serverObj).map((appsObj) => {
-                            const [appName, appObj] = appsObj;
-
-                            return Object.entries(appObj).map((channelsObj) => {
-                                const [channelName, channelObj] = channelsObj;
-
+                        return Object.entries(serverObj).map(([appName, appObj]) => {
+                            return Object.entries(appObj).map(([channelName, channelObj]) => {
                                 const stream = channelObj.publisher;
                                 const subscribers = channelObj.subscribers;
 
