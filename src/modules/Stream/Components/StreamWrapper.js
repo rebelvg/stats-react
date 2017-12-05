@@ -95,7 +95,7 @@ class StreamWrapper extends Component {
     };
 
     render() {
-        const {stream = null, subscribers = [], options = {}, info = {}, relatedStreams = [], events = [],} = this.props;
+        const {stream = null, subscribers = [], options = {}, info = {}, relatedStreams = [], events = []} = this.props;
         const {totalBytes, totalDuration, totalPeakViewers, totalIPs} = info;
 
         let streams = [];
