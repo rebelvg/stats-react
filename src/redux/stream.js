@@ -2,9 +2,9 @@ import {handleActions} from 'redux-actions';
 import axios from 'axios';
 import _ from 'lodash';
 
-const ACTION_GET = 'get',
-    ACTION_GET_SUCCESS = 'get.success',
-    ACTION_GET_FAILED = 'get.failed';
+const ACTION_GET = 'stream.get',
+    ACTION_GET_SUCCESS = 'stream.get.success',
+    ACTION_GET_FAILED = 'stream.get.failed';
 
 //ACTIONS
 export function getAction(id, limit = 20, currentPage = 0, filters = [], sorts = []) {

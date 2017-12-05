@@ -1,9 +1,9 @@
 import {handleActions} from 'redux-actions';
 import axios from 'axios';
 
-const ACTION_GET = 'get',
-    ACTION_GET_SUCCESS = 'get.success',
-    ACTION_GET_FAILED = 'get.failed';
+const ACTION_GET = 'subscriber.get',
+    ACTION_GET_SUCCESS = 'subscriber.get.success',
+    ACTION_GET_FAILED = 'subscriber.get.failed';
 
 //ACTIONS
 export function getAction(id) {
