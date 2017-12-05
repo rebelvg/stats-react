@@ -7,7 +7,7 @@ const ACTION_GET = 'get',
     ACTION_GET_FAILED = 'get.failed';
 
 //ACTIONS
-export function getSubscribersAction(limit = 20, currentPage = 0, filters = [], sorts = []) {
+export function getAction(limit = 20, currentPage = 0, filters = [], sorts = []) {
     return (dispatch) => {
         dispatch({type: ACTION_GET});
 

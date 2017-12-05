@@ -6,7 +6,7 @@ import qs from 'qs';
 import humanizeDuration from 'humanize-duration';
 
 import StreamsWrapper from '../Components/StreamsWrapper';
-import {getStreamsAction, getError, getData, getLoading} from '../../../redux/streams';
+import {getAction, getError, getData, getLoading} from '../../../redux/streams';
 
 @connect(
     state => ({
@@ -14,7 +14,7 @@ import {getStreamsAction, getError, getData, getLoading} from '../../../redux/st
         data: getData(state),
         isLoading: getLoading(state)
     }),
-    {getStreamsAction}
+    {getStreamsAction: getAction}
 )
 class StreamsPage extends Component {
     render() {

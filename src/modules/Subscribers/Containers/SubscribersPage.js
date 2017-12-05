@@ -6,7 +6,7 @@ import qs from 'qs';
 import humanizeDuration from 'humanize-duration';
 
 import SubscribersWrapper from '../Components/SubscribersWrapper';
-import {getSubscribersAction, getError, getData, getLoading} from '../../../redux/subscribers';
+import {getAction, getError, getData, getLoading} from '../../../redux/subscribers';
 
 @connect(
     state => ({
@@ -14,7 +14,7 @@ import {getSubscribersAction, getError, getData, getLoading} from '../../../redu
         data: getData(state),
         isLoading: getLoading(state)
     }),
-    {getSubscribersAction}
+    {getSubscribersAction: getAction}
 )
 class SubscribersPage extends Component {
     render() {

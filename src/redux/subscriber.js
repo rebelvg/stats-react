@@ -6,7 +6,7 @@ const ACTION_GET = 'get',
     ACTION_GET_FAILED = 'get.failed';
 
 //ACTIONS
-export function getSubscriberAction(id) {
+export function getAction(id) {
     return (dispatch) => {
         dispatch({type: ACTION_GET});
 

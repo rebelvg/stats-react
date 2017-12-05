@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import SubscriberWrapper from '../Components/SubscriberWrapper';
-import {getSubscriberAction, getError, getData} from '../../../redux/subscriber';
+import {getAction, getError, getData} from '../../../redux/subscriber';
 
 @connect(
     state => ({
         error: getError(state),
         data: getData(state)
     }),
-    {getSubscriberAction}
+    {getSubscriberAction: getAction}
 )
 class SubscriberPage extends Component {
     componentDidMount() {

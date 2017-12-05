@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import qs from 'qs';
 
 import StreamWrapper from '../Components/StreamWrapper';
-import {getStreamAction, getError, getData, getEvents} from '../../../redux/stream';
+import {getAction, getError, getData, getEvents} from '../../../redux/stream';
 
 @connect(
     state => ({
@@ -11,7 +11,7 @@ import {getStreamAction, getError, getData, getEvents} from '../../../redux/stre
         data: getData(state),
         events: getEvents(state)
     }),
-    {getStreamAction}
+    {getStreamAction: getAction}
 )
 class StreamPage extends Component {
     componentWillReceiveProps(nextProps) {
