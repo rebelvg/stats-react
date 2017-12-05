@@ -21,10 +21,7 @@ export function getSubscriberAction(id) {
 //REDUCER
 const initialState = {
     error: null,
-    data: {
-        subscriber: null,
-        stream: null
-    }
+    data: {}
 };
 
 const reducer = handleActions({

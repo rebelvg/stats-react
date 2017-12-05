@@ -49,13 +49,7 @@ export function getStreamsAction(limit = 20, currentPage = 0, filters = [], sort
 //REDUCER
 const initialState = {
     error: null,
-    data: {
-        streams: [],
-        total: 0,
-        limit: 1,
-        page: 1,
-        pages: 1
-    },
+    data: {},
     isLoading: false
 };
 

@@ -43,13 +43,7 @@ export function getSubscribersAction(limit = 20, currentPage = 0, filters = [], 
 //REDUCER
 const initialState = {
     error: null,
-    data: {
-        subscribers: [],
-        total: 0,
-        limit: 1,
-        page: 1,
-        pages: 1
-    },
+    data: {},
     isLoading: false
 };
 

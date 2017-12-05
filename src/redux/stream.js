@@ -43,10 +43,7 @@ export function getStreamAction(id, limit = 20, currentPage = 0, filters = [], s
 //REDUCER
 const initialState = {
     error: null,
-    data: {
-        stream: null,
-        subscribers: []
-    },
+    data: {},
     events: []
 };
 
