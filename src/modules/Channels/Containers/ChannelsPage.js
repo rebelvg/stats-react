@@ -20,23 +20,17 @@ class ChannelsPage extends Component {
     }
 
     componentDidMount() {
-        console.log('componentDidMount');
-
         this.timerId = setInterval(() => {
             this.props.getAction();
         }, 5000);
     }
 
     componentWillUnmount() {
-        console.log('componentWillUnmount');
-
         clearInterval(this.timerId);
     }
 
     render() {
         const servers = this.props.data;
-
-        console.log(servers);
 
         if (_.isEmpty(servers)) return <div>No servers online.</div>;
 
