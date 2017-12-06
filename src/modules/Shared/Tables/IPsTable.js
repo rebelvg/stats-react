@@ -19,7 +19,12 @@ const tableConfigTemplate = [
     },
     {
         Header: 'Country',
-        accessor: 'api.country'
+        accessor: 'api.country',
+        Cell: (props) => {
+            if (props.original.api.status !== 'success') return props.original.api.message;
+
+            return props.original.api.country;
+        }
     },
     {
         Header: 'City',
