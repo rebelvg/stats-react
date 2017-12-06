@@ -7,6 +7,7 @@ const Header = () => (
         <StyledLink to="/">Home</StyledLink>
         <StyledLink to="/streams">Streams</StyledLink>
         <StyledLink to="/subscribers">Subscribers</StyledLink>
+        <StyledLink to="/ips">IPs</StyledLink>
         <StyledLink to="/channels">Channels</StyledLink>
         <StyledLink to="/graphs">Graphs</StyledLink>
     </HeaderWrap>

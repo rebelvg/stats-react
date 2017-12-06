@@ -86,7 +86,7 @@ const tableConfigTemplate = [
         Header: 'Protocol',
         accessor: 'protocol',
         minWidth: 40
-    },
+    }
 ];
 
 function tableConfigOptions(options = {}, disableFiltering = []) {

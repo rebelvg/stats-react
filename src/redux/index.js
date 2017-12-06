@@ -4,13 +4,15 @@ import stream from './stream';
 import subscribers from './subscribers';
 import subscriber from './subscriber';
 import channels from './channels';
+import ips from './ips';
 
 const reducers = combineReducers({
     streams,
     stream,
     subscribers,
     subscriber,
-    channels
+    channels,
+    ips
 });
 
 export default reducers;
