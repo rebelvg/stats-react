@@ -8,7 +8,7 @@ const Header = () => (
         <StyledLink to="/streams">Streams</StyledLink>
         <StyledLink to="/subscribers">Subscribers</StyledLink>
         <StyledLink to="/ips">IPs</StyledLink>
-        <StyledLink to="/channels">Channels</StyledLink>
+        <StyledLink to="/live">Live!</StyledLink>
         <StyledLink to="/graphs">Graphs</StyledLink>
     </HeaderWrap>
 );

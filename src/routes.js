@@ -16,7 +16,7 @@ const Routes = () => (
         <Route exact path='/streams/:id' component={StreamPage}/>
         <Route exact path='/subscribers' component={SubscribersPage}/>
         <Route exact path='/subscribers/:id' component={SubscriberPage}/>
-        <Route exact path='/channels/' component={ChannelsPage}/>
+        <Route exact path='/live/' component={ChannelsPage}/>
         <Route exact path='/graphs/' component={GraphsPage}/>
         <Route exact path='/ips/' component={IPsPage}/>
     </div>
