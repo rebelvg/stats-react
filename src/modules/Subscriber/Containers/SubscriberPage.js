@@ -20,6 +20,9 @@ class SubscriberPage extends Component {
 
     render() {
         const {subscriber = null, streams = []} = this.props.data;
+        const {error} = this.props;
+
+        if (error) return <div>{error}</div>;
 
         return <div>
             <SubscriberWrapper

@@ -33,9 +33,15 @@ export function getAction(limit = 20, currentPage = 0, filters = [], sorts = [])
         axios.get('/api/ips', {
             params: params
         }).then(res => {
-            dispatch({type: ACTION_GET_SUCCESS, data: res.data});
+            dispatch({
+                type: ACTION_GET_SUCCESS,
+                data: res.data
+            });
         }).catch(e => {
-            dispatch({type: ACTION_GET_FAILED, error: e});
+            dispatch({
+                type: ACTION_GET_FAILED,
+                error: e.response.data.error
+            });
         });
     }
 }

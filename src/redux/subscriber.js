@@ -11,9 +11,15 @@ export function getAction(id) {
         dispatch({type: ACTION_GET});
 
         axios.get('/api/subscribers/' + id).then(res => {
-            dispatch({type: ACTION_GET_SUCCESS, data: res.data});
+            dispatch({
+                type: ACTION_GET_SUCCESS,
+                data: res.data
+            });
         }).catch(e => {
-            dispatch({type: ACTION_GET_FAILED, error: e});
+            dispatch({
+                type: ACTION_GET_FAILED,
+                error: e.response.data.error
+            });
         });
     }
 }
@@ -26,10 +32,16 @@ const initialState = {
 
 const reducer = handleActions({
     [ACTION_GET_SUCCESS]: (state, action) => {
-        return {...state, data: action.data};
+        return {
+            ...state,
+            data: action.data
+        };
     },
     [ACTION_GET_FAILED]: (state, action) => {
-        return {...state, error: action.error};
+        return {
+            ...state,
+            error: action.error
+        };
     }
 }, initialState);
 

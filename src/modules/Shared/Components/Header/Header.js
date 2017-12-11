@@ -10,6 +10,7 @@ const Header = () => (
         <StyledLink to="/ips">IPs</StyledLink>
         <StyledLink to="/live">Live!</StyledLink>
         <StyledLink to="/graphs">Graphs</StyledLink>
+        <StyledLink to="/api/users/auth/google">Login</StyledLink>
     </HeaderWrap>
 );
 

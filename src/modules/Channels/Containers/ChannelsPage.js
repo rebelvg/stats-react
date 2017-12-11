@@ -31,6 +31,9 @@ class ChannelsPage extends Component {
 
     render() {
         const servers = this.props.data;
+        const {error} = this.props;
+
+        if (error) return <div>{error}</div>;
 
         if (_.isEmpty(servers)) return <div>No servers online.</div>;
 

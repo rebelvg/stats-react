@@ -32,10 +32,17 @@ export function getAction(id, limit = 20, currentPage = 0, filters = [], sorts =
         }), axios.get('/api/streams/' + id + '/graph', {
             params: params
         })]).then(res => {
-                dispatch({type: ACTION_GET_SUCCESS, data: res[0].data, events: res[1].data.events});
+                dispatch({
+                    type: ACTION_GET_SUCCESS,
+                    data: res[0].data,
+                    events: res[1].data.events
+                });
             }
         ).catch(e => {
-            dispatch({type: ACTION_GET_FAILED, error: e});
+            dispatch({
+                type: ACTION_GET_FAILED,
+                error: e.response.data.error
+            });
         });
     }
 }
@@ -49,10 +56,17 @@ const initialState = {
 
 const reducer = handleActions({
     [ACTION_GET_SUCCESS]: (state, action) => {
-        return {...state, data: action.data, events: action.events};
+        return {
+            ...state,
+            data: action.data,
+            events: action.events
+        };
     },
     [ACTION_GET_FAILED]: (state, action) => {
-        return {...state, error: action.error};
+        return {
+            ...state,
+            error: action.error
+        };
     }
 }, initialState);
 

@@ -18,9 +18,11 @@ class IPsPage extends Component {
         const {ips = [], options = {}, info = {}, total, limit, page, pages} = this.props.data;
         const {totalCountries, totalCities, totalISPs} = info;
         const {search} = this.props.location;
-        const {isLoading} = this.props;
+        const {error, isLoading} = this.props;
 
         let searchParams = qs.parse(search, {ignoreQueryPrefix: true});
+
+        if (error) return <div>{error}</div>;
 
         return <div>
             <IPsWrapper

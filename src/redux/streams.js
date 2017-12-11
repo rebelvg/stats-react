@@ -40,7 +40,7 @@ export function getAction(limit = 20, currentPage = 0, filters = [], sorts = [])
         }).catch(e => {
             dispatch({
                 type: ACTION_GET_FAILED,
-                error: e
+                error: e.response.data.error
             });
         });
     }

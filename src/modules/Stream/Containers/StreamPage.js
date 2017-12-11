@@ -26,9 +26,11 @@ class StreamPage extends Component {
     render() {
         const {stream, subscribers, options, info, relatedStreams} = this.props.data;
         const {search} = this.props.location;
-        const {events} = this.props;
+        const {error, events} = this.props;
 
         let searchParams = qs.parse(search, {ignoreQueryPrefix: true});
+
+        if (error) return <div>{error}</div>;
 
         return <div>
             <StreamWrapper

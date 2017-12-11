@@ -21,9 +21,11 @@ class StreamsPage extends Component {
         const {streams = [], options = {}, info = {}, total, limit, page, pages} = this.props.data;
         const {totalBytes, totalDuration, totalConnections, totalPeakViewers, totalIPs} = info;
         const {search} = this.props.location;
-        const {isLoading} = this.props;
+        const {error, isLoading} = this.props;
 
         let searchParams = qs.parse(search, {ignoreQueryPrefix: true});
+
+        if (error) return <div>{error}</div>;
 
         return (
             <div>
