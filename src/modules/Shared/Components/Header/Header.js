@@ -1,27 +1,28 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import styled from 'styled-components';
 
 const Header = () => (
     <HeaderWrap>
-        <StyledLink to="/">Home</StyledLink>
+        <StyledLink exact to="/">Home</StyledLink>
         <StyledLink to="/streams">Streams</StyledLink>
         <StyledLink to="/subscribers">Subscribers</StyledLink>
         <StyledLink to="/ips">IPs</StyledLink>
-        <StyledLink to="/live">Live!</StyledLink>
-        <StyledLink to="/graphs">Graphs</StyledLink>
-        <StyledLink to="/api/users/auth/google">Login</StyledLink>
+        <StyledLink exact to="/live">Live!</StyledLink>
+        <StyledLink exact to="/graphs">Graphs</StyledLink>
+        <StyledLink exact to="/api/users/auth/google">Login</StyledLink>
     </HeaderWrap>
 );
 
 export default Header;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(NavLink)`
   margin: 0px 10px;
   color: white;
   cursor: pointer;
   text-decoration: none;
   font-weight: bold;
+  &.active {color:red};
 `;
 
 const HeaderWrap = styled.div`

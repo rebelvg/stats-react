@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
+import {Route, Redirect} from 'react-router-dom';
 import HomePage from './modules/Home/Containers/HomePage/HomePage';
 import StreamsPage from './modules/Streams/Containers/StreamsPage';
 import StreamPage from './modules/Stream/Containers/StreamPage';
@@ -16,9 +16,9 @@ const Routes = () => (
         <Route exact path='/streams/:id' component={StreamPage}/>
         <Route exact path='/subscribers' component={SubscribersPage}/>
         <Route exact path='/subscribers/:id' component={SubscriberPage}/>
-        <Route exact path='/live/' component={ChannelsPage}/>
-        <Route exact path='/graphs/' component={GraphsPage}/>
-        <Route exact path='/ips/' component={IPsPage}/>
+        <Route exact path='/live' component={ChannelsPage}/>
+        <Route exact path='/graphs' component={GraphsPage}/>
+        <Route exact path='/ips' component={IPsPage}/>
     </div>
 );
 
