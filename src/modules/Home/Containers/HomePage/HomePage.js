@@ -6,7 +6,8 @@ const Home = () => (
         <h2>This is home page</h2>
         <img
             src="https://i.imgur.com/wAUCPw1.png"
-            alt="meme"/>
+            alt="meme"
+            height="60%"/>
     </HomeWrapper>
 );
 
