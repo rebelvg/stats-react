@@ -10,7 +10,7 @@ const Header = () => (
         <StyledLink to="/ips">IPs</StyledLink>
         <StyledLink exact to="/live">Live!</StyledLink>
         <StyledLink exact to="/graphs">Graphs</StyledLink>
-        <StyledLink exact to="/api/users/auth/google">Login</StyledLink>
+        <MyLink href={`${window.location.origin}/api/users/auth/google`}>Login</MyLink>
     </HeaderWrap>
 );
 
@@ -29,4 +29,13 @@ const HeaderWrap = styled.div`
   width: 100%;
   background-color: #262626;
   padding: 15px 0px;
+`;
+
+const MyLink = styled.a`
+  margin: 0px 10px;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+  &.active {color:red};
 `;
