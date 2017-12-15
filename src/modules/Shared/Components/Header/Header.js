@@ -11,6 +11,7 @@ const Header = () => (
         <StyledLink exact to="/live">Live!</StyledLink>
         <StyledLink exact to="/graphs">Graphs</StyledLink>
         <MyLink href={`${window.location.origin}/api/users/auth/google`}>Login</MyLink>
+        <MyLink href={`${window.location.origin}/api/users/logout`}>Logout</MyLink>
     </HeaderWrap>
 );
 
