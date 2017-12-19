@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import styled, {keyframes} from 'styled-components';
 import qs from 'qs';
+import {Route, Redirect} from 'react-router';
 
 class Home extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount() {
+    render() {
         const {search} = this.props.location;
 
         let searchParams = qs.parse(search, {ignoreQueryPrefix: true});
@@ -16,10 +13,10 @@ class Home extends Component {
             const localStorage = window.localStorage;
 
             localStorage.setItem('token', searchParams.token);
-        }
-    }
 
-    render() {
+            return <Redirect to='/'/>;
+        }
+
         return (
             <HomeWrapper>
                 <h2>This is home page</h2>
