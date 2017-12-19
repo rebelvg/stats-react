@@ -10,7 +10,11 @@ export function getAction(id) {
     return (dispatch) => {
         dispatch({type: ACTION_GET});
 
-        axios.get('/api/subscribers/' + id).then(res => {
+        axios.get('/api/subscribers/' + id, {
+            headers: {
+                token: window.localStorage.getItem('token')
+            }
+        }).then(res => {
             dispatch({
                 type: ACTION_GET_SUCCESS,
                 data: res.data

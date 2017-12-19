@@ -2,6 +2,10 @@ import React from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import styled from 'styled-components';
 
+const handleLogout = () => {
+    window.localStorage.removeItem('token');
+};
+
 const Header = () => (
     <HeaderWrap>
         <StyledLink exact to="/">Home</StyledLink>
@@ -10,8 +14,14 @@ const Header = () => (
         <StyledLink to="/ips">IPs</StyledLink>
         <StyledLink exact to="/live">Live!</StyledLink>
         <StyledLink exact to="/graphs">Graphs</StyledLink>
-        <MyLink href={`${window.location.origin}/api/users/auth/google`}>Login</MyLink>
-        <MyLink href={`${window.location.origin}/api/users/logout`}>Logout</MyLink>
+        {
+            !window.localStorage.getItem('token') ?
+                <MyLink href={`${window.location.origin}/api/users/auth/google`}>Login</MyLink> :
+                <StyledLink to='/' onClick={handleLogout} activeStyle={{
+                    fontWeight: 'bold',
+                    color: 'white'
+                }}>Logout</StyledLink>
+        }
     </HeaderWrap>
 );
 

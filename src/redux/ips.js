@@ -31,6 +31,9 @@ export function getAction(limit = 20, currentPage = 0, filters = [], sorts = [])
         params.limit = limit;
 
         axios.get('/api/ips', {
+            headers: {
+                token: window.localStorage.getItem('token')
+            },
             params: params
         }).then(res => {
             dispatch({

@@ -1,16 +1,37 @@
-import React from 'react';
+import React, {Component} from 'react';
 import styled, {keyframes} from 'styled-components';
+import qs from 'qs';
 
-const Home = () => (
-    <HomeWrapper>
-        <h2>This is home page</h2>
-        <img
-            src="https://i.imgur.com/wAUCPw1.png"
-            alt="meme"
-            height="60%"
-        />
-    </HomeWrapper>
-);
+class Home extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        const {search} = this.props.location;
+
+        let searchParams = qs.parse(search, {ignoreQueryPrefix: true});
+
+        if (searchParams.token) {
+            const localStorage = window.localStorage;
+
+            localStorage.setItem('token', searchParams.token);
+        }
+    }
+
+    render() {
+        return (
+            <HomeWrapper>
+                <h2>This is home page</h2>
+                <img
+                    src="https://i.imgur.com/wAUCPw1.png"
+                    alt="meme"
+                    height="60%"
+                />
+            </HomeWrapper>
+        );
+    }
+}
 
 export default Home;
 

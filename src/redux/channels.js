@@ -10,7 +10,11 @@ export function getAction() {
     return (dispatch) => {
         dispatch({type: ACTION_GET});
 
-        axios.get('/api/channels').then(res => {
+        axios.get('/api/channels', {
+            headers: {
+                token: window.localStorage.getItem('token')
+            }
+        }).then(res => {
             dispatch({
                 type: ACTION_GET_SUCCESS,
                 data: res.data
