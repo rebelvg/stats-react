@@ -8,6 +8,7 @@ import SubscriberPage from './modules/Subscriber/Containers/SubscriberPage';
 import ChannelsPage from './modules/Channels/Containers/ChannelsPage';
 import GraphsPage from './modules/Graphs/Containers/GraphsPage';
 import IPsPage from './modules/IPs/Containers/IPsPage';
+import UserPage from './modules/User/Containers/UserPage';
 
 const Routes = () => (
     <div>
@@ -19,6 +20,7 @@ const Routes = () => (
         <Route exact path='/live' component={ChannelsPage}/>
         <Route exact path='/graphs' component={GraphsPage}/>
         <Route exact path='/ips' component={IPsPage}/>
+        <Route exact path='/user' component={UserPage}/>
     </div>
 );
 
