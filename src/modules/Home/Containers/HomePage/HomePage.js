@@ -19,7 +19,7 @@ class Home extends Component {
 
         return (
             <HomeWrapper>
-                <h2>This is home page</h2>
+                <h2>This is a homepage</h2>
                 <img
                     src="https://i.imgur.com/wAUCPw1.png"
                     alt="meme"

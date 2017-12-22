@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
+import {Alert} from 'reactstrap';
 
 import ChannelWrapper from '../Components/ChannelWrapper';
 import {getAction, getError, getData} from '../../../redux/channels';
@@ -33,15 +34,16 @@ class ChannelsPage extends Component {
         const servers = this.props.data;
         const {error} = this.props;
 
-        if (error) return <div>{error}</div>;
+        if (error) return <Alert color="danger">{error}</Alert>;
 
-        if (_.isEmpty(servers)) return <div>No servers online.</div>;
+        if (_.isEmpty(servers)) return <Alert color="danger">No servers online.</Alert>;
 
         return (
             <div>
                 {
                     Object.entries(servers).map(([serverName, serverObj]) => {
-                        if (_.isEmpty(serverObj)) return <div>No channels online for {serverName}.</div>;
+                        if (_.isEmpty(serverObj)) return <Alert color="danger">No channels online
+                            for {serverName}.</Alert>;
 
                         return Object.entries(serverObj).map(([appName, appObj]) => {
                             return Object.entries(appObj).map(([channelName, channelObj]) => {

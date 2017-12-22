@@ -6,6 +6,7 @@ import {BrowserRouter} from 'react-router-dom';
 import App from './modules/App/Containers/App/App';
 import store from './store';
 import 'normalize.css/normalize.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 injectTapEventPlugin();
 
