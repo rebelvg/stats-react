@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
+import ReactTable from 'react-table';
 
-class GraphsPage extends Component {
+class UsersPage extends Component {
     render() {
         return (
             <div>
-                GraphsPage
+                UsersPage
             </div>
         );
     }
 }
 
-export default GraphsPage;
+export default UsersPage;

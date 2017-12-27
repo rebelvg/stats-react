@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import ReactTable from 'react-table';
-import 'react-table/react-table.css';
 import moment from 'moment';
 import {LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer} from 'recharts';
 import _ from 'lodash';
@@ -79,7 +78,6 @@ class StreamWrapper extends Component {
 
     handleFilteredChange = (column, value) => {
         this.setState({
-            page: 0,
             filtered: column
         }, () => {
             this.fetchData();

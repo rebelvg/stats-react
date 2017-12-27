@@ -7,6 +7,7 @@ import App from './modules/App/Containers/App/App';
 import store from './store';
 import 'normalize.css/normalize.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'react-table/react-table.css';
 
 injectTapEventPlugin();
 
