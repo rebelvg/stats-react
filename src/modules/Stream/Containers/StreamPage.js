@@ -11,7 +11,7 @@ import {getAction, getError, getData, getEvents} from '../../../redux/stream';
         data: getData(state),
         events: getEvents(state)
     }),
-    {getStreamAction: getAction}
+    {getAction}
 )
 class StreamPage extends Component {
     componentWillReceiveProps(nextProps) {
@@ -19,7 +19,7 @@ class StreamPage extends Component {
         const newId = nextProps.match.params.id;
 
         if (newId !== id) {
-            this.props.getStreamAction(newId);
+            this.props.getAction(newId);
         }
     }
 
@@ -40,7 +40,7 @@ class StreamPage extends Component {
                 info={info}
                 relatedStreams={relatedStreams}
                 events={events}
-                getData={this.props.getStreamAction}
+                getData={this.props.getAction}
                 streamId={this.props.match.params.id}
                 searchParams={searchParams}
             />
@@ -48,7 +48,7 @@ class StreamPage extends Component {
             <button onClick={() => {
                 const id = this.props.match.params.id;
 
-                this.props.getStreamAction(id);
+                this.props.getAction(id);
             }}>Refresh
             </button>
         </div>

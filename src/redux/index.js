@@ -6,6 +6,7 @@ import subscriber from './subscriber';
 import channels from './channels';
 import ips from './ips';
 import user from './user';
+import adminUsers from './admin/users';
 
 const reducers = combineReducers({
     streams,
@@ -14,7 +15,8 @@ const reducers = combineReducers({
     subscriber,
     channels,
     ips,
-    user
+    user,
+    adminUsers
 });
 
 export default reducers;
