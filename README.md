@@ -18,12 +18,12 @@ yarn run start
 ### Build
 `yarn run build`
 
-### Libraries
+## Libraries
 - React
 - Redux
 - React-Router
 - Styled-Components
 - Decorators
 
-### Live Example
-http://stats.klpq.men/streams
+## Live Example
+> http://stats.klpq.men/streams
