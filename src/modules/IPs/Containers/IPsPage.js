@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import qs from 'qs';
+import {Alert} from 'reactstrap';
 
 import IPsWrapper from '../Components/IPsWrapper';
 import {getAction, getError, getData, getLoading} from '../../../redux/ips';
@@ -22,7 +23,7 @@ class IPsPage extends Component {
 
         let searchParams = qs.parse(search, {ignoreQueryPrefix: true});
 
-        if (error) return <div>{error}</div>;
+        if (error) return <Alert color="danger">{error}</Alert>;
 
         return <div>
             <IPsWrapper
