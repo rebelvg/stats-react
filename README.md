@@ -16,7 +16,9 @@ yarn run start
 ```
 
 ### Build
-`yarn run build`
+```
+yarn run build
+```
 
 ## Libraries
 - React
