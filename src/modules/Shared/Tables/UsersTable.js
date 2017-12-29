@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import moment from 'moment';
 import _ from 'lodash';
 import {Link} from 'react-router-dom';
-import {Alert} from 'reactstrap';
+import {Button} from 'reactstrap';
 import axios from 'axios';
 
 const tableConfigTemplate = [
@@ -51,21 +51,31 @@ function tableConfigOptions(putUser) {
     let adminTableColumn = _.find(tableConfig, ['accessor', 'isAdmin']);
 
     adminTableColumn.Cell = (props) => {
-        return <Alert color="primary" onClick={() => {
-            putUser(props.original._id, {
-                isAdmin: !props.value
-            });
-        }}>{props.value ? 'Yes' : 'No'}</Alert>;
+        return <Button
+            outline
+            color="primary"
+            onClick={() => {
+                putUser(props.original._id, {
+                    isAdmin: !props.value
+                });
+            }}
+            block
+            disabled={props.original.token === window.localStorage.getItem('token')
+            }>{props.value ? 'Yes' : 'No'}</Button>;
     };
 
     let streamerTableColumn = _.find(tableConfig, ['accessor', 'isStreamer']);
 
     streamerTableColumn.Cell = (props) => {
-        return <Alert color="primary" onClick={() => {
-            putUser(props.original._id, {
-                isStreamer: !props.value
-            });
-        }}>{props.value ? 'Yes' : 'No'}</Alert>;
+        return <Button
+            outline
+            color="primary"
+            onClick={() => {
+                putUser(props.original._id, {
+                    isStreamer: !props.value
+                });
+            }}
+            block>{props.value ? 'Yes' : 'No'}</Button>;
     };
 
     return tableConfig;
