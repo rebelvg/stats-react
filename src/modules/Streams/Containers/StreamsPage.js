@@ -14,7 +14,7 @@ import {getAction, getError, getData, getLoading} from '../../../redux/streams';
         data: getData(state),
         isLoading: getLoading(state)
     }),
-    {getStreamsAction: getAction}
+    {getAction}
 )
 class StreamsPage extends Component {
     render() {
@@ -33,7 +33,7 @@ class StreamsPage extends Component {
                     streams={streams}
                     options={options}
                     pages={pages}
-                    getData={this.props.getStreamsAction}
+                    getData={this.props.getAction}
                     searchParams={searchParams}
                     isLoading={isLoading}
                 />
@@ -54,7 +54,7 @@ class StreamsPage extends Component {
                 <div>Pages: {pages}</div>
 
                 <button onClick={() => {
-                    this.props.getStreamsAction();
+                    this.props.getAction();
                 }}>Refresh
                 </button>
             </div>

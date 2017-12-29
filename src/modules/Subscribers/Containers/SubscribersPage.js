@@ -14,7 +14,7 @@ import {getAction, getError, getData, getLoading} from '../../../redux/subscribe
         data: getData(state),
         isLoading: getLoading(state)
     }),
-    {getSubscribersAction: getAction}
+    {getAction}
 )
 class SubscribersPage extends Component {
     render() {
@@ -33,7 +33,7 @@ class SubscribersPage extends Component {
                     subscribers={subscribers}
                     options={options}
                     pages={pages}
-                    getData={this.props.getSubscribersAction}
+                    getData={this.props.getAction}
                     searchParams={searchParams}
                     isLoading={isLoading}
                 />
@@ -52,7 +52,7 @@ class SubscribersPage extends Component {
                 <div>Pages: {pages}</div>
 
                 <button onClick={() => {
-                    this.props.getSubscribersAction();
+                    this.props.getAction();
                 }}>Refresh
                 </button>
             </div>

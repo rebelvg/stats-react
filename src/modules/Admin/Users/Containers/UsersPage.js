@@ -5,14 +5,14 @@ import AdminHeader from '../../../Shared/Components/AdminHeader/AdminHeader';
 import {Alert} from 'reactstrap';
 
 import usersTable from '../../../Shared/Tables/UsersTable';
-import {getAction, getError, getData} from '../../../../redux/admin/users';
+import {getAction, getError, getData, putUser} from '../../../../redux/admin/users';
 
 @connect(
     state => ({
         error: getError(state),
         data: getData(state)
     }),
-    {getAction}
+    {getAction, putUser}
 )
 class UsersPage extends Component {
     componentDidMount() {
@@ -29,13 +29,18 @@ class UsersPage extends Component {
             <div>
                 <AdminHeader/>
                 <ReactTable
-                    columns={usersTable()}
+                    columns={usersTable(this.props.putUser)}
                     data={users}
                     showPagination={false}
                     showPageSizeOptions={false}
                     minRows={0}
                     className="-striped -highlight"
                 />
+
+                <button onClick={() => {
+                    this.props.getAction();
+                }}>Refresh
+                </button>
             </div>
         );
     }

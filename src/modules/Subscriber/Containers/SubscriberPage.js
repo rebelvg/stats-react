@@ -9,13 +9,13 @@ import {getAction, getError, getData} from '../../../redux/subscriber';
         error: getError(state),
         data: getData(state)
     }),
-    {getSubscriberAction: getAction}
+    {getAction}
 )
 class SubscriberPage extends Component {
     componentDidMount() {
         const id = this.props.match.params.id;
 
-        this.props.getSubscriberAction(id);
+        this.props.getAction(id);
     }
 
     render() {
@@ -33,7 +33,7 @@ class SubscriberPage extends Component {
             <button onClick={() => {
                 const id = this.props.match.params.id;
 
-                this.props.getSubscriberAction(id);
+                this.props.getAction(id);
             }}>Refresh
             </button>
         </div>

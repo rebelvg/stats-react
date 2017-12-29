@@ -5,17 +5,6 @@ import {Link} from 'react-router-dom';
 import {Alert} from 'reactstrap';
 import axios from 'axios';
 
-function updateUser(id, data) {
-    return axios.put('/api/admin/users/' + id, data, {
-        headers: {
-            token: window.localStorage.getItem('token')
-        }
-    })
-        .then(res => {
-            return res.data.user;
-        });
-}
-
 const tableConfigTemplate = [
     {
         Header: 'Time Registered',
@@ -52,25 +41,34 @@ const tableConfigTemplate = [
     {
         Header: 'Is Streamer',
         accessor: 'isStreamer',
-        Cell: (props) => {
-            return <Alert color="primary" onClick={() => {
-                updateUser(props.original._id, {
-                    isStreamer: !props.value
-                })
-                    .then(user => {
-                        console.log(user.isStreamer);
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    });
-            }}>{props.value ? 'Yes' : 'No'}</Alert>;
-        },
         minWidth: 40
     }
 ];
 
-function tableConfigOptions() {
-    return _.cloneDeep(tableConfigTemplate);
+function tableConfigOptions(putUser) {
+    let tableConfig = _.cloneDeep(tableConfigTemplate);
+
+    let adminTableColumn = _.find(tableConfig, ['accessor', 'isAdmin']);
+
+    adminTableColumn.Cell = (props) => {
+        return <Alert color="primary" onClick={() => {
+            putUser(props.original._id, {
+                isAdmin: !props.value
+            });
+        }}>{props.value ? 'Yes' : 'No'}</Alert>;
+    };
+
+    let streamerTableColumn = _.find(tableConfig, ['accessor', 'isStreamer']);
+
+    streamerTableColumn.Cell = (props) => {
+        return <Alert color="primary" onClick={() => {
+            putUser(props.original._id, {
+                isStreamer: !props.value
+            });
+        }}>{props.value ? 'Yes' : 'No'}</Alert>;
+    };
+
+    return tableConfig;
 }
 
 export default tableConfigOptions;

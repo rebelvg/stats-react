@@ -3,7 +3,10 @@ import axios from 'axios';
 
 const ACTION_GET = 'adminUsers.get',
     ACTION_GET_SUCCESS = 'adminUsers.get.success',
-    ACTION_GET_FAILED = 'adminUsers.get.failed';
+    ACTION_GET_FAILED = 'adminUsers.get.failed',
+    ACTION_PUT = 'adminUsers.put',
+    ACTION_PUT_SUCCESS = 'adminUsers.put.success',
+    ACTION_PUT_FAILED = 'adminUsers.put.failed';
 
 //ACTIONS
 export function getAction() {
@@ -28,6 +31,41 @@ export function getAction() {
     }
 }
 
+export function putUser(id, data) {
+    return (dispatch) => {
+        dispatch({type: ACTION_PUT});
+
+        axios.put('/api/admin/users/' + id, data, {
+            headers: {
+                token: window.localStorage.getItem('token')
+            }
+        }).then(res => {
+            dispatch({
+                type: ACTION_PUT_SUCCESS,
+                user: res.data.user
+            });
+        }).catch(e => {
+            dispatch({
+                type: ACTION_PUT_FAILED,
+                error: e.response.data.error
+            });
+        });
+    }
+}
+
+function updateObjectInArray(users, action) {
+    return users.map((item, index) => {
+        if (item._id !== action.user._id) {
+            return item;
+        }
+
+        return {
+            ...item,
+            ...action.user
+        };
+    });
+}
+
 //REDUCER
 const initialState = {
     error: null,
@@ -42,6 +80,20 @@ const reducer = handleActions({
         };
     },
     [ACTION_GET_FAILED]: (state, action) => {
+        return {
+            ...state,
+            error: action.error
+        };
+    },
+    [ACTION_PUT_SUCCESS]: (state, action) => {
+        return {
+            ...state,
+            data: {
+                users: updateObjectInArray(state.data.users, action)
+            }
+        };
+    },
+    [ACTION_PUT_FAILED]: (state, action) => {
         return {
             ...state,
             error: action.error
