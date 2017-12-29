@@ -19,7 +19,7 @@ const tableConfigTemplate = [
         Cell: (props) => {
             return props.value.map((email) => {
                 return email.value;
-            }).join(' ');
+            }).join(' ') + (props.original.token === window.localStorage.getItem('token') ? ' (You)' : '');
         }
     },
     {
@@ -60,8 +60,8 @@ function tableConfigOptions(putUser) {
                 });
             }}
             block
-            disabled={props.original.token === window.localStorage.getItem('token')
-            }>{props.value ? 'Yes' : 'No'}</Button>;
+            disabled={props.original.token === window.localStorage.getItem('token')}
+        >{props.value ? 'Yes' : 'No'}</Button>;
     };
 
     let streamerTableColumn = _.find(tableConfig, ['accessor', 'isStreamer']);
@@ -75,7 +75,8 @@ function tableConfigOptions(putUser) {
                     isStreamer: !props.value
                 });
             }}
-            block>{props.value ? 'Yes' : 'No'}</Button>;
+            block
+        >{props.value ? 'Yes' : 'No'}</Button>;
     };
 
     return tableConfig;
