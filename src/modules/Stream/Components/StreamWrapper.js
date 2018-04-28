@@ -36,6 +36,8 @@ class StreamWrapper extends Component {
                 id: _.replace(sort, /^-/, '')
             }
         });
+
+        this.handleFilteredChange = _.debounce(this.handleFilteredChange, 500);
     }
 
     fetchData = (state, instance) => {
