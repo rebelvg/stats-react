@@ -1,33 +1,29 @@
-import React, {Component} from 'react';
-import styled, {keyframes} from 'styled-components';
+import React, { Component } from 'react';
+import styled, { keyframes } from 'styled-components';
 import qs from 'qs';
-import {Route, Redirect} from 'react-router';
+import { Route, Redirect } from 'react-router';
 
 class Home extends Component {
-    render() {
-        const {search} = this.props.location;
+  render() {
+    const { search } = this.props.location;
 
-        let searchParams = qs.parse(search, {ignoreQueryPrefix: true});
+    let searchParams = qs.parse(search, { ignoreQueryPrefix: true });
 
-        if (searchParams.token) {
-            const localStorage = window.localStorage;
+    if (searchParams.token) {
+      const localStorage = window.localStorage;
 
-            localStorage.setItem('token', searchParams.token);
+      localStorage.setItem('token', searchParams.token);
 
-            return <Redirect to='/'/>;
-        }
-
-        return (
-            <HomeWrapper>
-                <h2>This is a homepage</h2>
-                <img
-                    src="https://i.imgur.com/wAUCPw1.png"
-                    alt="meme"
-                    height="60%"
-                />
-            </HomeWrapper>
-        );
+      return <Redirect to="/" />;
     }
+
+    return (
+      <HomeWrapper>
+        <h2>This is a homepage</h2>
+        <img src="https://i.imgur.com/wAUCPw1.png" alt="meme" height="60%" />
+      </HomeWrapper>
+    );
+  }
 }
 
 export default Home;
@@ -49,6 +45,6 @@ const HomeWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   & img {
-	  animation: ${rotate360} 2s linear infinite;
+    animation: ${rotate360} 2s linear infinite;
   }
 `;

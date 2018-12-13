@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import streams from './streams';
 import stream from './stream';
 import subscribers from './subscribers';
@@ -9,14 +9,14 @@ import user from './user';
 import adminUsers from './admin/users';
 
 const reducers = combineReducers({
-    streams,
-    stream,
-    subscribers,
-    subscriber,
-    channels,
-    ips,
-    user,
-    adminUsers
+  streams,
+  stream,
+  subscribers,
+  subscriber,
+  channels,
+  ips,
+  user,
+  adminUsers
 });
 
 export default reducers;

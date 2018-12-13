@@ -9,42 +9,32 @@ module.exports = {
       {
         test: /.js/,
         exclude: /node_modules/,
-        include: [
-          path.resolve(__dirname, "src"),
-        ],
+        include: [path.resolve(__dirname, 'src')],
         use: {
           loader: 'babel-loader',
           options: {
             presets: ['env', 'stage-0', 'react', 'es2015', 'es2016', 'es2017'],
-            plugins: [
-              'transform-class-properties',
-              'react-html-attrs',
-              'transform-decorators-legacy'
-            ],
+            plugins: ['transform-class-properties', 'react-html-attrs', 'transform-decorators-legacy']
           }
-        },
+        }
       },
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
       },
       {
-        include: [
-          path.resolve(__dirname, "static"),
-        ],
+        include: [path.resolve(__dirname, 'static')],
         test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3)$/,
-        loader: "file-loader"
+        loader: 'file-loader'
       }
-    ],
+    ]
   },
-  plugins: [
-    new HtmlWebpackPlugin(),
-  ],
+  plugins: [new HtmlWebpackPlugin()],
   devtool: 'source-map',
   resolve: {
     alias: {
-      src: path.resolve(__dirname, './src'),
-    },
+      src: path.resolve(__dirname, './src')
+    }
   },
   output: {
     filename: 'bundle.js',

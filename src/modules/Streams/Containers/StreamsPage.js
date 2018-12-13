@@ -1,65 +1,71 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import humanize from 'humanize-plus';
 import moment from 'moment';
 import qs from 'qs';
 import humanizeDuration from 'humanize-duration';
 
 import StreamsWrapper from '../Components/StreamsWrapper';
-import {getAction, getError, getData, getLoading} from '../../../redux/streams';
+import { getAction, getError, getData, getLoading } from '../../../redux/streams';
 
 @connect(
-    state => ({
-        error: getError(state),
-        data: getData(state),
-        isLoading: getLoading(state)
-    }),
-    {getAction}
+  state => ({
+    error: getError(state),
+    data: getData(state),
+    isLoading: getLoading(state)
+  }),
+  { getAction }
 )
 class StreamsPage extends Component {
-    render() {
-        const {streams = [], options = {}, info = {}, total, limit, page, pages} = this.props.data;
-        const {totalBytes, totalDuration, totalConnections, totalPeakViewers, totalIPs} = info;
-        const {search} = this.props.location;
-        const {error, isLoading} = this.props;
+  render() {
+    const { streams = [], options = {}, info = {}, total, limit, page, pages } = this.props.data;
+    const { totalBytes, totalDuration, totalConnections, totalPeakViewers, totalIPs } = info;
+    const { search } = this.props.location;
+    const { error, isLoading } = this.props;
 
-        let searchParams = qs.parse(search, {ignoreQueryPrefix: true});
+    let searchParams = qs.parse(search, { ignoreQueryPrefix: true });
 
-        if (error) return <div>{error}</div>;
+    if (error) return <div>{error}</div>;
 
-        return (
-            <div>
-                <StreamsWrapper
-                    streams={streams}
-                    options={options}
-                    pages={pages}
-                    getData={this.props.getAction}
-                    searchParams={searchParams}
-                    isLoading={isLoading}
-                />
+    return (
+      <div>
+        <StreamsWrapper
+          streams={streams}
+          options={options}
+          pages={pages}
+          getData={this.props.getAction}
+          searchParams={searchParams}
+          isLoading={isLoading}
+        />
 
-                <div>Total Traffic: {humanize.fileSize(totalBytes)}</div>
-                <div>Total Duration: {humanizeDuration(totalDuration * 1000, {
-                    round: true,
-                    largest: 3
-                })}</div>
-                <div>Total Connections: {totalConnections}</div>
-                <div>Total Peak Viewers: {totalPeakViewers}</div>
-                <div>Unique IPs: {totalIPs}</div>
-                <br/>
-                <div>Showing: {streams.length}</div>
-                <div>Total: {total}</div>
-                <div>Limit: {limit}</div>
-                <div>Page: {page}</div>
-                <div>Pages: {pages}</div>
+        <div>Total Traffic: {humanize.fileSize(totalBytes)}</div>
+        <div>
+          Total Duration:{' '}
+          {humanizeDuration(totalDuration * 1000, {
+            round: true,
+            largest: 3
+          })}
+        </div>
+        <div>Total Connections: {totalConnections}</div>
+        <div>Total Peak Viewers: {totalPeakViewers}</div>
+        <div>Unique IPs: {totalIPs}</div>
+        <br />
+        <div>Showing: {streams.length}</div>
+        <div>Total: {total}</div>
+        <div>Limit: {limit}</div>
+        <div>Page: {page}</div>
+        <div>Pages: {pages}</div>
 
-                <button onClick={() => {
-                    this.props.getAction();
-                }}>Refresh
-                </button>
-            </div>
-        );
-    }
+        <button
+          onClick={() => {
+            this.props.getAction();
+          }}
+        >
+          Refresh
+        </button>
+      </div>
+    );
+  }
 }
 
 export default StreamsPage;

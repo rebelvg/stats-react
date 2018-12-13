@@ -1,15 +1,19 @@
-import React, {Component} from 'react';
-import {Link, NavLink} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 class AdminHeader extends Component {
-    render() {
-        let isLoggedIn = !!window.localStorage.getItem('token');
+  render() {
+    let isLoggedIn = !!window.localStorage.getItem('token');
 
-        return <HeaderWrap>
-            <StyledLink exact to='/admin/users'>Users</StyledLink>
-        </HeaderWrap>;
-    }
+    return (
+      <HeaderWrap>
+        <StyledLink exact to="/admin/users">
+          Users
+        </StyledLink>
+      </HeaderWrap>
+    );
+  }
 }
 
 export default AdminHeader;
@@ -20,7 +24,9 @@ const StyledLink = styled(NavLink)`
   cursor: pointer;
   text-decoration: none;
   font-weight: bold;
-  &.active {color:red};
+  &.active {
+    color: red;
+  }
 `;
 
 const HeaderWrap = styled.div`
@@ -35,5 +41,7 @@ const MyLink = styled.a`
   cursor: pointer;
   text-decoration: none;
   font-weight: bold;
-  &.active {color:red};
+  &.active {
+    color: red;
+  }
 `;

@@ -1,56 +1,62 @@
-import {handleActions} from 'redux-actions';
+import { handleActions } from 'redux-actions';
 import axios from 'axios';
 
 const ACTION_GET = 'user.get',
-    ACTION_GET_SUCCESS = 'user.get.success',
-    ACTION_GET_FAILED = 'user.get.failed';
+  ACTION_GET_SUCCESS = 'user.get.success',
+  ACTION_GET_FAILED = 'user.get.failed';
 
 //ACTIONS
 export function getAction() {
-    return (dispatch) => {
-        dispatch({type: ACTION_GET});
+  return dispatch => {
+    dispatch({ type: ACTION_GET });
 
-        axios.get('/api/users', {
-            headers: {
-                token: window.localStorage.getItem('token')
-            }
-        }).then(res => {
-            dispatch({
-                type: ACTION_GET_SUCCESS,
-                data: res.data
-            });
-        }).catch(e => {
-            dispatch({
-                type: ACTION_GET_FAILED,
-                error: e.response.data.error
-            });
+    axios
+      .get('/api/users', {
+        headers: {
+          token: window.localStorage.getItem('token')
+        }
+      })
+      .then(res => {
+        dispatch({
+          type: ACTION_GET_SUCCESS,
+          data: res.data
         });
-    }
+      })
+      .catch(e => {
+        dispatch({
+          type: ACTION_GET_FAILED,
+          error: e.response.data.error
+        });
+      });
+  };
 }
 
 //REDUCER
 const initialState = {
-    error: null,
-    data: {}
+  error: null,
+  data: {}
 };
 
-const reducer = handleActions({
+const reducer = handleActions(
+  {
     [ACTION_GET_SUCCESS]: (state, action) => {
-        return {
-            ...state,
-            data: action.data
-        };
+      return {
+        ...state,
+        data: action.data
+      };
     },
     [ACTION_GET_FAILED]: (state, action) => {
-        return {
-            ...state,
-            error: action.error
-        };
+      return {
+        ...state,
+        error: action.error
+      };
     }
-}, initialState);
+  },
+  initialState
+);
 
 export default reducer;
 
 //SELECTORS
-export const getError = (state) => state.user.error;
-export const getData = (state) => state.user.data;
+export const getError = state => state.user.error;
+export const getData = state => state.user.data;
