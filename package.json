@@ -4,7 +4,9 @@
   "main": "./src/index.js",
   "license": "MIT",
   "scripts": {
-    "prepush": "prettier --write \"**/*.js\"",
+    "prepush": "yarn run lint",
+    "lint": "prettier --list-different \"**/*.{ts,js,json,css,md}\"",
+    "lint:fix": "prettier --write \"**/*.{ts,js,json,css,md}\"",
     "start": "webpack-dev-server",
     "build": "webpack --config webpack.config.production"
   },
