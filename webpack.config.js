@@ -49,7 +49,7 @@ module.exports = {
     proxy: [
       {
         path: '/api',
-        target: `http://localhost:8001`,
+        target: `http://localhost:8000`,
         changeOrigin: true,
         secure: true,
         pathRewrite: {
