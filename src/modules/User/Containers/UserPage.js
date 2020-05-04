@@ -34,11 +34,7 @@ class UserPage extends Component {
           <ListGroupItem active>
             <ListGroupItemHeading>Emails</ListGroupItemHeading>
             {user.emails.map(email => {
-              return (
-                <ListGroupItemText>
-                  {email.value} - {email.type}
-                </ListGroupItemText>
-              );
+              return <ListGroupItemText>{email.value}</ListGroupItemText>;
             })}
           </ListGroupItem>
           <ListGroupItem>
