@@ -83,7 +83,8 @@ const reducer = handleActions(
     [ACTION_GET_SUCCESS]: (state, action) => {
       return {
         ...state,
-        data: action.data
+        data: action.data,
+        error: null
       };
     },
     [ACTION_GET_FAILED]: (state, action) => {
@@ -97,7 +98,8 @@ const reducer = handleActions(
         ...state,
         data: {
           users: updateObjectInArray(state.data.users, action)
-        }
+        },
+        error: null
       };
     },
     [ACTION_PUT_FAILED]: (state, action) => {

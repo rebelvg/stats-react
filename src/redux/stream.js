@@ -70,7 +70,8 @@ const reducer = handleActions(
       return {
         ...state,
         data: action.data,
-        events: action.events
+        events: action.events,
+        error: null
       };
     },
     [ACTION_GET_FAILED]: (state, action) => {
