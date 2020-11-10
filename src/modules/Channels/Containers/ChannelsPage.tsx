@@ -9,9 +9,9 @@ import { getAction, getError, getData } from '../../../redux/channels';
 @connect(
   state => ({
     error: getError(state),
-    data: getData(state)
+    data: getData(state),
   }),
-  { getAction }
+  { getAction },
 )
 class ChannelsPage extends Component<any, any> {
   timerId;
@@ -38,20 +38,28 @@ class ChannelsPage extends Component<any, any> {
 
     if (error) return <Alert color="danger">{error}</Alert>;
 
-    if (_.isEmpty(servers)) return <Alert color="danger">No servers online.</Alert>;
+    if (_.isEmpty(servers))
+      return <Alert color="danger">No servers online.</Alert>;
 
     return (
       <div>
         {Object.entries(servers).map(([serverName, serverObj]) => {
-          if (_.isEmpty(serverObj)) return <Alert color="danger">No channels online for {serverName}.</Alert>;
+          if (_.isEmpty(serverObj))
+            return (
+              <Alert color="danger">No channels online for {serverName}.</Alert>
+            );
 
           return Object.entries(serverObj).map(([appName, appObj]) => {
-            return Object.entries(appObj).map(([channelName, channelObj]: any) => {
-              const stream = channelObj.publisher;
-              const subscribers = channelObj.subscribers;
+            return Object.entries(appObj).map(
+              ([channelName, channelObj]: any) => {
+                const stream = channelObj.publisher;
+                const subscribers = channelObj.subscribers;
 
-              return <ChannelWrapper stream={stream} subscribers={subscribers} />;
-            });
+                return (
+                  <ChannelWrapper stream={stream} subscribers={subscribers} />
+                );
+              },
+            );
           });
         })}
       </div>

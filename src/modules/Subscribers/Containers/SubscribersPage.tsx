@@ -6,19 +6,32 @@ import qs from 'qs';
 import humanizeDuration from 'humanize-duration';
 
 import SubscribersWrapper from '../Components/SubscribersWrapper';
-import { getAction, getError, getData, getLoading } from '../../../redux/subscribers';
+import {
+  getAction,
+  getError,
+  getData,
+  getLoading,
+} from '../../../redux/subscribers';
 
 @connect(
   state => ({
     error: getError(state),
     data: getData(state),
-    isLoading: getLoading(state)
+    isLoading: getLoading(state),
   }),
-  { getAction }
+  { getAction },
 )
 class SubscribersPage extends Component<any, any> {
   render() {
-    const { subscribers = [], options = {}, info = {}, total, limit, page, pages } = this.props.data;
+    const {
+      subscribers = [],
+      options = {},
+      info = {},
+      total,
+      limit,
+      page,
+      pages,
+    } = this.props.data;
     const { totalBytes, totalDuration, totalIPs } = info;
     const { search } = this.props.location;
     const { error, isLoading } = this.props;
@@ -43,7 +56,7 @@ class SubscribersPage extends Component<any, any> {
           Total Duration:{' '}
           {humanizeDuration(totalDuration * 1000, {
             round: true,
-            largest: 3
+            largest: 3,
           })}
         </div>
         <div>Unique IPs: {totalIPs}</div>

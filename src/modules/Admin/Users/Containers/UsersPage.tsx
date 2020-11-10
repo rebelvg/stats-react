@@ -5,14 +5,19 @@ import AdminHeader from '../../../Shared/Components/AdminHeader/AdminHeader';
 import { Alert } from 'reactstrap';
 
 import usersTable from '../../../Shared/Tables/UsersTable';
-import { getAction, getError, getData, putUser } from '../../../../redux/admin/users';
+import {
+  getAction,
+  getError,
+  getData,
+  putUser,
+} from '../../../../redux/admin/users';
 
 @connect(
   state => ({
     error: getError(state),
-    data: getData(state)
+    data: getData(state),
   }),
-  { getAction, putUser }
+  { getAction, putUser },
 )
 class UsersPage extends Component<any, any> {
   componentDidMount() {

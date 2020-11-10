@@ -11,7 +11,7 @@ const tableConfigTemplate = [
     accessor: 'createdAt',
     Cell: props => {
       return moment(props.value).format('ddd D/MMM/YY HH:mm');
-    }
+    },
   },
   {
     Header: 'Emails',
@@ -22,17 +22,20 @@ const tableConfigTemplate = [
           .map(email => {
             return email.value;
           })
-          .join(' ') + (props.original.token === window.localStorage.getItem('token') ? ' (You)' : '')
+          .join(' ') +
+        (props.original.token === window.localStorage.getItem('token')
+          ? ' (You)'
+          : '')
       );
-    }
+    },
   },
   {
     Header: 'Name',
-    accessor: 'name'
+    accessor: 'name',
   },
   {
     Header: 'IP',
-    accessor: 'ipUpdated'
+    accessor: 'ipUpdated',
   },
   {
     Header: 'Is Admin',
@@ -40,13 +43,13 @@ const tableConfigTemplate = [
     Cell: props => {
       return props.value ? 'Yes' : 'No';
     },
-    minWidth: 40
+    minWidth: 40,
   },
   {
     Header: 'Is Streamer',
     accessor: 'isStreamer',
-    minWidth: 40
-  }
+    minWidth: 40,
+  },
 ];
 
 function tableConfigOptions(putUser) {
@@ -61,7 +64,7 @@ function tableConfigOptions(putUser) {
         color="primary"
         onClick={() => {
           putUser(props.original._id, {
-            isAdmin: !props.value
+            isAdmin: !props.value,
           });
         }}
         block
@@ -81,7 +84,7 @@ function tableConfigOptions(putUser) {
         color="primary"
         onClick={() => {
           putUser(props.original._id, {
-            isStreamer: !props.value
+            isStreamer: !props.value,
           });
         }}
         block

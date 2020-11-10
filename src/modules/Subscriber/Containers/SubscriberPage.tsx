@@ -7,9 +7,9 @@ import { getAction, getError, getData } from '../../../redux/subscriber';
 @connect(
   state => ({
     error: getError(state),
-    data: getData(state)
+    data: getData(state),
   }),
-  { getAction }
+  { getAction },
 )
 class SubscriberPage extends Component<any, any> {
   componentDidMount() {

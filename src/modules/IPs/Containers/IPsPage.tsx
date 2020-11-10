@@ -10,13 +10,21 @@ import { getAction, getError, getData, getLoading } from '../../../redux/ips';
   state => ({
     error: getError(state),
     data: getData(state),
-    isLoading: getLoading(state)
+    isLoading: getLoading(state),
   }),
-  { getAction }
+  { getAction },
 )
 class IPsPage extends Component<any, any> {
   render() {
-    const { ips = [], options = {}, info = {}, total, limit, page, pages } = this.props.data;
+    const {
+      ips = [],
+      options = {},
+      info = {},
+      total,
+      limit,
+      page,
+      pages,
+    } = this.props.data;
     const { totalCountries, totalCities, totalISPs } = info;
     const { search } = this.props.location;
     const { error, isLoading } = this.props;

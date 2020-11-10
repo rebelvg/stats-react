@@ -8,7 +8,7 @@ let defaultFilterMethod = (filter, row, column) => {
     bytes: 1024 * 1024,
     duration: 60,
     totalConnectionsCount: 1,
-    peakViewersCount: 1
+    peakViewersCount: 1,
   };
   const dates = ['connectCreated', 'connectUpdated'];
   const ips = ['ip'];
@@ -27,10 +27,14 @@ let defaultFilterMethod = (filter, row, column) => {
       return (
         new RegExp(filter.value, 'gi').test(row._original.ip) ||
         !row._original.location ||
-        new RegExp(filter.value, 'gi').test(row._original.location.api.country) ||
+        new RegExp(filter.value, 'gi').test(
+          row._original.location.api.country,
+        ) ||
         new RegExp(filter.value, 'gi').test(row._original.location.api.city) ||
         new RegExp(filter.value, 'gi').test(row._original.location.api.isp) ||
-        new RegExp(filter.value, 'gi').test(row._original.location.api.countryCode) ||
+        new RegExp(filter.value, 'gi').test(
+          row._original.location.api.countryCode,
+        ) ||
         new RegExp(filter.value, 'gi').test(row._original.location.api.message)
       );
     }

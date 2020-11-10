@@ -6,20 +6,39 @@ import qs from 'qs';
 import humanizeDuration from 'humanize-duration';
 
 import StreamsWrapper from '../Components/StreamsWrapper';
-import { getAction, getError, getData, getLoading } from '../../../redux/streams';
+import {
+  getAction,
+  getError,
+  getData,
+  getLoading,
+} from '../../../redux/streams';
 
 @connect(
   state => ({
     error: getError(state),
     data: getData(state),
-    isLoading: getLoading(state)
+    isLoading: getLoading(state),
   }),
-  { getAction }
+  { getAction },
 )
 class StreamsPage extends Component<any, any> {
   render() {
-    const { streams = [], options = {}, info = {}, total, limit, page, pages } = this.props.data;
-    const { totalBytes, totalDuration, totalConnections, totalPeakViewers, totalIPs } = info;
+    const {
+      streams = [],
+      options = {},
+      info = {},
+      total,
+      limit,
+      page,
+      pages,
+    } = this.props.data;
+    const {
+      totalBytes,
+      totalDuration,
+      totalConnections,
+      totalPeakViewers,
+      totalIPs,
+    } = info;
     const { search } = this.props.location;
     const { error, isLoading } = this.props;
 
@@ -43,7 +62,7 @@ class StreamsPage extends Component<any, any> {
           Total Duration:{' '}
           {humanizeDuration(totalDuration * 1000, {
             round: true,
-            largest: 3
+            largest: 3,
           })}
         </div>
         <div>Total Connections: {totalConnections}</div>

@@ -16,19 +16,19 @@ export function getAction() {
     axios
       .get('/api/admin/users', {
         headers: {
-          token: window.localStorage.getItem('token')
-        }
+          token: window.localStorage.getItem('token'),
+        },
       })
       .then(res => {
         dispatch({
           type: ACTION_GET_SUCCESS,
-          data: res.data
+          data: res.data,
         });
       })
       .catch(e => {
         dispatch({
           type: ACTION_GET_FAILED,
-          error: e.response.data.error
+          error: e.response.data.error,
         });
       });
   };
@@ -41,19 +41,19 @@ export function putUser(id, data) {
     axios
       .put('/api/admin/users/' + id, data, {
         headers: {
-          token: window.localStorage.getItem('token')
-        }
+          token: window.localStorage.getItem('token'),
+        },
       })
       .then(res => {
         dispatch({
           type: ACTION_PUT_SUCCESS,
-          user: res.data.user
+          user: res.data.user,
         });
       })
       .catch(e => {
         dispatch({
           type: ACTION_PUT_FAILED,
-          error: e.response.data.error
+          error: e.response.data.error,
         });
       });
   };
@@ -67,7 +67,7 @@ function updateObjectInArray(users, action) {
 
     return {
       ...item,
-      ...action.user
+      ...action.user,
     };
   });
 }
@@ -75,7 +75,7 @@ function updateObjectInArray(users, action) {
 //REDUCER
 const initialState = {
   error: null,
-  data: {}
+  data: {},
 };
 
 const reducer = handleActions(
@@ -84,32 +84,32 @@ const reducer = handleActions(
       return {
         ...state,
         data: action.data,
-        error: null
+        error: null,
       };
     },
     [ACTION_GET_FAILED]: (state, action) => {
       return {
         ...state,
-        error: action.error
+        error: action.error,
       };
     },
     [ACTION_PUT_SUCCESS]: (state, action) => {
       return {
         ...state,
         data: {
-          users: updateObjectInArray(state.data.users, action)
+          users: updateObjectInArray(state.data.users, action),
         },
-        error: null
+        error: null,
       };
     },
     [ACTION_PUT_FAILED]: (state, action) => {
       return {
         ...state,
-        error: action.error
+        error: action.error,
       };
-    }
+    },
   },
-  initialState
+  initialState,
 );
 
 export default reducer;

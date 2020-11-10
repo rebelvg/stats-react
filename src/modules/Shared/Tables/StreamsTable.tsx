@@ -10,25 +10,31 @@ const tableConfigTemplate = [
     Header: 'Connect Created',
     accessor: 'connectCreated',
     Cell: props => {
-      return <Link to={'/streams/' + props.original._id}>{moment(props.value).format('ddd D/MMM/YY HH:mm')}</Link>;
-    }
+      return (
+        <Link to={'/streams/' + props.original._id}>
+          {moment(props.value).format('ddd D/MMM/YY HH:mm')}
+        </Link>
+      );
+    },
   },
   {
     Header: 'App',
     accessor: 'app',
-    minWidth: 40
+    minWidth: 40,
   },
   {
     Header: 'Channel',
     accessor: 'channel',
-    minWidth: 40
+    minWidth: 40,
   },
   {
     Header: 'Last Update',
     accessor: 'connectUpdated',
     Cell: props => {
-      return props.original.isLive ? 'Live!' : moment(props.value).format('ddd D/MMM/YY HH:mm');
-    }
+      return props.original.isLive
+        ? 'Live!'
+        : moment(props.value).format('ddd D/MMM/YY HH:mm');
+    },
   },
   {
     Header: 'Bitrate',
@@ -36,7 +42,7 @@ const tableConfigTemplate = [
     Cell: props => {
       return `${props.value} kbps`;
     },
-    minWidth: 40
+    minWidth: 40,
   },
   {
     Header: 'Net Traffic',
@@ -44,7 +50,7 @@ const tableConfigTemplate = [
     Cell: props => {
       return humanize.fileSize(props.value);
     },
-    minWidth: 40
+    minWidth: 40,
   },
   {
     Header: 'Duration',
@@ -63,12 +69,12 @@ const tableConfigTemplate = [
             h: 'h',
             m: 'm',
             s: 'sec',
-            ms: 'ms'
-          }
-        }
+            ms: 'ms',
+          },
+        },
       });
     },
-    minWidth: 40
+    minWidth: 40,
   },
   {
     Header: 'IP',
@@ -78,19 +84,21 @@ const tableConfigTemplate = [
       if (props.original.location.api.status !== 'success')
         return `${props.value} (${props.original.location.api.message})`;
 
-      return `${props.value} (${props.original.location.api.countryCode}/${props.original.location.api.city})`;
-    }
+      return `${props.value} (${props.original.location.api.countryCode}/${
+        props.original.location.api.city
+      })`;
+    },
   },
   {
     Header: 'Connections',
     accessor: 'totalConnectionsCount',
-    minWidth: 40
+    minWidth: 40,
   },
   {
     Header: 'Peak Viewers',
     accessor: 'peakViewersCount',
-    minWidth: 40
-  }
+    minWidth: 40,
+  },
 ];
 
 function tableConfigOptions(options: any = {}) {

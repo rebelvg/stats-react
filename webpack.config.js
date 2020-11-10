@@ -7,30 +7,30 @@ module.exports = {
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
-    './src/index.tsx'
+    './src/index.tsx',
   ],
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3)$/,
-        loader: 'file-loader'
+        loader: 'file-loader',
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      }
-    ]
+        loader: 'style-loader!css-loader',
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
   ],
   devtool: 'source-map',
   devServer: {
@@ -46,20 +46,20 @@ module.exports = {
         changeOrigin: true,
         secure: true,
         pathRewrite: {
-          '^/api': ''
-        }
-      }
-    ]
+          '^/api': '',
+        },
+      },
+    ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js'],
   },
   node: {
-    fs: 'empty'
+    fs: 'empty',
   },
   output: {
     filename: 'dev_bundle.js',
     publicPath: '/',
-    path: path.resolve(__dirname, 'dist')
-  }
+    path: path.resolve(__dirname, 'dist'),
+  },
 };

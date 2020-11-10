@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "prepush": "yarn run lint",
-    "lint": "prettier --list-different \"**/*.{ts,js,json,css,md}\"",
-    "lint:fix": "prettier --write \"**/*.{ts,js,json,css,md}\"",
+    "lint": "prettier --list-different \"**/*.{tsx,ts,js,json,css,md}\"",
+    "lint:fix": "prettier --write \"**/*.{tsx,ts,js,json,css,md}\"",
     "start": "webpack-dev-server",
     "build": "webpack --config webpack.config.production"
   },

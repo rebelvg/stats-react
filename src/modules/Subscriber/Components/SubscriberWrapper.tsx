@@ -45,8 +45,8 @@ class StreamWrapper extends Component<any, any> {
                   .map('location.api.message')
                   .compact()
                   .uniq()
-                  .value()
-              )
+                  .value(),
+              ),
           })}
           data={streams}
           minRows={0}

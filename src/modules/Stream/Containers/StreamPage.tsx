@@ -9,9 +9,9 @@ import { getAction, getError, getData, getEvents } from '../../../redux/stream';
   state => ({
     error: getError(state),
     data: getData(state),
-    events: getEvents(state)
+    events: getEvents(state),
   }),
-  { getAction }
+  { getAction },
 )
 class StreamPage extends Component<any, any> {
   componentWillReceiveProps(nextProps) {
@@ -24,7 +24,13 @@ class StreamPage extends Component<any, any> {
   }
 
   render() {
-    const { stream, subscribers, options, info, relatedStreams } = this.props.data;
+    const {
+      stream,
+      subscribers,
+      options,
+      info,
+      relatedStreams,
+    } = this.props.data;
     const { search } = this.props.location;
     const { error, events } = this.props;
 

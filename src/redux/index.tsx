@@ -16,7 +16,7 @@ const reducers = combineReducers({
   channels,
   ips,
   user,
-  adminUsers
+  adminUsers,
 });
 
 export default reducers;

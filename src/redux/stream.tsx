@@ -7,7 +7,13 @@ const ACTION_GET = 'stream.get',
   ACTION_GET_FAILED = 'stream.get.failed';
 
 //ACTIONS
-export function getAction(id, limit = 20, currentPage = 0, filters = [], sorts = []) {
+export function getAction(
+  id,
+  limit = 20,
+  currentPage = 0,
+  filters = [],
+  sorts = [],
+) {
   return dispatch => {
     dispatch({ type: ACTION_GET });
 
@@ -30,28 +36,28 @@ export function getAction(id, limit = 20, currentPage = 0, filters = [], sorts =
     Promise.all([
       axios.get('/api/streams/' + id, {
         headers: {
-          token: window.localStorage.getItem('token')
+          token: window.localStorage.getItem('token'),
         },
-        params
+        params,
       }),
       axios.get('/api/streams/' + id + '/graph', {
         headers: {
-          token: window.localStorage.getItem('token')
+          token: window.localStorage.getItem('token'),
         },
-        params
-      })
+        params,
+      }),
     ])
       .then(res => {
         dispatch({
           type: ACTION_GET_SUCCESS,
           data: res[0].data,
-          events: res[1].data.events
+          events: res[1].data.events,
         });
       })
       .catch(e => {
         dispatch({
           type: ACTION_GET_FAILED,
-          error: e.response.data.error
+          error: e.response.data.error,
         });
       });
   };
@@ -61,7 +67,7 @@ export function getAction(id, limit = 20, currentPage = 0, filters = [], sorts =
 const initialState = {
   error: null,
   data: {},
-  events: []
+  events: [],
 };
 
 const reducer = handleActions(
@@ -71,17 +77,17 @@ const reducer = handleActions(
         ...state,
         data: action.data,
         events: action.events,
-        error: null
+        error: null,
       };
     },
     [ACTION_GET_FAILED]: (state, action) => {
       return {
         ...state,
-        error: action.error
+        error: action.error,
       };
-    }
+    },
   },
-  initialState
+  initialState,
 );
 
 export default reducer;

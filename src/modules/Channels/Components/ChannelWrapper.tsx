@@ -15,7 +15,13 @@ class ChannelWrapper extends Component<any, any> {
     return (
       <div>
         Stream
-        <ReactTable columns={streamsTable()} data={streams} showPagination={false} minRows={0} sortable={false} />
+        <ReactTable
+          columns={streamsTable()}
+          data={streams}
+          showPagination={false}
+          minRows={0}
+          sortable={false}
+        />
         Subscribers: {subscribers.length}
         <ReactTable
           columns={subscribersTable()}

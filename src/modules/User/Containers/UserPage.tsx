@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Alert, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button } from 'reactstrap';
+import {
+  Alert,
+  ListGroup,
+  ListGroupItem,
+  ListGroupItemHeading,
+  ListGroupItemText,
+  Button,
+} from 'reactstrap';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import moment from 'moment';
 import AdminHeader from '../../Shared/Components/AdminHeader/AdminHeader';
@@ -10,9 +17,9 @@ import { getAction, getError, getData } from '../../../redux/user';
 @connect(
   state => ({
     error: getError(state),
-    data: getData(state)
+    data: getData(state),
   }),
-  { getAction }
+  { getAction },
 )
 class UserPage extends Component<any, any> {
   componentDidMount() {
@@ -47,7 +54,9 @@ class UserPage extends Component<any, any> {
           </ListGroupItem>
           <ListGroupItem>
             <ListGroupItemHeading>Is Streamer</ListGroupItemHeading>
-            <ListGroupItemText>{user.isStreamer ? 'Yes' : 'No'}</ListGroupItemText>
+            <ListGroupItemText>
+              {user.isStreamer ? 'Yes' : 'No'}
+            </ListGroupItemText>
           </ListGroupItem>
           <ListGroupItem>
             <ListGroupItemHeading>API Key</ListGroupItemHeading>
@@ -69,7 +78,9 @@ class UserPage extends Component<any, any> {
           </ListGroupItem>
           <ListGroupItem>
             <ListGroupItemHeading>Date Created</ListGroupItemHeading>
-            <ListGroupItemText>{moment(user.createdAt).format('ddd D/MMM/YY HH:mm')}</ListGroupItemText>
+            <ListGroupItemText>
+              {moment(user.createdAt).format('ddd D/MMM/YY HH:mm')}
+            </ListGroupItemText>
           </ListGroupItem>
         </ListGroup>
       </div>

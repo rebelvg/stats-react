@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import ReactTable from 'react-table';
 import moment from 'moment';
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  CartesianGrid,
+  ResponsiveContainer,
+} from 'recharts';
 import _ from 'lodash';
 import humanize from 'humanize-plus';
 import createHistory from 'history/createBrowserHistory';
@@ -20,22 +29,25 @@ class StreamWrapper extends Component<any, any> {
 
     this.state = {
       filtered: [],
-      sorted: []
+      sorted: [],
     };
 
     const newState: any = {};
 
-    newState.filtered = _.map(props.searchParams.filter, (paramKey, paramValue) => {
-      return {
-        id: paramValue,
-        value: paramKey
-      };
-    });
+    newState.filtered = _.map(
+      props.searchParams.filter,
+      (paramKey, paramValue) => {
+        return {
+          id: paramValue,
+          value: paramKey,
+        };
+      },
+    );
 
     newState.sorted = _.map(props.searchParams.sort, sort => {
       return {
         desc: _.startsWith(sort, '-'),
-        id: _.replace(sort, /^-/, '')
+        id: _.replace(sort, /^-/, ''),
       };
     });
 
@@ -45,7 +57,13 @@ class StreamWrapper extends Component<any, any> {
   }
 
   fetchData = () => {
-    this.props.getData(this.props.streamId, undefined, undefined, this.state.filtered, this.state.sorted);
+    this.props.getData(
+      this.props.streamId,
+      undefined,
+      undefined,
+      this.state.filtered,
+      this.state.sorted,
+    );
 
     this.buildQuery();
   };
@@ -78,34 +96,41 @@ class StreamWrapper extends Component<any, any> {
     query = qs.stringify(query, { arrayFormat: 'brackets' });
 
     history.push({
-      search: query
+      search: query,
     });
   };
 
   handleFilteredChange = (column, value) => {
     this.setState(
       {
-        filtered: column
+        filtered: column,
       },
       () => {
         this.fetchData();
-      }
+      },
     );
   };
 
   handleSortedChange = (newSorted, column, shiftKey) => {
     this.setState(
       {
-        sorted: newSorted
+        sorted: newSorted,
       },
       () => {
         this.fetchData();
-      }
+      },
     );
   };
 
   render() {
-    const { stream = null, subscribers = [], options = {}, info = {}, relatedStreams = [], events = [] } = this.props;
+    const {
+      stream = null,
+      subscribers = [],
+      options = {},
+      info = {},
+      relatedStreams = [],
+      events = [],
+    } = this.props;
     const { totalBytes, totalDuration, totalPeakViewers, totalIPs } = info;
 
     let streams = [];
@@ -115,7 +140,13 @@ class StreamWrapper extends Component<any, any> {
     return (
       <div>
         Stream
-        <ReactTable columns={streamsTable()} data={streams} showPagination={false} minRows={0} sortable={false} />
+        <ReactTable
+          columns={streamsTable()}
+          data={streams}
+          showPagination={false}
+          minRows={0}
+          sortable={false}
+        />
         Related Streams: {relatedStreams.length}
         <ReactTable
           columns={streamsTable()}
@@ -141,9 +172,16 @@ class StreamWrapper extends Component<any, any> {
               domain={['dataMin', 'dataMax']}
             />
             <YAxis />
-            <Tooltip labelFormatter={value => moment.unix(value).format('ddd HH:mm')} />
+            <Tooltip
+              labelFormatter={value => moment.unix(value).format('ddd HH:mm')}
+            />
             <Legend />
-            <Line name="Viewers" type="stepAfter" dataKey="subscribersCount" stroke="#82ca9d" />
+            <Line
+              name="Viewers"
+              type="stepAfter"
+              dataKey="subscribersCount"
+              stroke="#82ca9d"
+            />
           </LineChart>
         </ResponsiveContainer>
         Subscribers: {subscribers.length}
@@ -152,7 +190,7 @@ class StreamWrapper extends Component<any, any> {
           Total Duration:{' '}
           {humanizeDuration(totalDuration * 1000, {
             round: true,
-            largest: 3
+            largest: 3,
           })}
         </div>
         <div>Total Peak Viewers: {totalPeakViewers}</div>

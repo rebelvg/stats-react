@@ -7,7 +7,12 @@ const ACTION_GET = 'streams.get',
   ACTION_GET_FAILED = 'streams.get.failed';
 
 //ACTIONS
-export function getAction(limit = 20, currentPage = 0, filters = [], sorts = []) {
+export function getAction(
+  limit = 20,
+  currentPage = 0,
+  filters = [],
+  sorts = [],
+) {
   return dispatch => {
     dispatch({ type: ACTION_GET });
 
@@ -33,20 +38,20 @@ export function getAction(limit = 20, currentPage = 0, filters = [], sorts = [])
     axios
       .get('/api/streams', {
         headers: {
-          token: window.localStorage.getItem('token')
+          token: window.localStorage.getItem('token'),
         },
-        params
+        params,
       })
       .then(res => {
         dispatch({
           type: ACTION_GET_SUCCESS,
-          data: res.data
+          data: res.data,
         });
       })
       .catch(e => {
         dispatch({
           type: ACTION_GET_FAILED,
-          error: e.response.data.error
+          error: e.response.data.error,
         });
       });
   };
@@ -56,7 +61,7 @@ export function getAction(limit = 20, currentPage = 0, filters = [], sorts = [])
 const initialState = {
   error: null,
   data: {},
-  isLoading: false
+  isLoading: false,
 };
 
 const reducer = handleActions(
@@ -64,7 +69,7 @@ const reducer = handleActions(
     [ACTION_GET]: (state, action) => {
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
     },
     [ACTION_GET_SUCCESS]: (state, action) => {
@@ -72,18 +77,18 @@ const reducer = handleActions(
         ...state,
         data: action.data,
         isLoading: false,
-        error: null
+        error: null,
       };
     },
     [ACTION_GET_FAILED]: (state, action) => {
       return {
         ...state,
         error: action.error,
-        isLoading: false
+        isLoading: false,
       };
-    }
+    },
   },
-  initialState
+  initialState,
 );
 
 export default reducer;

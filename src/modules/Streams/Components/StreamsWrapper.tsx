@@ -14,7 +14,7 @@ class StreamsWrapper extends Component<any, any> {
       page: 0,
       pageSize: 20,
       filtered: [],
-      sorted: []
+      sorted: [],
     };
 
     const newState: any = {};
@@ -31,17 +31,20 @@ class StreamsWrapper extends Component<any, any> {
       newState.pageSize = pageSize;
     }
 
-    newState.filtered = _.map(props.searchParams.filter, (paramKey, paramValue) => {
-      return {
-        id: paramValue,
-        value: paramKey
-      };
-    });
+    newState.filtered = _.map(
+      props.searchParams.filter,
+      (paramKey, paramValue) => {
+        return {
+          id: paramValue,
+          value: paramKey,
+        };
+      },
+    );
 
     newState.sorted = _.map(props.searchParams.sort, sort => {
       return {
         desc: _.startsWith(sort, '-'),
-        id: _.replace(sort, /^-/, '')
+        id: _.replace(sort, /^-/, ''),
       };
     });
 
@@ -51,7 +54,12 @@ class StreamsWrapper extends Component<any, any> {
   }
 
   fetchData = () => {
-    this.props.getData(this.state.pageSize, this.state.page, this.state.filtered, this.state.sorted);
+    this.props.getData(
+      this.state.pageSize,
+      this.state.page,
+      this.state.filtered,
+      this.state.sorted,
+    );
 
     this.buildQuery();
   };
@@ -92,29 +100,29 @@ class StreamsWrapper extends Component<any, any> {
     query = qs.stringify(query, { arrayFormat: 'brackets' });
 
     history.push({
-      search: query
+      search: query,
     });
   };
 
   handlePageChange = pageIndex => {
     this.setState(
       {
-        page: pageIndex
+        page: pageIndex,
       },
       () => {
         this.fetchData();
-      }
+      },
     );
   };
 
   handlePageSizeChange = (pageSize, pageIndex) => {
     this.setState(
       {
-        pageSize: pageSize
+        pageSize: pageSize,
       },
       () => {
         this.fetchData();
-      }
+      },
     );
   };
 
@@ -122,27 +130,33 @@ class StreamsWrapper extends Component<any, any> {
     this.setState(
       {
         page: 0,
-        filtered: column
+        filtered: column,
       },
       () => {
         this.fetchData();
-      }
+      },
     );
   };
 
   handleSortedChange = (newSorted, column, shiftKey) => {
     this.setState(
       {
-        sorted: newSorted
+        sorted: newSorted,
       },
       () => {
         this.fetchData();
-      }
+      },
     );
   };
 
   render() {
-    const { streams = [], options = {}, pages = 1, searchParams = {}, isLoading = false } = this.props;
+    const {
+      streams = [],
+      options = {},
+      pages = 1,
+      searchParams = {},
+      isLoading = false,
+    } = this.props;
 
     return (
       <div>

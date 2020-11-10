@@ -26,7 +26,9 @@ class Header extends Component {
         </StyledLink>
         {!isLoggedIn ? (
           <span>
-            <MyLink href={`${window.location.origin}/api/users/auth/google`}>Login</MyLink>
+            <MyLink href={`${window.location.origin}/api/users/auth/google`}>
+              Login
+            </MyLink>
           </span>
         ) : (
           <span>
@@ -35,7 +37,7 @@ class Header extends Component {
               onClick={handleLogout}
               activeStyle={{
                 fontWeight: 'bold',
-                color: 'white'
+                color: 'white',
               }}
             >
               Logout

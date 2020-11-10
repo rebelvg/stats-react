@@ -11,29 +11,30 @@ const tableConfigTemplate = [
     accessor: 'createdAt',
     Cell: props => {
       return moment(props.value).format('ddd D/MMM/YY HH:mm');
-    }
+    },
   },
   {
     Header: 'IP',
-    accessor: 'ip'
+    accessor: 'ip',
   },
   {
     Header: 'Country',
     accessor: 'api.country',
     Cell: props => {
-      if (props.original.api.status !== 'success') return props.original.api.message;
+      if (props.original.api.status !== 'success')
+        return props.original.api.message;
 
       return props.original.api.country;
-    }
+    },
   },
   {
     Header: 'City',
-    accessor: 'api.city'
+    accessor: 'api.city',
   },
   {
     Header: 'ISP',
-    accessor: 'api.isp'
-  }
+    accessor: 'api.isp',
+  },
 ];
 
 function tableConfigOptions(options: any = {}, disableFiltering = []) {

@@ -13,19 +13,19 @@ export function getAction() {
     axios
       .get('/api/users', {
         headers: {
-          token: window.localStorage.getItem('token')
-        }
+          token: window.localStorage.getItem('token'),
+        },
       })
       .then(res => {
         dispatch({
           type: ACTION_GET_SUCCESS,
-          data: res.data
+          data: res.data,
         });
       })
       .catch(e => {
         dispatch({
           type: ACTION_GET_FAILED,
-          error: e.response.data.error
+          error: e.response.data.error,
         });
       });
   };
@@ -34,7 +34,7 @@ export function getAction() {
 //REDUCER
 const initialState = {
   error: null,
-  data: {}
+  data: {},
 };
 
 const reducer = handleActions(
@@ -43,17 +43,17 @@ const reducer = handleActions(
       return {
         ...state,
         data: action.data,
-        error: null
+        error: null,
       };
     },
     [ACTION_GET_FAILED]: (state, action) => {
       return {
         ...state,
-        error: action.error
+        error: action.error,
       };
-    }
+    },
   },
-  initialState
+  initialState,
 );
 
 export default reducer;
