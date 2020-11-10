@@ -88,7 +88,7 @@ const tableConfigTemplate = [
   }
 ];
 
-function tableConfigOptions(options = {}, disableFiltering = []) {
+function tableConfigOptions(options: any = {}, disableFiltering = []) {
   let tableConfig = _.cloneDeep(tableConfigTemplate);
 
   _.forEach(disableFiltering, columnName => {

@@ -6,7 +6,7 @@ import streamsTable from '../../Shared/Tables/StreamsTable';
 import subscribersTable from '../../Shared/Tables/SubscribersTable';
 import defaultFilterMethod from '../../Shared/Methods/TableFilter';
 
-class StreamWrapper extends Component {
+class StreamWrapper extends Component<any, any> {
   render() {
     const { subscriber = null, streams = [] } = this.props;
 

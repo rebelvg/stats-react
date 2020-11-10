@@ -4,7 +4,7 @@ import ReactTable from 'react-table';
 import streamsTable from '../../Shared/Tables/StreamsTable';
 import subscribersTable from '../../Shared/Tables/SubscribersTable';
 
-class ChannelWrapper extends Component {
+class ChannelWrapper extends Component<any, any> {
   render() {
     const { stream = null, subscribers = [] } = this.props;
 

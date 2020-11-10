@@ -11,7 +11,7 @@ export function getAction(limit = 20, currentPage = 0, filters = [], sorts = [])
   return dispatch => {
     dispatch({ type: ACTION_GET });
 
-    let params = {};
+    let params: any = {};
 
     _.forEach(filters, filter => {
       params[filter.id] = filter.value;

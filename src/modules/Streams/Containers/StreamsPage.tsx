@@ -16,7 +16,7 @@ import { getAction, getError, getData, getLoading } from '../../../redux/streams
   }),
   { getAction }
 )
-class StreamsPage extends Component {
+class StreamsPage extends Component<any, any> {
   render() {
     const { streams = [], options = {}, info = {}, total, limit, page, pages } = this.props.data;
     const { totalBytes, totalDuration, totalConnections, totalPeakViewers, totalIPs } = info;

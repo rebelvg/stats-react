@@ -15,7 +15,7 @@ import { getAction, getError, getData } from '../../../redux/user';
   }),
   { getAction }
 )
-class UserPage extends Component {
+class UserPage extends Component<any, any> {
   componentDidMount() {
     this.props.getAction();
   }
@@ -37,6 +37,7 @@ class UserPage extends Component {
               return <ListGroupItemText>{email.value}</ListGroupItemText>;
             })}
           </ListGroupItem>
+
           <ListGroupItem>
             <ListGroupItemHeading>Name</ListGroupItemHeading>
             <ListGroupItemText>{user.name}</ListGroupItemText>

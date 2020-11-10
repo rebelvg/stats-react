@@ -4,9 +4,9 @@ import _ from 'lodash';
 import createHistory from 'history/createBrowserHistory';
 import qs from 'qs';
 
-import ipsTable from '../../Shared/Tables/IPsTable';
+import streamsTable from '../../Shared/Tables/StreamsTable';
 
-class IPsWrapper extends Component {
+class StreamsWrapper extends Component<any, any> {
   constructor(props) {
     super(props);
 
@@ -17,31 +17,35 @@ class IPsWrapper extends Component {
       sorted: []
     };
 
+    const newState: any = {};
+
     let page = parseInt(props.searchParams.page);
 
     if (!isNaN(page)) {
-      this.state.page = page - 1;
+      newState.page = page - 1;
     }
 
     let pageSize = parseInt(props.searchParams.pageSize);
 
     if (!isNaN(pageSize)) {
-      this.state.pageSize = pageSize;
+      newState.pageSize = pageSize;
     }
 
-    this.state.filtered = _.map(props.searchParams.filter, (paramKey, paramValue) => {
+    newState.filtered = _.map(props.searchParams.filter, (paramKey, paramValue) => {
       return {
         id: paramValue,
         value: paramKey
       };
     });
 
-    this.state.sorted = _.map(props.searchParams.sort, sort => {
+    newState.sorted = _.map(props.searchParams.sort, sort => {
       return {
         desc: _.startsWith(sort, '-'),
         id: _.replace(sort, /^-/, '')
       };
     });
+
+    this.setState(newState);
 
     this.handleFilteredChange = _.debounce(this.handleFilteredChange, 500);
   }
@@ -59,7 +63,7 @@ class IPsWrapper extends Component {
   buildQuery = () => {
     const history = createHistory();
 
-    let query = {};
+    let query: any = {};
 
     if (this.state.page > 0) {
       query.page = this.state.page + 1;
@@ -138,14 +142,14 @@ class IPsWrapper extends Component {
   };
 
   render() {
-    const { ips = [], options = {}, pages = 1, isLoading = false } = this.props;
+    const { streams = [], options = {}, pages = 1, searchParams = {}, isLoading = false } = this.props;
 
     return (
       <div>
         <ReactTable
-          columns={ipsTable(options)}
+          columns={streamsTable(options)}
           page={this.state.page}
-          data={ips}
+          data={streams}
           pages={pages}
           loading={isLoading}
           defaultPageSize={this.state.pageSize}
@@ -166,4 +170,4 @@ class IPsWrapper extends Component {
   }
 }
 
-export default IPsWrapper;
+export default StreamsWrapper;

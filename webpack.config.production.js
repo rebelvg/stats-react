@@ -3,20 +3,13 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   module: {
     rules: [
       {
-        test: /.js/,
-        exclude: /node_modules/,
-        include: [path.resolve(__dirname, 'src')],
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['env', 'stage-0', 'react', 'es2015', 'es2016', 'es2017'],
-            plugins: ['transform-class-properties', 'react-html-attrs', 'transform-decorators-legacy']
-          }
-        }
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.css$/,
@@ -32,9 +25,7 @@ module.exports = {
   plugins: [new HtmlWebpackPlugin()],
   devtool: 'source-map',
   resolve: {
-    alias: {
-      src: path.resolve(__dirname, './src')
-    }
+    extensions: ['.tsx', '.ts', '.js']
   },
   output: {
     filename: 'bundle.js',

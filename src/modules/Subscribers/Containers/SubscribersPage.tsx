@@ -16,7 +16,7 @@ import { getAction, getError, getData, getLoading } from '../../../redux/subscri
   }),
   { getAction }
 )
-class SubscribersPage extends Component {
+class SubscribersPage extends Component<any, any> {
   render() {
     const { subscribers = [], options = {}, info = {}, total, limit, page, pages } = this.props.data;
     const { totalBytes, totalDuration, totalIPs } = info;

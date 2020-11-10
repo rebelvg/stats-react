@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import qs from 'qs';
 import { Route, Redirect } from 'react-router';
 
-class Home extends Component {
+class Home extends Component<any, any> {
   render() {
     const { search } = this.props.location;
 

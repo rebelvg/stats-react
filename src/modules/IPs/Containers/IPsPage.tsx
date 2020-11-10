@@ -14,7 +14,7 @@ import { getAction, getError, getData, getLoading } from '../../../redux/ips';
   }),
   { getAction }
 )
-class IPsPage extends Component {
+class IPsPage extends Component<any, any> {
   render() {
     const { ips = [], options = {}, info = {}, total, limit, page, pages } = this.props.data;
     const { totalCountries, totalCities, totalISPs } = info;

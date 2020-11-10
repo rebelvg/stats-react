@@ -13,7 +13,9 @@ import { getAction, getError, getData } from '../../../redux/channels';
   }),
   { getAction }
 )
-class ChannelsPage extends Component {
+class ChannelsPage extends Component<any, any> {
+  timerId;
+
   constructor(props) {
     super(props);
 
@@ -44,7 +46,7 @@ class ChannelsPage extends Component {
           if (_.isEmpty(serverObj)) return <Alert color="danger">No channels online for {serverName}.</Alert>;
 
           return Object.entries(serverObj).map(([appName, appObj]) => {
-            return Object.entries(appObj).map(([channelName, channelObj]) => {
+            return Object.entries(appObj).map(([channelName, channelObj]: any) => {
               const stream = channelObj.publisher;
               const subscribers = channelObj.subscribers;
 

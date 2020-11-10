@@ -2,16 +2,16 @@ import { handleActions } from 'redux-actions';
 import axios from 'axios';
 import _ from 'lodash';
 
-const ACTION_GET = 'stream.get',
-  ACTION_GET_SUCCESS = 'stream.get.success',
-  ACTION_GET_FAILED = 'stream.get.failed';
+const ACTION_GET = 'streams.get',
+  ACTION_GET_SUCCESS = 'streams.get.success',
+  ACTION_GET_FAILED = 'streams.get.failed';
 
 //ACTIONS
-export function getAction(id, limit = 20, currentPage = 0, filters = [], sorts = []) {
+export function getAction(limit = 20, currentPage = 0, filters = [], sorts = []) {
   return dispatch => {
     dispatch({ type: ACTION_GET });
 
-    let params = {};
+    let params: any = {};
 
     _.forEach(filters, filter => {
       params[filter.id] = filter.value;
@@ -27,25 +27,20 @@ export function getAction(id, limit = 20, currentPage = 0, filters = [], sorts =
       }
     });
 
-    Promise.all([
-      axios.get('/api/streams/' + id, {
-        headers: {
-          token: window.localStorage.getItem('token')
-        },
-        params
-      }),
-      axios.get('/api/streams/' + id + '/graph', {
+    params.page = currentPage + 1;
+    params.limit = limit;
+
+    axios
+      .get('/api/streams', {
         headers: {
           token: window.localStorage.getItem('token')
         },
         params
       })
-    ])
       .then(res => {
         dispatch({
           type: ACTION_GET_SUCCESS,
-          data: res[0].data,
-          events: res[1].data.events
+          data: res.data
         });
       })
       .catch(e => {
@@ -61,23 +56,30 @@ export function getAction(id, limit = 20, currentPage = 0, filters = [], sorts =
 const initialState = {
   error: null,
   data: {},
-  events: []
+  isLoading: false
 };
 
 const reducer = handleActions(
   {
+    [ACTION_GET]: (state, action) => {
+      return {
+        ...state,
+        isLoading: true
+      };
+    },
     [ACTION_GET_SUCCESS]: (state, action) => {
       return {
         ...state,
         data: action.data,
-        events: action.events,
+        isLoading: false,
         error: null
       };
     },
     [ACTION_GET_FAILED]: (state, action) => {
       return {
         ...state,
-        error: action.error
+        error: action.error,
+        isLoading: false
       };
     }
   },
@@ -87,6 +89,6 @@ const reducer = handleActions(
 export default reducer;
 
 //SELECTORS
-export const getError = state => state.stream.error;
-export const getData = state => state.stream.data;
-export const getEvents = state => state.stream.events;
+export const getError = state => state.streams.error;
+export const getData = state => state.streams.data;
+export const getLoading = state => state.streams.isLoading;

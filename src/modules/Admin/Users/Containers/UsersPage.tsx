@@ -14,7 +14,7 @@ import { getAction, getError, getData, putUser } from '../../../../redux/admin/u
   }),
   { getAction, putUser }
 )
-class UsersPage extends Component {
+class UsersPage extends Component<any, any> {
   componentDidMount() {
     this.props.getAction();
   }

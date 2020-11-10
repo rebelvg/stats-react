@@ -6,7 +6,7 @@ import qs from 'qs';
 
 import subscribersTable from '../../Shared/Tables/SubscribersTable';
 
-class SubscribersWrapper extends Component {
+class SubscribersWrapper extends Component<any, any> {
   constructor(props) {
     super(props);
 
@@ -17,31 +17,35 @@ class SubscribersWrapper extends Component {
       sorted: []
     };
 
+    const newState: any = {};
+
     let page = parseInt(props.searchParams.page);
 
     if (!isNaN(page)) {
-      this.state.page = page - 1;
+      newState.page = page - 1;
     }
 
     let pageSize = parseInt(props.searchParams.pageSize);
 
     if (!isNaN(pageSize)) {
-      this.state.pageSize = pageSize;
+      newState.pageSize = pageSize;
     }
 
-    this.state.filtered = _.map(props.searchParams.filter, (paramKey, paramValue) => {
+    newState.filtered = _.map(props.searchParams.filter, (paramKey, paramValue) => {
       return {
         id: paramValue,
         value: paramKey
       };
     });
 
-    this.state.sorted = _.map(props.searchParams.sort, sort => {
+    newState.sorted = _.map(props.searchParams.sort, sort => {
       return {
         desc: _.startsWith(sort, '-'),
         id: _.replace(sort, /^-/, '')
       };
     });
+
+    this.setState(newState);
 
     this.handleFilteredChange = _.debounce(this.handleFilteredChange, 500);
   }
@@ -59,7 +63,7 @@ class SubscribersWrapper extends Component {
   buildQuery = () => {
     const history = createHistory();
 
-    let query = {};
+    let query: any = {};
 
     if (this.state.page > 0) {
       query.page = this.state.page + 1;

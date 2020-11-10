@@ -14,7 +14,7 @@ import defaultFilterMethod from '../../Shared/Methods/TableFilter';
 
 const tickFormatter = tick => moment.unix(tick).format('ddd HH:mm');
 
-class StreamWrapper extends Component {
+class StreamWrapper extends Component<any, any> {
   constructor(props) {
     super(props);
 
@@ -23,24 +23,28 @@ class StreamWrapper extends Component {
       sorted: []
     };
 
-    this.state.filtered = _.map(props.searchParams.filter, (paramKey, paramValue) => {
+    const newState: any = {};
+
+    newState.filtered = _.map(props.searchParams.filter, (paramKey, paramValue) => {
       return {
         id: paramValue,
         value: paramKey
       };
     });
 
-    this.state.sorted = _.map(props.searchParams.sort, sort => {
+    newState.sorted = _.map(props.searchParams.sort, sort => {
       return {
         desc: _.startsWith(sort, '-'),
         id: _.replace(sort, /^-/, '')
       };
     });
 
+    this.setState(newState);
+
     this.handleFilteredChange = _.debounce(this.handleFilteredChange, 500);
   }
 
-  fetchData = (state, instance) => {
+  fetchData = () => {
     this.props.getData(this.props.streamId, undefined, undefined, this.state.filtered, this.state.sorted);
 
     this.buildQuery();
@@ -53,7 +57,7 @@ class StreamWrapper extends Component {
   buildQuery = () => {
     const history = createHistory();
 
-    let query = {};
+    let query: any = {};
 
     _.forEach(this.state.filtered, filter => {
       if (!query.filter) query.filter = {};

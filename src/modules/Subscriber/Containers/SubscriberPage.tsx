@@ -11,7 +11,7 @@ import { getAction, getError, getData } from '../../../redux/subscriber';
   }),
   { getAction }
 )
-class SubscriberPage extends Component {
+class SubscriberPage extends Component<any, any> {
   componentDidMount() {
     const id = this.props.match.params.id;
 

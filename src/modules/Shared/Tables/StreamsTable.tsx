@@ -93,7 +93,7 @@ const tableConfigTemplate = [
   }
 ];
 
-function tableConfigOptions(options = {}) {
+function tableConfigOptions(options: any = {}) {
   let tableConfig = _.cloneDeep(tableConfigTemplate);
 
   let appsTableColumn = _.find(tableConfig, ['accessor', 'app']);
