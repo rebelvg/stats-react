@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button } from 'reactstrap';
+import { Alert, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button } from 'reactstrap';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { Alert } from 'reactstrap';
 import moment from 'moment';
 import AdminHeader from '../../Shared/Components/AdminHeader/AdminHeader';
 
