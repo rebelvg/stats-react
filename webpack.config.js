@@ -52,10 +52,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-    alias: {
-      app: path.resolve(__dirname, './src')
-    }
+    extensions: ['.tsx', '.ts', '.js']
   },
   node: {
     fs: 'empty'
