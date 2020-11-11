@@ -27,14 +27,9 @@ class StreamWrapper extends Component<any, any> {
   constructor(props) {
     super(props);
 
-    this.state = {
-      filtered: [],
-      sorted: [],
-    };
+    const state: any = {};
 
-    const newState: any = {};
-
-    newState.filtered = _.map(
+    state.filtered = _.map(
       props.searchParams.filter,
       (paramKey, paramValue) => {
         return {
@@ -44,14 +39,18 @@ class StreamWrapper extends Component<any, any> {
       },
     );
 
-    newState.sorted = _.map(props.searchParams.sort, sort => {
+    state.sorted = _.map(props.searchParams.sort, sort => {
       return {
         desc: _.startsWith(sort, '-'),
         id: _.replace(sort, /^-/, ''),
       };
     });
 
-    this.setState(newState);
+    this.state = {
+      filtered: [],
+      sorted: [],
+      ...state,
+    };
 
     this.handleFilteredChange = _.debounce(this.handleFilteredChange, 500);
   }

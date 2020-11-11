@@ -10,28 +10,21 @@ class StreamsWrapper extends Component<any, any> {
   constructor(props) {
     super(props);
 
-    this.state = {
-      page: 0,
-      pageSize: 20,
-      filtered: [],
-      sorted: [],
-    };
-
-    const newState: any = {};
+    const state: any = {};
 
     let page = parseInt(props.searchParams.page);
 
     if (!isNaN(page)) {
-      newState.page = page - 1;
+      state.page = page - 1;
     }
 
     let pageSize = parseInt(props.searchParams.pageSize);
 
     if (!isNaN(pageSize)) {
-      newState.pageSize = pageSize;
+      state.pageSize = pageSize;
     }
 
-    newState.filtered = _.map(
+    state.filtered = _.map(
       props.searchParams.filter,
       (paramKey, paramValue) => {
         return {
@@ -41,14 +34,20 @@ class StreamsWrapper extends Component<any, any> {
       },
     );
 
-    newState.sorted = _.map(props.searchParams.sort, sort => {
+    state.sorted = _.map(props.searchParams.sort, sort => {
       return {
         desc: _.startsWith(sort, '-'),
         id: _.replace(sort, /^-/, ''),
       };
     });
 
-    this.setState(newState);
+    this.state = {
+      page: 0,
+      pageSize: 20,
+      filtered: [],
+      sorted: [],
+      ...state,
+    };
 
     this.handleFilteredChange = _.debounce(this.handleFilteredChange, 500);
   }
