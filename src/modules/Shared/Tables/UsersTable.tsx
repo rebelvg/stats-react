@@ -53,7 +53,7 @@ const tableConfigTemplate = [
 ];
 
 function tableConfigOptions(putUser) {
-  let tableConfig = _.cloneDeep(tableConfigTemplate);
+  let tableConfig: any = _.cloneDeep(tableConfigTemplate);
 
   let adminTableColumn = _.find(tableConfig, ['accessor', 'isAdmin']);
 

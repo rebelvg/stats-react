@@ -38,7 +38,7 @@ const tableConfigTemplate = [
 ];
 
 function tableConfigOptions(options: any = {}, disableFiltering = []) {
-  let tableConfig = _.cloneDeep(tableConfigTemplate);
+  let tableConfig: any = _.cloneDeep(tableConfigTemplate);
 
   _.forEach(disableFiltering, columnName => {
     let tableColumn = _.find(tableConfig, ['accessor', columnName]);

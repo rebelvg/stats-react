@@ -84,9 +84,7 @@ const tableConfigTemplate = [
       if (props.original.location.api.status !== 'success')
         return `${props.value} (${props.original.location.api.message})`;
 
-      return `${props.value} (${props.original.location.api.countryCode}/${
-        props.original.location.api.city
-      })`;
+      return `${props.value} (${props.original.location.api.countryCode}/${props.original.location.api.city})`;
     },
   },
   {
@@ -102,7 +100,7 @@ const tableConfigTemplate = [
 ];
 
 function tableConfigOptions(options: any = {}) {
-  let tableConfig = _.cloneDeep(tableConfigTemplate);
+  let tableConfig: any = _.cloneDeep(tableConfigTemplate);
 
   let appsTableColumn = _.find(tableConfig, ['accessor', 'app']);
 
