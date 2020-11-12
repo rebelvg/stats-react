@@ -43,24 +43,32 @@ class ChannelsPage extends Component<any, any> {
 
     return (
       <div>
-        {Object.entries(servers).map(([serverName, serverObj]) => {
+        {Object.entries(servers).map(([serverName, serverObj], id) => {
           if (_.isEmpty(serverObj))
             return (
-              <Alert color="danger">No channels online for {serverName}.</Alert>
+              <Alert key={id} color="danger">
+                No channels online for {serverName}.
+              </Alert>
             );
 
-          return Object.entries(serverObj).map(([appName, appObj]) => {
-            return Object.entries(appObj).map(
-              ([channelName, channelObj]: any) => {
-                const stream = channelObj.publisher;
-                const subscribers = channelObj.subscribers;
+          return Object.entries(serverObj).map(
+            ([appName, appObj], serverId) => {
+              return Object.entries(appObj).map(
+                ([channelName, channelObj]: any, channelId) => {
+                  const stream = channelObj.publisher;
+                  const subscribers = channelObj.subscribers;
 
-                return (
-                  <ChannelWrapper stream={stream} subscribers={subscribers} />
-                );
-              },
-            );
-          });
+                  return (
+                    <ChannelWrapper
+                      key={`${serverId}-${channelId}`}
+                      stream={stream}
+                      subscribers={subscribers}
+                    />
+                  );
+                },
+              );
+            },
+          );
         })}
       </div>
     );
