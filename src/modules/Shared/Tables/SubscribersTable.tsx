@@ -119,8 +119,12 @@ function tableConfigOptions(options: any = {}, disableFiltering = []) {
         />
         <datalist id="apps">
           <option value="" />
-          {_.map(options.apps, app => {
-            return <option value={app}>{app}</option>;
+          {_.map(options.apps, (app, id) => {
+            return (
+              <option key={id} value={app}>
+                {app}
+              </option>
+            );
           })}
         </datalist>
       </div>
@@ -141,8 +145,12 @@ function tableConfigOptions(options: any = {}, disableFiltering = []) {
         />
         <datalist id="channels">
           <option value="" />
-          {_.map(options.channels, channel => {
-            return <option value={channel}>{channel}</option>;
+          {_.map(options.channels, (channel, id) => {
+            return (
+              <option key={id} value={channel}>
+                {channel}
+              </option>
+            );
           })}
         </datalist>
       </div>
@@ -163,8 +171,12 @@ function tableConfigOptions(options: any = {}, disableFiltering = []) {
         />
         <datalist id="countries">
           <option value="" />
-          {_.map(options.countries, country => {
-            return <option value={country}>{country}</option>;
+          {_.map(options.countries, (country, id) => {
+            return (
+              <option key={id} value={country}>
+                {country}
+              </option>
+            );
           })}
         </datalist>
       </div>
@@ -185,8 +197,12 @@ function tableConfigOptions(options: any = {}, disableFiltering = []) {
         />
         <datalist id="protocols">
           <option value="" />
-          {_.map(options.protocols, protocol => {
-            return <option value={protocol}>{protocol}</option>;
+          {_.map(options.protocols, (protocol, id) => {
+            return (
+              <option key={id} value={protocol}>
+                {protocol}
+              </option>
+            );
           })}
         </datalist>
       </div>

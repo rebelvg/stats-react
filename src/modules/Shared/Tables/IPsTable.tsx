@@ -62,8 +62,12 @@ function tableConfigOptions(options: any = {}, disableFiltering = []) {
         />
         <datalist id="countries">
           <option value="" />
-          {_.map(options.countries, app => {
-            return <option value={app}>{app}</option>;
+          {_.map(options.countries, (country, id) => {
+            return (
+              <option key={id} value={country}>
+                {country}
+              </option>
+            );
           })}
         </datalist>
       </div>
@@ -84,8 +88,12 @@ function tableConfigOptions(options: any = {}, disableFiltering = []) {
         />
         <datalist id="cities">
           <option value="" />
-          {_.map(options.cities, channel => {
-            return <option value={channel}>{channel}</option>;
+          {_.map(options.cities, (city, id) => {
+            return (
+              <option key={id} value={city}>
+                {city}
+              </option>
+            );
           })}
         </datalist>
       </div>
@@ -106,8 +114,12 @@ function tableConfigOptions(options: any = {}, disableFiltering = []) {
         />
         <datalist id="isps">
           <option value="" />
-          {_.map(options.ISPs, country => {
-            return <option value={country}>{country}</option>;
+          {_.map(options.ISPs, (isp, id) => {
+            return (
+              <option key={id} value={isp}>
+                {isp}
+              </option>
+            );
           })}
         </datalist>
       </div>
