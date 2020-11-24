@@ -33,41 +33,57 @@ class ChannelsPage extends Component<any, any> {
   }
 
   render() {
-    const servers = this.props.data;
+    const { live: servers = [] } = this.props.data;
     const { error } = this.props;
 
-    if (error) return <Alert color="danger">{error}</Alert>;
+    if (error) {
+      return <Alert color="danger">{error}</Alert>;
+    }
 
-    if (_.isEmpty(servers))
+    if (servers.length === 0) {
       return <Alert color="danger">No servers online.</Alert>;
+    }
 
     return (
       <div>
-        {Object.entries(servers).map(([serverName, serverObj], id) => {
-          if (_.isEmpty(serverObj))
+        {servers.map((serverObj, id) => {
+          const serverName = serverObj.serverName;
+          const apps = serverObj.apps;
+
+          if (apps.length === 0) {
             return (
               <Alert key={id} color="danger">
                 No channels online for {serverName}.
               </Alert>
             );
+          }
 
-          return Object.entries(serverObj).map(
-            ([appName, appObj], serverId) => {
-              return Object.entries(appObj).map(
-                ([channelName, channelObj]: any, channelId) => {
+          return (
+            <div>
+              <Alert color="success">Live channels for {serverName}</Alert>
+
+              {apps.map((appObj, serverId) => {
+                const appName = appObj.appName;
+                const channels = appObj.channels;
+
+                return channels.map((channelObj, channelId) => {
+                  const channelName = channelObj.channelName;
                   const stream = channelObj.publisher;
                   const subscribers = channelObj.subscribers;
 
                   return (
-                    <ChannelWrapper
-                      key={`${serverId}-${channelId}`}
-                      stream={stream}
-                      subscribers={subscribers}
-                    />
+                    <div>
+                      <ChannelWrapper
+                        key={`${serverId}-${channelId}`}
+                        stream={stream}
+                        subscribers={subscribers}
+                      />
+                      <br />
+                    </div>
                   );
-                },
-              );
-            },
+                });
+              })}
+            </div>
           );
         })}
       </div>
