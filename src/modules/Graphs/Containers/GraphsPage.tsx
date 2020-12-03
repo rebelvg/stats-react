@@ -169,7 +169,7 @@ class GraphsPage extends Component<any> {
             <YAxis />
             <Tooltip labelFormatter={(value) => value} />
             <Legend />
-            <Bar stackId={0} name="Streamers" dataKey="value" fill="#8884d8" />
+            <Bar stackId={0} name="Streams" dataKey="value" fill="#8884d8" />
           </BarChart>
         </div>
 
