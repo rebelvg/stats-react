@@ -18,9 +18,6 @@ class Header extends Component {
         <StyledLink to="/streams">Streams</StyledLink>
         <StyledLink to="/subscribers">Subscribers</StyledLink>
         <StyledLink to="/ips">IPs</StyledLink>
-        <StyledLink exact to="/live">
-          Live!
-        </StyledLink>
         <StyledLink exact to="/graphs">
           Graphs
         </StyledLink>

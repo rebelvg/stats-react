@@ -13,12 +13,11 @@ import UsersPage from './modules/Admin/Users/Containers/UsersPage';
 
 const Routes = () => (
   <div>
-    <Route exact path="/" component={HomePage} />
+    <Route exact path="/" component={ChannelsPage} />
     <Route exact path="/streams" component={StreamsPage} />
     <Route exact path="/streams/:id" component={StreamPage} />
     <Route exact path="/subscribers" component={SubscribersPage} />
     <Route exact path="/subscribers/:id" component={SubscriberPage} />
-    <Route exact path="/live" component={ChannelsPage} />
     <Route exact path="/graphs" component={GraphsPage} />
     <Route exact path="/ips" component={IPsPage} />
     <Route exact path="/user" component={UserPage} />
