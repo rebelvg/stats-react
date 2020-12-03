@@ -35,20 +35,29 @@ export function getAction() {
 const initialState = {
   error: null,
   data: {},
+  isLoading: false,
 };
 
 const reducer = handleActions(
   {
+    [ACTION_GET]: (state, action) => {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    },
     [ACTION_GET_SUCCESS]: (state, action) => {
       return {
         ...state,
         data: action.data,
+        isLoading: false,
         error: null,
       };
     },
     [ACTION_GET_FAILED]: (state, action) => {
       return {
         ...state,
+        isLoading: false,
         error: action.error,
       };
     },
@@ -61,3 +70,4 @@ export default reducer;
 //SELECTORS
 export const getError = (state) => state.graphs.error;
 export const getData = (state) => state.graphs.data;
+export const getLoading = (state) => state.graphs.isLoading;

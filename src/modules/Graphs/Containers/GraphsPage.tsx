@@ -16,8 +16,14 @@ import {
 } from 'recharts';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import { Alert } from 'reactstrap';
 
-import { getAction, getError, getData } from '../../../redux/graphs';
+import {
+  getAction,
+  getError,
+  getData,
+  getLoading,
+} from '../../../redux/graphs';
 
 const DAYS_OF_THE_WEEK = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
@@ -25,6 +31,7 @@ const DAYS_OF_THE_WEEK = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
   (state) => ({
     error: getError(state),
     data: getData(state),
+    isLoading: getLoading(state),
   }),
   { getAction },
 )
@@ -36,6 +43,16 @@ class GraphsPage extends Component<any> {
   }
 
   render() {
+    const { error, isLoading } = this.props;
+
+    if (error) {
+      return <div>{error}</div>;
+    }
+
+    if (isLoading) {
+      return <Alert color="danger">Loading...</Alert>;
+    }
+
     const {
       totalDurationStreams = [],
       totalDurationSubs = [],
