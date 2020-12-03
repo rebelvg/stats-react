@@ -15,6 +15,7 @@ import {
   Bar,
 } from 'recharts';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 
 import { getAction, getError, getData } from '../../../redux/graphs';
 
@@ -37,53 +38,122 @@ class GraphsPage extends Component<any> {
   render() {
     const {
       totalDurationStreams = [],
+      totalDurationSubs = [],
       monthlyStatsStreams = [],
+      monthlyStatsSubs = [],
       dayOfWeekStatsStreams = [],
+      dayOfWeekStatsSubs = [],
       timeOfDayStatsStreams = [],
+      timeOfDayStatsSubs = [],
+      topStreamers = [],
     } = this.props.data;
 
-    const pieDataTotalDurationStreams = totalDurationStreams.map((item) => ({
-      name: item._id || 'N/A',
-      value: Math.round(item.totalDurationSeconds / 60 / 60),
-    }));
+    const totalDurationStreamsData = totalDurationStreams.map((item) => {
+      return {
+        name: item._id || 'N/A',
+        value: Math.round(item.totalDurationSeconds / 60 / 60),
+      };
+    });
 
-    const lineChartDataMonthlyStatsStreams = monthlyStatsStreams.map(
-      (item) => ({
+    const totalDurationSubsData = totalDurationSubs.map((item) => {
+      return {
+        name: item._id || 'N/A',
+        value: Math.round(item.totalDurationSeconds / 60 / 60),
+      };
+    });
+
+    const lineChartDataMonthlyStatsStreams = monthlyStatsStreams.map((item) => {
+      const year = item._id.year;
+      const month = item._id.month;
+
+      const subsMonthlyStat = _.find(monthlyStatsSubs, {
+        _id: { year, month },
+      });
+
+      return {
         name: `${item._id.year}/${item._id.month}`,
         value: item.totalCount,
-      }),
-    );
+        valueSubs: subsMonthlyStat.totalCount || 0,
+      };
+    });
 
     const barChartDataDayOfWeekStatsStreams = dayOfWeekStatsStreams.map(
-      (item) => ({
-        name: item._id,
-        value: item.totalCount,
-      }),
+      (item) => {
+        const subsDayOfWeekStat = _.find(dayOfWeekStatsSubs, {
+          _id: item._id,
+        });
+
+        return {
+          name: item._id,
+          value: item.totalCount,
+          valueSubs: subsDayOfWeekStat.totalCount,
+        };
+      },
     );
 
-    const barChartTimeOfDayStatsStreams = timeOfDayStatsStreams.map((item) => ({
-      name: item._id,
-      value: item.totalCount,
-    }));
+    const barChartTimeOfDayStatsStreams = timeOfDayStatsStreams.map((item) => {
+      const subTimeOfDayStat = _.find(timeOfDayStatsSubs, {
+        _id: item._id,
+      });
+
+      return {
+        name: item._id,
+        value: item.totalCount,
+        valueSubs: subTimeOfDayStat.totalCount,
+      };
+    });
+
+    const topStreamersData = topStreamers.map((item) => {
+      return {
+        name: item.user.name,
+        value: item.totalCount,
+      };
+    });
 
     return (
       <div>
         <div>
-          <PieChart width={350} height={350}>
-            <Pie
-              data={pieDataTotalDurationStreams}
-              dataKey="value"
-              nameKey="name"
-              cx="50%"
-              cy="50%"
-              innerRadius={50}
-              outerRadius={90}
-              fill="#82ca9d"
-              label
-            />
-            <Tooltip labelFormatter={(value) => `${value}h`} />
+          <BarChart
+            width={730}
+            height={250}
+            data={totalDurationStreamsData}
+            margin={{ top: 20, right: 50, left: 5, bottom: 5 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" tickFormatter={(value) => value} />
+            <YAxis />
+            <Tooltip labelFormatter={(value) => value} />
             <Legend />
-          </PieChart>
+            <Bar stackId={0} name="Streams" dataKey="value" fill="#8884d8" />
+          </BarChart>
+
+          <BarChart
+            width={730}
+            height={250}
+            data={totalDurationSubsData}
+            margin={{ top: 20, right: 50, left: 5, bottom: 5 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" tickFormatter={(value) => value} />
+            <YAxis />
+            <Tooltip labelFormatter={(value) => value} />
+            <Legend />
+            <Bar stackId={0} name="Viewers" dataKey="value" fill="#82ca9d" />
+          </BarChart>
+
+          <BarChart
+            width={730}
+            height={250}
+            data={topStreamersData}
+            margin={{ top: 20, right: 50, left: 5, bottom: 5 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" tickFormatter={(value) => value} />
+            <YAxis />
+            <Tooltip labelFormatter={(value) => value} />
+            <Legend />
+            <Bar stackId={0} name="Streamers" dataKey="value" fill="#8884d8" />
+          </BarChart>
         </div>
 
         <div>
@@ -99,7 +169,18 @@ class GraphsPage extends Component<any> {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="value" stroke="#8884d8" />
+              <Line
+                name="Streams"
+                type="monotone"
+                dataKey="value"
+                stroke="#8884d8"
+              />
+              <Line
+                name="Viewers"
+                type="monotone"
+                dataKey="valueSubs"
+                stroke="#82ca9d"
+              />
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -108,17 +189,23 @@ class GraphsPage extends Component<any> {
           <BarChart
             width={730}
             height={250}
-            data={_.sortBy(barChartDataDayOfWeekStatsStreams, ['name'])}
+            data={barChartDataDayOfWeekStatsStreams}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               dataKey="name"
-              tickFormatter={(tick) => DAYS_OF_THE_WEEK[tick - 1]}
+              tickFormatter={(value) => DAYS_OF_THE_WEEK[value - 1]}
             />
             <YAxis />
-            <Tooltip />
+            <Tooltip labelFormatter={(value) => DAYS_OF_THE_WEEK[value - 1]} />
             <Legend />
-            <Bar dataKey="value" fill="#8884d8" />
+            <Bar stackId={0} name="Streams" dataKey="value" fill="#8884d8" />
+            <Bar
+              stackId={0}
+              name="Viewers"
+              dataKey="valueSubs"
+              fill="#82ca9d"
+            />
           </BarChart>
         </div>
 
@@ -126,14 +213,29 @@ class GraphsPage extends Component<any> {
           <BarChart
             width={730}
             height={250}
-            data={_.sortBy(barChartTimeOfDayStatsStreams, ['name'])}
+            data={barChartTimeOfDayStatsStreams}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
+            <XAxis
+              dataKey="name"
+              tickFormatter={(value) =>
+                moment.utc(value * 3600 * 1000).format('HH:mm')
+              }
+            />
             <YAxis />
-            <Tooltip />
+            <Tooltip
+              labelFormatter={(value) =>
+                moment.utc(value * 3600 * 1000).format('HH:mm')
+              }
+            />
             <Legend />
-            <Bar dataKey="value" fill="#8884d8" />
+            <Bar stackId={0} name="Streams" dataKey="value" fill="#8884d8" />
+            <Bar
+              stackId={0}
+              name="Viewers"
+              dataKey="valueSubs"
+              fill="#82ca9d"
+            />
           </BarChart>
         </div>
       </div>
