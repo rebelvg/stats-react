@@ -17,6 +17,7 @@ import {
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { Alert } from 'reactstrap';
+import humanizeDuration from 'humanize-duration';
 
 import {
   getAction,
@@ -83,47 +84,47 @@ class GraphsPage extends Component<any> {
       const year = item._id.year;
       const month = item._id.month;
 
-      const subsMonthlyStat = _.find(monthlyStatsSubs, {
+      const subsItem = _.find(monthlyStatsSubs, {
         _id: { year, month },
       });
 
       return {
         name: `${item._id.year}/${item._id.month}`,
-        value: item.totalCount,
-        valueSubs: subsMonthlyStat.totalCount || 0,
+        value: Math.round(item.totalDurationSeconds / 60 / 60),
+        valueSubs: Math.round(subsItem?.totalDurationSeconds / 60 / 60) || 0,
       };
     });
 
     const barChartDataDayOfWeekStatsStreams = dayOfWeekStatsStreams.map(
       (item) => {
-        const subsDayOfWeekStat = _.find(dayOfWeekStatsSubs, {
+        const subsItem = _.find(dayOfWeekStatsSubs, {
           _id: item._id,
         });
 
         return {
           name: item._id,
-          value: item.totalCount,
-          valueSubs: subsDayOfWeekStat.totalCount,
+          value: Math.round(item.totalDurationSeconds / 60 / 60),
+          valueSubs: Math.round(subsItem?.totalDurationSeconds / 60 / 60) || 0,
         };
       },
     );
 
     const barChartTimeOfDayStatsStreams = timeOfDayStatsStreams.map((item) => {
-      const subTimeOfDayStat = _.find(timeOfDayStatsSubs, {
+      const subsItem = _.find(timeOfDayStatsSubs, {
         _id: item._id,
       });
 
       return {
         name: item._id,
-        value: item.totalCount,
-        valueSubs: subTimeOfDayStat.totalCount,
+        value: Math.round(item.totalDurationSeconds / 60 / 60),
+        valueSubs: Math.round(subsItem?.totalDurationSeconds / 60 / 60) || 0,
       };
     });
 
     const topStreamersData = topStreamers.map((item) => {
       return {
         name: item.user.name,
-        value: item.totalCount,
+        value: Math.round(item.totalDurationSeconds / 60 / 60),
       };
     });
 
@@ -131,53 +132,89 @@ class GraphsPage extends Component<any> {
       <div>
         <div>
           <BarChart
-            width={730}
-            height={250}
+            width={900}
+            height={350}
             data={totalDurationStreamsData}
             margin={{ top: 20, right: 50, left: 5, bottom: 5 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" tickFormatter={(value) => value} />
+            <XAxis dataKey="name" />
             <YAxis />
-            <Tooltip labelFormatter={(value) => value} />
+            <Tooltip
+              formatter={(value) => {
+                return humanizeDuration(value * 60 * 60 * 1000, {
+                  round: true,
+                  largest: 2,
+                });
+              }}
+            />
             <Legend />
-            <Bar stackId={0} name="Streams" dataKey="value" fill="#8884d8" />
+            <Bar
+              stackId={0}
+              name="Hours Streamed"
+              dataKey="value"
+              fill="#8884d8"
+            />
           </BarChart>
 
           <BarChart
-            width={730}
-            height={250}
+            width={900}
+            height={350}
             data={totalDurationSubsData}
             margin={{ top: 20, right: 50, left: 5, bottom: 5 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" tickFormatter={(value) => value} />
+            <XAxis dataKey="name" />
             <YAxis />
-            <Tooltip labelFormatter={(value) => value} />
+            <Tooltip
+              formatter={(value) => {
+                return humanizeDuration(value * 60 * 60 * 1000, {
+                  round: true,
+                  largest: 2,
+                });
+              }}
+            />
             <Legend />
-            <Bar stackId={0} name="Viewers" dataKey="value" fill="#82ca9d" />
+            <Bar
+              stackId={0}
+              name="Hours Viewed"
+              dataKey="value"
+              fill="#82ca9d"
+            />
           </BarChart>
 
           <BarChart
-            width={730}
-            height={250}
+            width={900}
+            height={350}
             data={topStreamersData}
             margin={{ top: 20, right: 50, left: 5, bottom: 5 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" tickFormatter={(value) => value} />
+            <XAxis dataKey="name" />
             <YAxis />
-            <Tooltip labelFormatter={(value) => value} />
+            <Tooltip
+              formatter={(value) => {
+                return humanizeDuration(value * 60 * 60 * 1000, {
+                  round: true,
+                  largest: 2,
+                });
+              }}
+            />
             <Legend />
-            <Bar stackId={0} name="Streams" dataKey="value" fill="#8884d8" />
+            <Bar
+              stackId={0}
+              name="Hours Streamed"
+              dataKey="value"
+              fill="#8884d8"
+            />
           </BarChart>
         </div>
 
         <div>
           <ResponsiveContainer width="100%" height={720}>
             <LineChart
-              width={730}
-              height={250}
+              width={900}
+              height={350}
               data={lineChartDataMonthlyStatsStreams}
               margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
             >
@@ -187,13 +224,13 @@ class GraphsPage extends Component<any> {
               <Tooltip />
               <Legend />
               <Line
-                name="Streams"
+                name="Hours Streamed"
                 type="monotone"
                 dataKey="value"
                 stroke="#8884d8"
               />
               <Line
-                name="Viewers"
+                name="Hours Viewed"
                 type="monotone"
                 dataKey="valueSubs"
                 stroke="#82ca9d"
@@ -204,8 +241,8 @@ class GraphsPage extends Component<any> {
 
         <div>
           <BarChart
-            width={730}
-            height={250}
+            width={900}
+            height={350}
             data={barChartDataDayOfWeekStatsStreams}
           >
             <CartesianGrid strokeDasharray="3 3" />
@@ -216,10 +253,15 @@ class GraphsPage extends Component<any> {
             <YAxis />
             <Tooltip labelFormatter={(value) => DAYS_OF_THE_WEEK[value - 1]} />
             <Legend />
-            <Bar stackId={0} name="Streams" dataKey="value" fill="#8884d8" />
             <Bar
               stackId={0}
-              name="Viewers"
+              name="Hours Streamed"
+              dataKey="value"
+              fill="#8884d8"
+            />
+            <Bar
+              stackId={0}
+              name="Hours Viewed"
               dataKey="valueSubs"
               fill="#82ca9d"
             />
@@ -228,8 +270,8 @@ class GraphsPage extends Component<any> {
 
         <div>
           <BarChart
-            width={730}
-            height={250}
+            width={900}
+            height={350}
             data={barChartTimeOfDayStatsStreams}
           >
             <CartesianGrid strokeDasharray="3 3" />
@@ -246,10 +288,15 @@ class GraphsPage extends Component<any> {
               }
             />
             <Legend />
-            <Bar stackId={0} name="Streams" dataKey="value" fill="#8884d8" />
             <Bar
               stackId={0}
-              name="Viewers"
+              name="Hours Streamed"
+              dataKey="value"
+              fill="#8884d8"
+            />
+            <Bar
+              stackId={0}
+              name="Hours Viewed"
               dataKey="valueSubs"
               fill="#82ca9d"
             />
