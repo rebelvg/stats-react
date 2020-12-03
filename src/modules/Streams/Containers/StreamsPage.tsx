@@ -14,7 +14,7 @@ import {
 } from '../../../redux/streams';
 
 @connect(
-  state => ({
+  (state) => ({
     error: getError(state),
     data: getData(state),
     isLoading: getLoading(state),

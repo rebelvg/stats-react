@@ -1,9 +1,9 @@
 import { handleActions } from 'redux-actions';
 import axios from 'axios';
 
-const ACTION_GET = 'channels.get',
-  ACTION_GET_SUCCESS = 'channels.get.success',
-  ACTION_GET_FAILED = 'channels.get.failed';
+const ACTION_GET = 'graphs.get',
+  ACTION_GET_SUCCESS = 'graphs.get.success',
+  ACTION_GET_FAILED = 'graphs.get.failed';
 
 //ACTIONS
 export function getAction() {
@@ -11,7 +11,7 @@ export function getAction() {
     dispatch({ type: ACTION_GET });
 
     axios
-      .get('/api/channels', {
+      .get('/api/graphs', {
         headers: {
           token: window.localStorage.getItem('token'),
         },
@@ -59,5 +59,5 @@ const reducer = handleActions(
 export default reducer;
 
 //SELECTORS
-export const getError = (state) => state.channels.error;
-export const getData = (state) => state.channels.data;
+export const getError = (state) => state.graphs.error;
+export const getData = (state) => state.graphs.data;

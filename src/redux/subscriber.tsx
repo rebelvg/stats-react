@@ -7,7 +7,7 @@ const ACTION_GET = 'subscriber.get',
 
 //ACTIONS
 export function getAction(id) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({ type: ACTION_GET });
 
     axios
@@ -16,13 +16,13 @@ export function getAction(id) {
           token: window.localStorage.getItem('token'),
         },
       })
-      .then(res => {
+      .then((res) => {
         dispatch({
           type: ACTION_GET_SUCCESS,
           data: res.data,
         });
       })
-      .catch(e => {
+      .catch((e) => {
         dispatch({
           type: ACTION_GET_FAILED,
           error: e.response.data.error,
@@ -59,5 +59,5 @@ const reducer = handleActions(
 export default reducer;
 
 //SELECTORS
-export const getError = state => state.subscriber.error;
-export const getData = state => state.subscriber.data;
+export const getError = (state) => state.subscriber.error;
+export const getData = (state) => state.subscriber.data;

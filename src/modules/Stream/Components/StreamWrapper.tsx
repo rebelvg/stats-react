@@ -21,7 +21,7 @@ import streamsTable from '../../Shared/Tables/StreamsTable';
 import subscribersTable from '../../Shared/Tables/SubscribersTable';
 import defaultFilterMethod from '../../Shared/Methods/TableFilter';
 
-const tickFormatter = tick => moment.unix(tick).format('ddd HH:mm');
+const tickFormatter = (tick) => moment.unix(tick).format('ddd HH:mm');
 
 class StreamWrapper extends Component<any, any> {
   constructor(props) {
@@ -39,7 +39,7 @@ class StreamWrapper extends Component<any, any> {
       },
     );
 
-    state.sorted = _.map(props.searchParams.sort, sort => {
+    state.sorted = _.map(props.searchParams.sort, (sort) => {
       return {
         desc: _.startsWith(sort, '-'),
         id: _.replace(sort, /^-/, ''),
@@ -76,13 +76,13 @@ class StreamWrapper extends Component<any, any> {
 
     let query: any = {};
 
-    _.forEach(this.state.filtered, filter => {
+    _.forEach(this.state.filtered, (filter) => {
       if (!query.filter) query.filter = {};
 
       query.filter[filter.id] = filter.value;
     });
 
-    _.forEach(this.state.sorted, sort => {
+    _.forEach(this.state.sorted, (sort) => {
       if (!query.sort) query.sort = [];
 
       if (sort.desc) {
@@ -156,7 +156,7 @@ class StreamWrapper extends Component<any, any> {
         />
         <ResponsiveContainer width="100%" height={450}>
           <LineChart
-            data={_.map(events, event => {
+            data={_.map(events, (event) => {
               event.unixTime = moment(event.time).unix();
               event.subscribersCount = event.subscribers.length;
               return event;
@@ -172,7 +172,7 @@ class StreamWrapper extends Component<any, any> {
             />
             <YAxis />
             <Tooltip
-              labelFormatter={value => moment.unix(value).format('ddd HH:mm')}
+              labelFormatter={(value) => moment.unix(value).format('ddd HH:mm')}
             />
             <Legend />
             <Line

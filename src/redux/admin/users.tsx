@@ -10,7 +10,7 @@ const ACTION_GET = 'adminUsers.get',
 
 //ACTIONS
 export function getAction() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({ type: ACTION_GET });
 
     axios
@@ -19,13 +19,13 @@ export function getAction() {
           token: window.localStorage.getItem('token'),
         },
       })
-      .then(res => {
+      .then((res) => {
         dispatch({
           type: ACTION_GET_SUCCESS,
           data: res.data,
         });
       })
-      .catch(e => {
+      .catch((e) => {
         dispatch({
           type: ACTION_GET_FAILED,
           error: e.response.data.error,
@@ -35,7 +35,7 @@ export function getAction() {
 }
 
 export function putUser(id, data) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({ type: ACTION_PUT });
 
     axios
@@ -44,13 +44,13 @@ export function putUser(id, data) {
           token: window.localStorage.getItem('token'),
         },
       })
-      .then(res => {
+      .then((res) => {
         dispatch({
           type: ACTION_PUT_SUCCESS,
           user: res.data.user,
         });
       })
-      .catch(e => {
+      .catch((e) => {
         dispatch({
           type: ACTION_PUT_FAILED,
           error: e.response.data.error,
@@ -115,5 +115,5 @@ const reducer = handleActions(
 export default reducer;
 
 //SELECTORS
-export const getError = state => state.adminUsers.error;
-export const getData = state => state.adminUsers.data;
+export const getError = (state) => state.adminUsers.error;
+export const getData = (state) => state.adminUsers.data;

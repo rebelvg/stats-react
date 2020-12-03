@@ -15,7 +15,7 @@ import AdminHeader from '../../Shared/Components/AdminHeader/AdminHeader';
 import { getAction, getError, getData } from '../../../redux/user';
 
 @connect(
-  state => ({
+  (state) => ({
     error: getError(state),
     data: getData(state),
   }),

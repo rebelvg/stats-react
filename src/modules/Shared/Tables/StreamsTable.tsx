@@ -9,7 +9,7 @@ const tableConfigTemplate = [
   {
     Header: 'Connect Created',
     accessor: 'connectCreated',
-    Cell: props => {
+    Cell: (props) => {
       return (
         <Link to={'/streams/' + props.original._id}>
           {moment(props.value).format('ddd D/MMM/YY HH:mm')}
@@ -30,7 +30,7 @@ const tableConfigTemplate = [
   {
     Header: 'Last Update',
     accessor: 'connectUpdated',
-    Cell: props => {
+    Cell: (props) => {
       return props.original.isLive
         ? 'Live!'
         : moment(props.value).format('ddd D/MMM/YY HH:mm');
@@ -39,7 +39,7 @@ const tableConfigTemplate = [
   {
     Header: 'Bitrate',
     accessor: 'bitrate',
-    Cell: props => {
+    Cell: (props) => {
       return `${props.value} kbps`;
     },
     minWidth: 40,
@@ -47,7 +47,7 @@ const tableConfigTemplate = [
   {
     Header: 'Net Traffic',
     accessor: 'bytes',
-    Cell: props => {
+    Cell: (props) => {
       return humanize.fileSize(props.value);
     },
     minWidth: 40,
@@ -55,7 +55,7 @@ const tableConfigTemplate = [
   {
     Header: 'Duration',
     accessor: 'duration',
-    Cell: props => {
+    Cell: (props) => {
       return humanizeDuration(props.value * 1000, {
         round: true,
         largest: 2,
@@ -79,7 +79,7 @@ const tableConfigTemplate = [
   {
     Header: 'IP',
     accessor: 'ip',
-    Cell: props => {
+    Cell: (props) => {
       if (!props.original.location) return props.value;
       if (props.original.location.api.status !== 'success')
         return `${props.value} (${props.original.location.api.message})`;
@@ -110,7 +110,7 @@ function tableConfigOptions(options: any = {}) {
         <input
           list="apps"
           name="apps"
-          onChange={event => onChange(event.target.value)}
+          onChange={(event) => onChange(event.target.value)}
           style={{ width: '100%' }}
           value={filter ? filter.value : ''}
         />
@@ -136,7 +136,7 @@ function tableConfigOptions(options: any = {}) {
         <input
           list="channels"
           name="channels"
-          onChange={event => onChange(event.target.value)}
+          onChange={(event) => onChange(event.target.value)}
           style={{ width: '100%' }}
           value={filter ? filter.value : ''}
         />
@@ -162,7 +162,7 @@ function tableConfigOptions(options: any = {}) {
         <input
           list="countries"
           name="countries"
-          onChange={event => onChange(event.target.value)}
+          onChange={(event) => onChange(event.target.value)}
           style={{ width: '100%' }}
           value={filter ? filter.value : ''}
         />

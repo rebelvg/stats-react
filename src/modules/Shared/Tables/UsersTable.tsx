@@ -9,17 +9,17 @@ const tableConfigTemplate = [
   {
     Header: 'Time Registered',
     accessor: 'createdAt',
-    Cell: props => {
+    Cell: (props) => {
       return moment(props.value).format('ddd D/MMM/YY HH:mm');
     },
   },
   {
     Header: 'Emails',
     accessor: 'emails',
-    Cell: props => {
+    Cell: (props) => {
       return (
         props.value
-          .map(email => {
+          .map((email) => {
             return email.value;
           })
           .join(' ') +
@@ -40,7 +40,7 @@ const tableConfigTemplate = [
   {
     Header: 'Is Admin',
     accessor: 'isAdmin',
-    Cell: props => {
+    Cell: (props) => {
       return props.value ? 'Yes' : 'No';
     },
     minWidth: 40,
@@ -57,7 +57,7 @@ function tableConfigOptions(putUser) {
 
   let adminTableColumn = _.find(tableConfig, ['accessor', 'isAdmin']);
 
-  adminTableColumn.Cell = props => {
+  adminTableColumn.Cell = (props) => {
     return (
       <Button
         outline
@@ -77,7 +77,7 @@ function tableConfigOptions(putUser) {
 
   let streamerTableColumn = _.find(tableConfig, ['accessor', 'isStreamer']);
 
-  streamerTableColumn.Cell = props => {
+  streamerTableColumn.Cell = (props) => {
     return (
       <Button
         outline

@@ -5,7 +5,7 @@ import SubscriberWrapper from '../Components/SubscriberWrapper';
 import { getAction, getError, getData } from '../../../redux/subscriber';
 
 @connect(
-  state => ({
+  (state) => ({
     error: getError(state),
     data: getData(state),
   }),

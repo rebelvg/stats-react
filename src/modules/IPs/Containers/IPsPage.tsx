@@ -7,7 +7,7 @@ import IPsWrapper from '../Components/IPsWrapper';
 import { getAction, getError, getData, getLoading } from '../../../redux/ips';
 
 @connect(
-  state => ({
+  (state) => ({
     error: getError(state),
     data: getData(state),
     isLoading: getLoading(state),

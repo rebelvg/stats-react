@@ -34,7 +34,7 @@ class StreamsWrapper extends Component<any, any> {
       },
     );
 
-    state.sorted = _.map(props.searchParams.sort, sort => {
+    state.sorted = _.map(props.searchParams.sort, (sort) => {
       return {
         desc: _.startsWith(sort, '-'),
         id: _.replace(sort, /^-/, ''),
@@ -80,13 +80,13 @@ class StreamsWrapper extends Component<any, any> {
       query.pageSize = this.state.pageSize;
     }
 
-    _.forEach(this.state.filtered, filter => {
+    _.forEach(this.state.filtered, (filter) => {
       if (!query.filter) query.filter = {};
 
       query.filter[filter.id] = filter.value;
     });
 
-    _.forEach(this.state.sorted, sort => {
+    _.forEach(this.state.sorted, (sort) => {
       if (!query.sort) query.sort = [];
 
       if (sort.desc) {
@@ -103,7 +103,7 @@ class StreamsWrapper extends Component<any, any> {
     });
   };
 
-  handlePageChange = pageIndex => {
+  handlePageChange = (pageIndex) => {
     this.setState(
       {
         page: pageIndex,

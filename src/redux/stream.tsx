@@ -14,18 +14,18 @@ export function getAction(
   filters = [],
   sorts = [],
 ) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({ type: ACTION_GET });
 
     let params: any = {};
 
-    _.forEach(filters, filter => {
+    _.forEach(filters, (filter) => {
       params[filter.id] = filter.value;
     });
 
     params.sort = [];
 
-    _.forEach(sorts, sort => {
+    _.forEach(sorts, (sort) => {
       if (sort.desc) {
         params.sort.push(`-${sort.id}`);
       } else {
@@ -47,14 +47,14 @@ export function getAction(
         params,
       }),
     ])
-      .then(res => {
+      .then((res) => {
         dispatch({
           type: ACTION_GET_SUCCESS,
           data: res[0].data,
           events: res[1].data.events,
         });
       })
-      .catch(e => {
+      .catch((e) => {
         dispatch({
           type: ACTION_GET_FAILED,
           error: e.response.data.error,
@@ -93,6 +93,6 @@ const reducer = handleActions(
 export default reducer;
 
 //SELECTORS
-export const getError = state => state.stream.error;
-export const getData = state => state.stream.data;
-export const getEvents = state => state.stream.events;
+export const getError = (state) => state.stream.error;
+export const getData = (state) => state.stream.data;
+export const getEvents = (state) => state.stream.events;

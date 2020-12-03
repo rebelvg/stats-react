@@ -9,7 +9,7 @@ const tableConfigTemplate = [
   {
     Header: 'Time Added',
     accessor: 'createdAt',
-    Cell: props => {
+    Cell: (props) => {
       return moment(props.value).format('ddd D/MMM/YY HH:mm');
     },
   },
@@ -20,7 +20,7 @@ const tableConfigTemplate = [
   {
     Header: 'Country',
     accessor: 'api.country',
-    Cell: props => {
+    Cell: (props) => {
       if (props.original.api.status !== 'success')
         return props.original.api.message;
 
@@ -40,7 +40,7 @@ const tableConfigTemplate = [
 function tableConfigOptions(options: any = {}, disableFiltering = []) {
   let tableConfig: any = _.cloneDeep(tableConfigTemplate);
 
-  _.forEach(disableFiltering, columnName => {
+  _.forEach(disableFiltering, (columnName) => {
     let tableColumn = _.find(tableConfig, ['accessor', columnName]);
 
     if (tableColumn) {
@@ -56,7 +56,7 @@ function tableConfigOptions(options: any = {}, disableFiltering = []) {
         <input
           list="countries"
           name="countries"
-          onChange={event => onChange(event.target.value)}
+          onChange={(event) => onChange(event.target.value)}
           style={{ width: '100%' }}
           value={filter ? filter.value : ''}
         />
@@ -82,7 +82,7 @@ function tableConfigOptions(options: any = {}, disableFiltering = []) {
         <input
           list="cities"
           name="cities"
-          onChange={event => onChange(event.target.value)}
+          onChange={(event) => onChange(event.target.value)}
           style={{ width: '100%' }}
           value={filter ? filter.value : ''}
         />
@@ -108,7 +108,7 @@ function tableConfigOptions(options: any = {}, disableFiltering = []) {
         <input
           list="isps"
           name="isps"
-          onChange={event => onChange(event.target.value)}
+          onChange={(event) => onChange(event.target.value)}
           style={{ width: '100%' }}
           value={filter ? filter.value : ''}
         />
@@ -134,13 +134,13 @@ function tableConfigOptions(options: any = {}, disableFiltering = []) {
         <input
           list="protocols"
           name="protocols"
-          onChange={event => onChange(event.target.value)}
+          onChange={(event) => onChange(event.target.value)}
           style={{ width: '100%' }}
           value={filter ? filter.value : ''}
         />
         <datalist id="protocols">
           <option value="" />
-          {_.map(options.protocols, protocol => {
+          {_.map(options.protocols, (protocol) => {
             return <option value={protocol}>{protocol}</option>;
           })}
         </datalist>

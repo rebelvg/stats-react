@@ -13,7 +13,7 @@ import {
 } from '../../../../redux/admin/users';
 
 @connect(
-  state => ({
+  (state) => ({
     error: getError(state),
     data: getData(state),
   }),

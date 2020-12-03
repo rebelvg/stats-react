@@ -6,7 +6,7 @@ import StreamWrapper from '../Components/StreamWrapper';
 import { getAction, getError, getData, getEvents } from '../../../redux/stream';
 
 @connect(
-  state => ({
+  (state) => ({
     error: getError(state),
     data: getData(state),
     events: getEvents(state),

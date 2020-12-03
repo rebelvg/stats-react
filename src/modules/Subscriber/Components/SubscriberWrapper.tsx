@@ -27,14 +27,8 @@ class StreamWrapper extends Component<any, any> {
         Streams: {streams.length}
         <ReactTable
           columns={streamsTable({
-            apps: _.chain(streams)
-              .map('app')
-              .uniq()
-              .value(),
-            channels: _.chain(streams)
-              .map('channel')
-              .uniq()
-              .value(),
+            apps: _.chain(streams).map('app').uniq().value(),
+            channels: _.chain(streams).map('channel').uniq().value(),
             countries: _.chain(streams)
               .map('location.api.country')
               .compact()

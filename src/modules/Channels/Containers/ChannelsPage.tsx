@@ -7,7 +7,7 @@ import ChannelWrapper from '../Components/ChannelWrapper';
 import { getAction, getError, getData } from '../../../redux/channels';
 
 @connect(
-  state => ({
+  (state) => ({
     error: getError(state),
     data: getData(state),
   }),
