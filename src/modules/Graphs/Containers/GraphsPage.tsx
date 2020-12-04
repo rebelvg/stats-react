@@ -68,14 +68,14 @@ class GraphsPage extends Component<any> {
 
     const totalDurationStreamsData = totalDurationStreams.map((item) => {
       return {
-        name: item._id || 'N/A',
+        name: item._id || 'Local Network',
         value: Math.round(item.totalDurationSeconds / 60 / 60),
       };
     });
 
     const totalDurationSubsData = totalDurationSubs.map((item) => {
       return {
-        name: item._id || 'N/A',
+        name: item._id || 'Local Network',
         value: Math.round(item.totalDurationSeconds / 60 / 60),
       };
     });
