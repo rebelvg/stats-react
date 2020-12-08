@@ -10,6 +10,7 @@ import GraphsPage from './modules/Graphs/Containers/GraphsPage';
 import IPsPage from './modules/IPs/Containers/IPsPage';
 import UserPage from './modules/User/Containers/UserPage';
 import UsersPage from './modules/Admin/Users/Containers/UsersPage';
+import LoginPage from './modules/Home/Containers/HomePage/HomePage';
 
 const Routes = () => (
   <div>
@@ -22,6 +23,7 @@ const Routes = () => (
     <Route exact path="/ips" component={IPsPage} />
     <Route exact path="/user" component={UserPage} />
     <Route exact path="/admin/users" component={UsersPage} />
+    <Route exact path="/login" component={LoginPage} />
   </div>
 );
 
