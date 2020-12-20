@@ -22,7 +22,11 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      favicon: './src/icon.ico',
+    }),
+  ],
   devtool: 'source-map',
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
