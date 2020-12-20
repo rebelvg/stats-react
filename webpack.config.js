@@ -28,6 +28,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      title: 'Stream Stats',
       favicon: './src/icon.ico',
     }),
     new webpack.HotModuleReplacementPlugin(),
@@ -44,7 +45,7 @@ module.exports = {
     proxy: [
       {
         path: '/api',
-        target: `http://localhost:8000`,
+        target: 'http://localhost:8000',
         changeOrigin: true,
         secure: true,
         pathRewrite: {

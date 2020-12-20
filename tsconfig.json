@@ -6,7 +6,8 @@
     "allowJs": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "incremental": true
   },
   "include": ["src/**/*"]
 }

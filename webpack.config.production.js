@@ -24,6 +24,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      title: 'Stream Stats',
       favicon: './src/icon.ico',
     }),
   ],
