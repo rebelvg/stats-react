@@ -14,8 +14,8 @@ import {
   BarChart,
   Bar,
 } from 'recharts';
-import * as _ from 'lodash';
-import * as moment from 'moment';
+import _ from 'lodash';
+import moment from 'moment';
 import { Alert } from 'reactstrap';
 import humanizeDuration from 'humanize-duration';
 
