@@ -7,7 +7,7 @@ Built with React, it's a single page application for rendering data from stats-n
 
 ### Requirements
 
-- Node.js >= 8
+- Node.js LTS
 - Yarn
 
 ## Usage
