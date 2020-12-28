@@ -25,14 +25,6 @@ yarn start
 yarn build
 ```
 
-## Libraries
-
-- React
-- Redux
-- React-Router
-- Styled-Components
-- Decorators
-
 ## Live Example
 
 > http://stats.klpq.men/streams
