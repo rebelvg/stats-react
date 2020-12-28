@@ -46,42 +46,34 @@ class ChannelsPage extends Component<any, any> {
 
     return (
       <div>
-        {servers.map((serverObj, id) => {
-          const serverName = serverObj.serverName;
-          const apps = serverObj.apps;
-
+        {servers.map(({ server, apps }, id) => {
           if (apps.length === 0) {
             return (
               <Alert key={id} color="danger">
-                No channels online for {serverName}.
+                No channels online for {server}.
               </Alert>
             );
           }
 
           return (
             <div>
-              <Alert color="success">Live channels for {serverName}</Alert>
+              <Alert color="success">Live channels for {server}</Alert>
 
-              {apps.map((appObj, serverId) => {
-                const appName = appObj.appName;
-                const channels = appObj.channels;
-
-                return channels.map((channelObj, channelId) => {
-                  const channelName = channelObj.channelName;
-                  const stream = channelObj.publisher;
-                  const subscribers = channelObj.subscribers;
-
-                  return (
-                    <div>
-                      <ChannelWrapper
-                        key={`${serverId}-${channelId}`}
-                        stream={stream}
-                        subscribers={subscribers}
-                      />
-                      <br />
-                    </div>
-                  );
-                });
+              {apps.map(({ app, channels }, serverId) => {
+                return channels.map(
+                  ({ channel, publisher, subscribers }, channelId) => {
+                    return (
+                      <div>
+                        <ChannelWrapper
+                          key={`${serverId}-${channelId}`}
+                          stream={publisher}
+                          subscribers={subscribers}
+                        />
+                        <br />
+                      </div>
+                    );
+                  },
+                );
               })}
             </div>
           );
