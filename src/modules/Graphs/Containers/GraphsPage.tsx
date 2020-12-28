@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Pie,
-  PieChart,
   Tooltip,
   Legend,
   ResponsiveContainer,
@@ -18,6 +16,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import { Alert } from 'reactstrap';
 import humanizeDuration from 'humanize-duration';
+import { withRouter } from 'react-router-dom';
 
 import {
   getAction,
@@ -37,10 +36,10 @@ const DAYS_OF_THE_WEEK = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
   { getAction },
 )
 class GraphsPage extends Component<any> {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
+    const id = this.props.match.params.id || '';
 
-    this.props.getAction();
+    this.props.getAction(id);
   }
 
   render() {
@@ -56,14 +55,15 @@ class GraphsPage extends Component<any> {
 
     const {
       totalDurationStreams = [],
-      totalDurationSubs = [],
+      totalDurationSubscribers = [],
       monthlyStatsStreams = [],
-      monthlyStatsSubs = [],
+      monthlyStatsSubscribers = [],
       dayOfWeekStatsStreams = [],
-      dayOfWeekStatsSubs = [],
+      dayOfWeekStatsSubscribers = [],
       timeOfDayStatsStreams = [],
-      timeOfDayStatsSubs = [],
+      timeOfDayStatsSubscribers = [],
       topStreamers = [],
+      user = null,
     } = this.props.data;
 
     const totalDurationStreamsData = totalDurationStreams.map((item) => {
@@ -73,7 +73,7 @@ class GraphsPage extends Component<any> {
       };
     });
 
-    const totalDurationSubsData = totalDurationSubs.map((item) => {
+    const totalDurationSubsData = totalDurationSubscribers.map((item) => {
       return {
         name: item._id || 'Local Network',
         value: Math.round(item.totalDurationSeconds / 60 / 60),
@@ -84,7 +84,7 @@ class GraphsPage extends Component<any> {
       const year = item._id.year;
       const month = item._id.month;
 
-      const subsItem = _.find(monthlyStatsSubs, {
+      const subsItem = _.find(monthlyStatsSubscribers, {
         _id: { year, month },
       });
 
@@ -97,7 +97,7 @@ class GraphsPage extends Component<any> {
 
     const barChartDataDayOfWeekStatsStreams = dayOfWeekStatsStreams.map(
       (item) => {
-        const subsItem = _.find(dayOfWeekStatsSubs, {
+        const subsItem = _.find(dayOfWeekStatsSubscribers, {
           _id: item._id,
         });
 
@@ -110,7 +110,7 @@ class GraphsPage extends Component<any> {
     );
 
     const barChartTimeOfDayStatsStreams = timeOfDayStatsStreams.map((item) => {
-      const subsItem = _.find(timeOfDayStatsSubs, {
+      const subsItem = _.find(timeOfDayStatsSubscribers, {
         _id: item._id,
       });
 
@@ -125,11 +125,13 @@ class GraphsPage extends Component<any> {
       return {
         name: item.user.name,
         value: Math.round(item.totalDurationSeconds / 60 / 60),
+        userId: item.user._id,
       };
     });
 
     return (
       <div>
+        {user && <Alert color="primary">{user.name}</Alert>}
         <div>
           <BarChart
             width={900}
@@ -188,6 +190,13 @@ class GraphsPage extends Component<any> {
             height={350}
             data={topStreamersData}
             margin={{ top: 20, right: 50, left: 5, bottom: 5 }}
+            onClick={(data) => {
+              const { userId } = data.activePayload[0].payload;
+
+              console.log(userId);
+
+              this.props.history.push(`/graphs/${userId}`);
+            }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
@@ -307,4 +316,4 @@ class GraphsPage extends Component<any> {
   }
 }
 
-export default GraphsPage;
+export default withRouter(GraphsPage);

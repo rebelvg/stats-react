@@ -20,6 +20,7 @@ const Routes = () => (
     <Route exact path="/subscribers" component={SubscribersPage} />
     <Route exact path="/subscribers/:id" component={SubscriberPage} />
     <Route exact path="/graphs" component={GraphsPage} />
+    <Route exact path="/graphs/:id" component={GraphsPage} />
     <Route exact path="/ips" component={IPsPage} />
     <Route exact path="/user" component={UserPage} />
     <Route exact path="/admin/users" component={UsersPage} />

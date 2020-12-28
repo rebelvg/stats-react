@@ -6,12 +6,12 @@ const ACTION_GET = 'graphs.get',
   ACTION_GET_FAILED = 'graphs.get.failed';
 
 //ACTIONS
-export function getAction() {
+export function getAction(id) {
   return (dispatch) => {
     dispatch({ type: ACTION_GET });
 
     axios
-      .get('/api/graphs', {
+      .get('/api/graphs/' + id, {
         headers: {
           token: window.localStorage.getItem('token'),
         },
