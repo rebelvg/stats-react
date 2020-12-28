@@ -16,13 +16,13 @@ Built with React, it's a single page application for rendering data from stats-n
 
 ```
 yarn install
-yarn run start
+yarn start
 ```
 
 ### Build
 
 ```
-yarn run build
+yarn build
 ```
 
 ## Libraries
