@@ -45,7 +45,8 @@ module.exports = {
     proxy: [
       {
         path: '/api',
-        target: 'http://localhost:8000',
+        target: 'https://stats.klpq.men/api',
+        // target: 'http://localhost:8000',
         changeOrigin: true,
         secure: true,
         pathRewrite: {
