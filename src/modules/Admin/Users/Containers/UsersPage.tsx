@@ -25,7 +25,7 @@ class UsersPage extends Component<any, any> {
   }
 
   render() {
-    const { users } = this.props.data;
+    const { users = [] } = this.props.data;
     const { error } = this.props;
 
     if (error) return <Alert color="danger">{error}</Alert>;
@@ -36,10 +36,12 @@ class UsersPage extends Component<any, any> {
         <ReactTable
           columns={usersTable(this.props.putUser)}
           data={users}
-          showPagination={false}
+          showPagination={true}
           showPageSizeOptions={false}
           minRows={0}
           className="-striped -highlight"
+          defaultPageSize={100}
+          showPaginationTop
         />
 
         <button

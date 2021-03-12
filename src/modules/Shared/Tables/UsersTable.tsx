@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import moment from 'moment';
 import _ from 'lodash';
-import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
-import axios from 'axios';
 
 const tableConfigTemplate = [
   {
