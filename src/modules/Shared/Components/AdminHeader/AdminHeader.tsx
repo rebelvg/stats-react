@@ -4,12 +4,13 @@ import styled from 'styled-components';
 
 class AdminHeader extends Component {
   render() {
-    let isLoggedIn = !!window.localStorage.getItem('token');
-
     return (
       <HeaderWrap>
         <StyledLink exact to="/admin/users">
           Users
+        </StyledLink>
+        <StyledLink exact to="/admin/channels">
+          Channels
         </StyledLink>
       </HeaderWrap>
     );
