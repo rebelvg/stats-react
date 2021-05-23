@@ -23,7 +23,13 @@ class Header extends Component {
         </StyledLink>
         {!isLoggedIn ? (
           <span>
-            <MyLink href={`${window.location.origin}/api/users/auth/google`}>
+            <MyLink
+              href={`${
+                location.origin
+              }/api/users/auth/google?redirectUri=${encodeURIComponent(
+                `${location.origin}/login?token=`,
+              )}`}
+            >
               Login
             </MyLink>
           </span>

@@ -13,7 +13,7 @@ export function getAction(id) {
     axios
       .get('/api/subscribers/' + id, {
         headers: {
-          token: window.localStorage.getItem('token'),
+          'jwt-token': window.localStorage.getItem('token'),
         },
       })
       .then((res) => {

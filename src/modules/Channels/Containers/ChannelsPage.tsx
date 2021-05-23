@@ -56,16 +56,17 @@ class ChannelsPage extends Component<any, any> {
           }
 
           return (
-            <div>
-              <Alert color="success">Live channels for {server}</Alert>
+            <div key={id}>
+              <Alert key={id} color="success">
+                Live channels for {server}
+              </Alert>
 
               {apps.map(({ app, channels }, serverId) => {
                 return channels.map(
                   ({ channel, publisher, subscribers }, channelId) => {
                     return (
-                      <div>
+                      <div key={`${server}-${app}-${channel}}`}>
                         <ChannelWrapper
-                          key={`${serverId}-${channelId}`}
                           stream={publisher}
                           subscribers={subscribers}
                         />

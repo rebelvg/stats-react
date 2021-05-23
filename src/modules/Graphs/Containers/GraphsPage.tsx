@@ -193,8 +193,6 @@ class GraphsPage extends Component<any> {
             onClick={(data) => {
               const { userId } = data.activePayload[0].payload;
 
-              console.log(userId);
-
               this.props.history.push(`/graphs/${userId}`);
             }}
           >

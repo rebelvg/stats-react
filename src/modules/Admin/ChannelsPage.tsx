@@ -32,8 +32,6 @@ function generateColumns(updateDataFnc: () => Promise<void>) {
             outline
             color="primary"
             onClick={async () => {
-              console.log(props);
-
               await axios.put(
                 `/api/admin/channels/${props.original._id}`,
                 {
@@ -41,7 +39,7 @@ function generateColumns(updateDataFnc: () => Promise<void>) {
                 },
                 {
                   headers: {
-                    token: window.localStorage.getItem('token'),
+                    'jwt-token': window.localStorage.getItem('token'),
                   },
                 },
               );
@@ -78,7 +76,7 @@ class AdminChannelsPage extends Component<any, { channels: IChannel[] }> {
       data: { channels },
     } = await axios.get<IChannelsResponse>('/api/admin/channels', {
       headers: {
-        token: window.localStorage.getItem('token'),
+        'jwt-token': window.localStorage.getItem('token'),
       },
     });
 

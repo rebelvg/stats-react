@@ -38,7 +38,7 @@ export function getAction(
     axios
       .get('/api/subscribers', {
         headers: {
-          token: window.localStorage.getItem('token'),
+          'jwt-token': window.localStorage.getItem('token'),
         },
         params,
       })

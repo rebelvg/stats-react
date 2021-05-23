@@ -1,8 +1,8 @@
-const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: [
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:3000',
@@ -36,6 +36,9 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
   ],
   devtool: 'source-map',
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
   devServer: {
     hot: true,
     host: 'localhost',
@@ -45,8 +48,8 @@ module.exports = {
     proxy: [
       {
         path: '/api',
-        target: 'https://stats.klpq.men/api',
-        // target: 'http://localhost:8000',
+        // target: 'https://stats.klpq.men/api',
+        target: 'http://localhost:8000',
         changeOrigin: true,
         secure: true,
         pathRewrite: {
@@ -54,16 +57,5 @@ module.exports = {
         },
       },
     ],
-  },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-  },
-  node: {
-    fs: 'empty',
-  },
-  output: {
-    filename: 'dev_bundle.js',
-    publicPath: '/',
-    path: path.resolve(__dirname, 'dist'),
   },
 };

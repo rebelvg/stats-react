@@ -36,13 +36,13 @@ export function getAction(
     Promise.all([
       axios.get('/api/streams/' + id, {
         headers: {
-          token: window.localStorage.getItem('token'),
+          'jwt-token': window.localStorage.getItem('token'),
         },
         params,
       }),
       axios.get('/api/streams/' + id + '/graph', {
         headers: {
-          token: window.localStorage.getItem('token'),
+          'jwt-token': window.localStorage.getItem('token'),
         },
         params,
       }),

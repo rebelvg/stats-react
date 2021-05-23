@@ -16,7 +16,7 @@ export function getAction() {
     axios
       .get('/api/admin/users', {
         headers: {
-          token: window.localStorage.getItem('token'),
+          'jwt-token': window.localStorage.getItem('token'),
         },
       })
       .then((res) => {
@@ -41,7 +41,7 @@ export function putUser(id, data) {
     axios
       .put('/api/admin/users/' + id, data, {
         headers: {
-          token: window.localStorage.getItem('token'),
+          'jwt-token': window.localStorage.getItem('token'),
         },
       })
       .then((res) => {
