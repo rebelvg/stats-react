@@ -2,6 +2,8 @@ import { handleActions } from 'redux-actions';
 import axios from 'axios';
 import _ from 'lodash';
 
+import * as config from '../../config';
+
 const ACTION_GET = 'stream.get',
   ACTION_GET_SUCCESS = 'stream.get.success',
   ACTION_GET_FAILED = 'stream.get.failed';
@@ -34,13 +36,13 @@ export function getAction(
     });
 
     Promise.all([
-      axios.get('/api/streams/' + id, {
+      axios.get(`${config.STATS_HOST}/streams/${id}`, {
         headers: {
           'jwt-token': window.localStorage.getItem('token'),
         },
         params,
       }),
-      axios.get('/api/streams/' + id + '/graph', {
+      axios.get(`${config.STATS_HOST}/streams/${id}/graph`, {
         headers: {
           'jwt-token': window.localStorage.getItem('token'),
         },

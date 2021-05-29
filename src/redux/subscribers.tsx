@@ -2,6 +2,8 @@ import { handleActions } from 'redux-actions';
 import axios from 'axios';
 import _ from 'lodash';
 
+import * as config from '../../config';
+
 const ACTION_GET = 'subscribers.get',
   ACTION_GET_SUCCESS = 'subscribers.get.success',
   ACTION_GET_FAILED = 'subscribers.get.failed';
@@ -36,7 +38,7 @@ export function getAction(
     params.limit = limit;
 
     axios
-      .get('/api/subscribers', {
+      .get(`${config.STATS_HOST}/subscribers`, {
         headers: {
           'jwt-token': window.localStorage.getItem('token'),
         },

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
+import * as config from '../../../../../config';
+
 const handleLogout = () => {
   window.localStorage.removeItem('token');
 };
@@ -25,8 +27,8 @@ class Header extends Component {
           <span>
             <MyLink
               href={`${
-                location.origin
-              }/api/users/auth/google?redirectUri=${encodeURIComponent(
+                config.STATS_HOST
+              }/users/auth/google?redirectUri=${encodeURIComponent(
                 `${location.origin}/login?token=`,
               )}`}
             >

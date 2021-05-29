@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import _ from 'lodash';
 import { Button } from 'reactstrap';
+import * as jsonwebtoken from 'jsonwebtoken';
 
 const tableConfigTemplate = [
   {
@@ -56,6 +57,16 @@ function tableConfigOptions(putUser) {
   let adminTableColumn = _.find(tableConfig, ['accessor', 'isAdmin']);
 
   adminTableColumn.Cell = (props) => {
+    let userId: string;
+
+    try {
+      const tokenData: any = jsonwebtoken.decode(
+        window.localStorage.getItem('token'),
+      );
+
+      userId = tokenData.userId;
+    } catch (error) {}
+
     return (
       <Button
         outline
@@ -66,7 +77,7 @@ function tableConfigOptions(putUser) {
           });
         }}
         block
-        disabled={props.original.token === window.localStorage.getItem('token')}
+        disabled={props.original._id === userId}
       >
         {props.value ? 'Yes' : 'No'}
       </Button>

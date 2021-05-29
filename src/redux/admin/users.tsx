@@ -1,6 +1,8 @@
 import { handleActions } from 'redux-actions';
 import axios from 'axios';
 
+import * as config from '../../../config';
+
 const ACTION_GET = 'adminUsers.get',
   ACTION_GET_SUCCESS = 'adminUsers.get.success',
   ACTION_GET_FAILED = 'adminUsers.get.failed',
@@ -14,7 +16,7 @@ export function getAction() {
     dispatch({ type: ACTION_GET });
 
     axios
-      .get('/api/admin/users', {
+      .get(`${config.STATS_HOST}/admin/users`, {
         headers: {
           'jwt-token': window.localStorage.getItem('token'),
         },
@@ -39,7 +41,7 @@ export function putUser(id, data) {
     dispatch({ type: ACTION_PUT });
 
     axios
-      .put('/api/admin/users/' + id, data, {
+      .put(`${config.STATS_HOST}/admin/users/${id}`, data, {
         headers: {
           'jwt-token': window.localStorage.getItem('token'),
         },

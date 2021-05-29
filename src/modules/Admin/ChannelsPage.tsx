@@ -3,6 +3,8 @@ import axios from 'axios';
 import ReactTable from 'react-table';
 import { Button } from 'reactstrap';
 
+import * as config from '../../../config';
+
 import AdminHeader from '../Shared/Components/AdminHeader/AdminHeader';
 
 interface IChannel {
@@ -33,7 +35,7 @@ function generateColumns(updateDataFnc: () => Promise<void>) {
             color="primary"
             onClick={async () => {
               await axios.put(
-                `/api/admin/channels/${props.original._id}`,
+                `${config.STATS_HOST}/admin/channels/${props.original._id}`,
                 {
                   type: props.value === 'PRIVATE' ? 'PUBLIC' : 'PRIVATE',
                 },
@@ -74,11 +76,14 @@ class AdminChannelsPage extends Component<any, { channels: IChannel[] }> {
   updateData = async () => {
     const {
       data: { channels },
-    } = await axios.get<IChannelsResponse>('/api/admin/channels', {
-      headers: {
-        'jwt-token': window.localStorage.getItem('token'),
+    } = await axios.get<IChannelsResponse>(
+      `${config.STATS_HOST}/admin/channels`,
+      {
+        headers: {
+          'jwt-token': window.localStorage.getItem('token'),
+        },
       },
-    });
+    );
 
     this.setState({
       channels,

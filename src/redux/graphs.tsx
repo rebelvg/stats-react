@@ -1,6 +1,8 @@
 import { handleActions } from 'redux-actions';
 import axios from 'axios';
 
+import * as config from '../../config';
+
 const ACTION_GET = 'graphs.get',
   ACTION_GET_SUCCESS = 'graphs.get.success',
   ACTION_GET_FAILED = 'graphs.get.failed';
@@ -11,7 +13,7 @@ export function getAction(id) {
     dispatch({ type: ACTION_GET });
 
     axios
-      .get('/api/graphs/' + id, {
+      .get(`${config.STATS_HOST}/graphs/${id}`, {
         headers: {
           'jwt-token': window.localStorage.getItem('token'),
         },
