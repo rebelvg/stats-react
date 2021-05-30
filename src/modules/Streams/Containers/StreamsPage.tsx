@@ -33,11 +33,11 @@ class StreamsPage extends Component<any, any> {
       pages,
     } = this.props.data;
     const {
-      totalBytes,
-      totalDuration,
-      totalConnections,
-      totalPeakViewers,
-      totalIPs,
+      totalBytes = 0,
+      totalDuration = 0,
+      totalConnections = 0,
+      totalPeakViewers = 0,
+      totalIPs = 0,
     } = info;
     const { search } = this.props.location;
     const { error, isLoading } = this.props;

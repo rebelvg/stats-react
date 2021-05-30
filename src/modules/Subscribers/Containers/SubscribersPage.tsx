@@ -32,7 +32,7 @@ class SubscribersPage extends Component<any, any> {
       page,
       pages,
     } = this.props.data;
-    const { totalBytes, totalDuration, totalIPs } = info;
+    const { totalBytes = 0, totalDuration = 0, totalIPs = 0 } = info;
     const { search } = this.props.location;
     const { error, isLoading } = this.props;
 

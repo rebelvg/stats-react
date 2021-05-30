@@ -130,7 +130,12 @@ class StreamWrapper extends Component<any, any> {
       relatedStreams = [],
       events = [],
     } = this.props;
-    const { totalBytes, totalDuration, totalPeakViewers, totalIPs } = info;
+    const {
+      totalBytes = 0,
+      totalDuration = 0,
+      totalPeakViewers = 0,
+      totalIPs = 0,
+    } = info;
 
     let streams = [];
 
