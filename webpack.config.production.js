@@ -29,7 +29,9 @@ module.exports = {
       title: 'Stream Stats',
       favicon: './src/icon.ico',
     }),
-    new Dotenv(),
+    new Dotenv({
+      systemvars: true,
+    }),
   ],
   devtool: 'source-map',
   resolve: {
