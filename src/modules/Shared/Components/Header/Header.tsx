@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-import * as config from '../../../../../config';
+import { config } from '../../../../config';
 
 const handleLogout = () => {
   window.localStorage.removeItem('token');

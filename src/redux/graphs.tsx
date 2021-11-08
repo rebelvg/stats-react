@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import axios from 'axios';
 
-import * as config from '../../config';
+import { config } from '../config';
 
 const ACTION_GET = 'graphs.get',
   ACTION_GET_SUCCESS = 'graphs.get.success',

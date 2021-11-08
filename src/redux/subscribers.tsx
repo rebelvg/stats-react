@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions';
 import axios from 'axios';
 import _ from 'lodash';
 
-import * as config from '../../config';
+import { config } from '../config';
 
 const ACTION_GET = 'subscribers.get',
   ACTION_GET_SUCCESS = 'subscribers.get.success',

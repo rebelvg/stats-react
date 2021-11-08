@@ -3,7 +3,7 @@ import axios from 'axios';
 import ReactTable from 'react-table';
 import { Button } from 'reactstrap';
 
-import * as config from '../../../config';
+import { config } from '../../config';
 
 import AdminHeader from '../Shared/Components/AdminHeader/AdminHeader';
 

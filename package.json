@@ -53,6 +53,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "dotenv-webpack": "^7.0.3",
     "jsonwebtoken": "^8.5.1"
   }
 }
