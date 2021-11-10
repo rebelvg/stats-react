@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -31,9 +30,6 @@ module.exports = {
     }),
     new Dotenv({
       systemvars: true,
-    }),
-    new CopyWebpackPlugin({
-      patterns: ['src/web.config'],
     }),
   ],
   devtool: 'source-map',
