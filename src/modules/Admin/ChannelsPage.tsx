@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ReactTable from 'react-table';
 import { Button } from 'reactstrap';
+import moment from 'moment';
 
 import { config } from '../../config';
 
@@ -21,6 +22,13 @@ interface IChannelsResponse {
 
 function generateColumns(updateDataFnc: () => Promise<void>) {
   const tableConfigTemplate = [
+    {
+      Header: 'Channel Created',
+      accessor: 'channelCreatedAt',
+      Cell: (props) => {
+        return moment(props.value).format('ddd D/MMM/YY HH:mm');
+      },
+    },
     {
       Header: 'Name',
       accessor: 'name',
