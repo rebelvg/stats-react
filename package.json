@@ -25,7 +25,7 @@
     "humanize-plus": "^1.8.2",
     "locutus": "^2.0.9",
     "lodash": "^4.17.4",
-    "moment": "^2.19.2",
+    "moment": "^2.29.4",
     "normalize.css": "^7.0.0",
     "prettier": "^2.2.1",
     "qs": "^6.5.1",
