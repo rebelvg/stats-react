@@ -50,7 +50,7 @@ class ChannelsPage extends Component<any, any> {
           if (apps.length === 0) {
             return (
               <Alert key={id} color="danger">
-                No channels online for {server}.
+                No channels online for {server}
               </Alert>
             );
           }
