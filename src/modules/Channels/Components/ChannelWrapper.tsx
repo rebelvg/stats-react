@@ -14,24 +14,33 @@ class ChannelWrapper extends Component<any, any> {
 
     return (
       <div>
-        Stream
         <ReactTable
-          columns={streamsTable()}
+          columns={streamsTable(undefined, ['connectUpdated'])}
           data={streams}
           showPagination={false}
           minRows={0}
           sortable={false}
         />
-        Subscribers: {subscribers.length}
-        <ReactTable
-          columns={subscribersTable()}
-          data={subscribers}
-          showPagination={false}
-          showPageSizeOptions={false}
-          minRows={0}
-          className="-striped -highlight"
-          sortable={false}
-        />
+        {subscribers.length > 0 ? (
+          <div>
+            <ReactTable
+              columns={subscribersTable(undefined, undefined, [
+                'connectUpdated',
+                'app',
+                'channel',
+              ])}
+              data={subscribers}
+              showPagination={false}
+              showPageSizeOptions={false}
+              minRows={0}
+              className="-striped -highlight"
+              sortable={false}
+            />
+            {`Subscribers: ${subscribers.length}`}
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     );
   }

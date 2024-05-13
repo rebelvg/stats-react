@@ -94,8 +94,16 @@ const tableConfigTemplate = [
   },
 ];
 
-function tableConfigOptions(options: any = {}, disableFiltering = []) {
+function tableConfigOptions(
+  options: any = {},
+  disableFiltering: string[] = [],
+  removeColumns: string[] = [],
+) {
   let tableConfig: any = _.cloneDeep(tableConfigTemplate);
+
+  for (const removeColumn of removeColumns) {
+    _.remove(tableConfig, { accessor: removeColumn });
+  }
 
   _.forEach(disableFiltering, (columnName) => {
     let tableColumn = _.find(tableConfig, ['accessor', columnName]);

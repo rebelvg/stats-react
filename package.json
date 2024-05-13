@@ -7,7 +7,7 @@
     "prepush": "yarn run lint",
     "lint": "prettier \"**/*\" --list-different --ignore-unknown",
     "lint:fix": "prettier \"**/*\" --write --ignore-unknown",
-    "start": "webpack-dev-server",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server",
     "build": "webpack --config webpack.config.production"
   },
   "devDependencies": {
@@ -17,6 +17,7 @@
     "axios": "^0.17.0",
     "bootstrap": "^4.0.0",
     "copy-webpack-plugin": "^6.0.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^0.28.4",
     "file-loader": "^1.1.5",
     "history": "^4.7.2",

@@ -99,8 +99,12 @@ const tableConfigTemplate = [
   },
 ];
 
-function tableConfigOptions(options: any = {}) {
+function tableConfigOptions(options: any = {}, removeColumns: string[] = []) {
   let tableConfig: any = _.cloneDeep(tableConfigTemplate);
+
+  for (const removeColumn of removeColumns) {
+    _.remove(tableConfig, { accessor: removeColumn });
+  }
 
   let appsTableColumn = _.find(tableConfig, ['accessor', 'app']);
 

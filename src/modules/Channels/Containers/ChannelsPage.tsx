@@ -50,7 +50,7 @@ class ChannelsPage extends Component<any, any> {
           if (apps.length === 0) {
             return (
               <Alert key={id} color="danger">
-                No channels online for {server}
+                {server}
               </Alert>
             );
           }
@@ -58,7 +58,7 @@ class ChannelsPage extends Component<any, any> {
           return (
             <div key={id}>
               <Alert key={id} color="success">
-                Live channels for {server}
+                {server}
               </Alert>
 
               {apps.map(({ app, channels }, serverId) => {
