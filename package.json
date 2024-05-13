@@ -8,7 +8,7 @@
     "lint": "prettier \"**/*\" --list-different --ignore-unknown",
     "lint:fix": "prettier \"**/*\" --write --ignore-unknown",
     "start": "webpack-dev-server",
-    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack --config webpack.config.production"
+    "build": "webpack --config webpack.config.production"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^8.5.1",
