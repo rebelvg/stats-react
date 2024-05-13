@@ -80,11 +80,10 @@ const tableConfigTemplate = [
     Header: 'IP',
     accessor: 'ip',
     Cell: (props) => {
-      if (!props.original.location) return props.value;
-      if (props.original.location.api.status !== 'success')
-        return `${props.value} (${props.original.location.api.message})`;
+      if (!props.original.location?.api)
+        return `${props.value} (${props.original.userName})`;
 
-      return `${props.value} (${props.original.location.api.countryCode}/${props.original.location.api.city})`;
+      return `${props.value} (${props.original.location?.api?.countryCode}/${props.original.location?.api?.city}) (${props.original.userName})`;
     },
   },
   {

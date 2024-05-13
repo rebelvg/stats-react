@@ -28,14 +28,18 @@ let defaultFilterMethod = (filter, row, column) => {
         new RegExp(filter.value, 'gi').test(row._original.ip) ||
         !row._original.location ||
         new RegExp(filter.value, 'gi').test(
-          row._original.location.api.country,
+          row._original.location?.api?.country,
         ) ||
-        new RegExp(filter.value, 'gi').test(row._original.location.api.city) ||
-        new RegExp(filter.value, 'gi').test(row._original.location.api.isp) ||
         new RegExp(filter.value, 'gi').test(
-          row._original.location.api.countryCode,
+          row._original.location?.api?.city,
         ) ||
-        new RegExp(filter.value, 'gi').test(row._original.location.api.message)
+        new RegExp(filter.value, 'gi').test(row._original.location?.api?.isp) ||
+        new RegExp(filter.value, 'gi').test(
+          row._original.location?.api?.countryCode,
+        ) ||
+        new RegExp(filter.value, 'gi').test(
+          row._original.location?.api?.message,
+        )
       );
     }
     default: {
