@@ -13,24 +13,16 @@ const tableConfigTemplate = [
     },
   },
   {
-    Header: 'Emails',
-    accessor: 'emails',
+    Header: 'Name',
+    accessor: 'name',
     Cell: (props) => {
       return (
-        props.value
-          .map((email) => {
-            return email.value;
-          })
-          .join(' ') +
+        props.value +
         (props.original.token === window.localStorage.getItem('token')
           ? ' (You)'
           : '')
       );
     },
-  },
-  {
-    Header: 'Name',
-    accessor: 'name',
   },
   {
     Header: 'IP',

@@ -37,15 +37,6 @@ class UserPage extends Component<any, any> {
       <div>
         {user.isAdmin ? <AdminHeader /> : null}
         <ListGroup>
-          <ListGroupItem active>
-            <ListGroupItemHeading>Emails</ListGroupItemHeading>
-            {user.emails.map((email, id) => {
-              return (
-                <ListGroupItemText key={id}>{email.value}</ListGroupItemText>
-              );
-            })}
-          </ListGroupItem>
-
           <ListGroupItem>
             <ListGroupItemHeading>Name</ListGroupItemHeading>
             <ListGroupItemText>{user.name}</ListGroupItemText>
