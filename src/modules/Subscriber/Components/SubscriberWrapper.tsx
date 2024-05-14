@@ -30,17 +30,10 @@ class StreamWrapper extends Component<any, any> {
             apps: _.chain(streams).map('app').uniq().value(),
             channels: _.chain(streams).map('channel').uniq().value(),
             countries: _.chain(streams)
-              .map('location.api.country')
+              .map('countryCode')
               .compact()
               .uniq()
-              .value()
-              .concat(
-                _.chain(streams)
-                  .map('location.api.message')
-                  .compact()
-                  .uniq()
-                  .value(),
-              ),
+              .value(),
           })}
           data={streams}
           minRows={0}

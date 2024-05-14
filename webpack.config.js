@@ -61,4 +61,7 @@ module.exports = {
       },
     ],
   },
+  output: {
+    publicPath: '/',
+  },
 };
