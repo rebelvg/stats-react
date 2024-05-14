@@ -4,6 +4,7 @@ import humanize from 'humanize-plus';
 import moment from 'moment';
 import qs from 'qs';
 import humanizeDuration from 'humanize-duration';
+import { Alert } from 'reactstrap';
 
 import StreamsWrapper from '../Components/StreamsWrapper';
 import {
@@ -22,6 +23,10 @@ import {
   { getAction },
 )
 class StreamsPage extends Component<any, any> {
+  componentDidMount() {
+    this.props.getAction();
+  }
+
   render() {
     const {
       streams = [],
@@ -42,9 +47,9 @@ class StreamsPage extends Component<any, any> {
     const { search } = this.props.location;
     const { error, isLoading } = this.props;
 
-    let searchParams = qs.parse(search, { ignoreQueryPrefix: true });
+    if (error) return <Alert color="danger">{error}</Alert>;
 
-    if (error) return <div>{error}</div>;
+    let searchParams = qs.parse(search, { ignoreQueryPrefix: true });
 
     return (
       <div>

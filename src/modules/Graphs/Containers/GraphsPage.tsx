@@ -45,13 +45,8 @@ class GraphsPage extends Component<any> {
   render() {
     const { error, isLoading } = this.props;
 
-    if (error) {
-      return <div>{error}</div>;
-    }
-
-    if (isLoading) {
-      return <Alert color="danger">Loading...</Alert>;
-    }
+    if (error) return <Alert color="danger">{error}</Alert>;
+    if (isLoading) return <Alert color="info">Loading...</Alert>;
 
     const {
       totalDurationStreams = [],

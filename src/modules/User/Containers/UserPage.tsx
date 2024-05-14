@@ -31,7 +31,7 @@ class UserPage extends Component<any, any> {
     const { error } = this.props;
 
     if (error) return <Alert color="danger">{error}</Alert>;
-    if (!user) return <div>Loading...</div>;
+    if (!user) return <Alert color="info">Loading...</Alert>;
 
     return (
       <div>

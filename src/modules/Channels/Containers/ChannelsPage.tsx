@@ -18,11 +18,11 @@ class ChannelsPage extends Component<any, any> {
 
   constructor(props) {
     super(props);
-
-    this.props.getAction();
   }
 
   componentDidMount() {
+    this.props.getAction();
+
     this.timerId = setInterval(() => {
       this.props.getAction();
     }, 5000);
@@ -36,21 +36,18 @@ class ChannelsPage extends Component<any, any> {
     const { live: servers = [] } = this.props.data;
     const { error } = this.props;
 
-    if (error) {
-      return <Alert color="danger">{error}</Alert>;
-    }
+    if (error) return <Alert color="danger">{error}</Alert>;
 
-    if (servers.length === 0) {
-      return <Alert color="danger">No servers online.</Alert>;
-    }
+    if (servers.length === 0)
+      return <Alert color="info">No servers online.</Alert>;
 
     return (
       <div>
         {servers.map(({ server, apps }, id) => {
           if (apps.length === 0) {
             return (
-              <Alert key={id} color="danger">
-                {server}
+              <Alert key={id} color="info">
+                {server} / apps: {apps.length}
               </Alert>
             );
           }

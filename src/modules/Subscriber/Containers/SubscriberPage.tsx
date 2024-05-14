@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Alert } from 'reactstrap';
 
 import SubscriberWrapper from '../Components/SubscriberWrapper';
 import { getAction, getError, getData } from '../../../redux/subscriber';
@@ -12,7 +13,16 @@ import { getAction, getError, getData } from '../../../redux/subscriber';
   { getAction },
 )
 class SubscriberPage extends Component<any, any> {
-  componentDidMount() {
+  componentWillReceiveProps(nextProps) {
+    const id = this.props.match.params.id;
+    const newId = nextProps.match.params.id;
+
+    if (newId !== id) {
+      this.props.getAction(newId);
+    }
+  }
+
+  componentWillMount(): void {
     const id = this.props.match.params.id;
 
     this.props.getAction(id);
@@ -22,7 +32,7 @@ class SubscriberPage extends Component<any, any> {
     const { subscriber = null, streams = [] } = this.props.data;
     const { error } = this.props;
 
-    if (error) return <div>{error}</div>;
+    if (error) return <Alert color="danger">{error}</Alert>;
 
     return (
       <div>

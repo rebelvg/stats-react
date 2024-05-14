@@ -15,6 +15,10 @@ import { getAction, getError, getData, getLoading } from '../../../redux/ips';
   { getAction },
 )
 class IPsPage extends Component<any, any> {
+  componentDidMount() {
+    this.props.getAction();
+  }
+
   render() {
     const {
       ips = [],
@@ -29,9 +33,9 @@ class IPsPage extends Component<any, any> {
     const { search } = this.props.location;
     const { error, isLoading } = this.props;
 
-    let searchParams = qs.parse(search, { ignoreQueryPrefix: true });
-
     if (error) return <Alert color="danger">{error}</Alert>;
+
+    let searchParams = qs.parse(search, { ignoreQueryPrefix: true });
 
     return (
       <div>

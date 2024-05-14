@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import qs from 'qs';
+import { Alert } from 'reactstrap';
 
 import StreamWrapper from '../Components/StreamWrapper';
 import { getAction, getError, getData, getEvents } from '../../../redux/stream';
@@ -23,6 +24,12 @@ class StreamPage extends Component<any, any> {
     }
   }
 
+  componentWillMount(): void {
+    const id = this.props.match.params.id;
+
+    this.props.getAction(id);
+  }
+
   render() {
     const {
       stream,
@@ -34,9 +41,9 @@ class StreamPage extends Component<any, any> {
     const { search } = this.props.location;
     const { error, events } = this.props;
 
-    let searchParams = qs.parse(search, { ignoreQueryPrefix: true });
+    if (error) return <Alert color="danger">{error}</Alert>;
 
-    if (error) return <div>{error}</div>;
+    let searchParams = qs.parse(search, { ignoreQueryPrefix: true });
 
     return (
       <div>

@@ -63,10 +63,6 @@ class SubscribersWrapper extends Component<any, any> {
     this.buildQuery();
   };
 
-  componentDidMount() {
-    this.fetchData();
-  }
-
   buildQuery = () => {
     const history = createHistory();
 
