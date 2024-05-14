@@ -10,7 +10,7 @@ const handleLogout = () => {
 
 class Header extends Component {
   render() {
-    let isLoggedIn = !!window.localStorage.getItem('token');
+    let isLoggedIn = !!window.localStorage.getItem('token') ?? undefined;
 
     return (
       <HeaderWrap>

@@ -18,7 +18,8 @@ const tableConfigTemplate = [
     Cell: (props) => {
       return (
         props.value +
-        (props.original.token === window.localStorage.getItem('token')
+        (props.original.token === window.localStorage.getItem('token') ??
+        undefined
           ? ' (You)'
           : '')
       );
@@ -53,7 +54,7 @@ function tableConfigOptions(putUser) {
 
     try {
       const tokenData: any = jsonwebtoken.decode(
-        window.localStorage.getItem('token'),
+        window.localStorage.getItem('token') ?? undefined,
       );
 
       userId = tokenData.userId;

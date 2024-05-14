@@ -15,7 +15,7 @@ export function getAction() {
     axios
       .get(`${config.STATS_HOST}/channels`, {
         headers: {
-          'jwt-token': window.localStorage.getItem('token'),
+          'jwt-token': window.localStorage.getItem('token') ?? undefined,
         },
       })
       .then((res) => {
