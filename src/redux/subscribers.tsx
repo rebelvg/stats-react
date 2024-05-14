@@ -40,7 +40,7 @@ export function getAction(
     axios
       .get(`${config.STATS_HOST}/subscribers`, {
         headers: {
-          'jwt-token': window.localStorage.getItem('token') ?? undefined,
+          'jwt-token': window.localStorage.getItem('token') ?? '',
         },
         params,
       })

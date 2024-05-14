@@ -49,8 +49,7 @@ function generateColumns(updateDataFnc: () => Promise<void>) {
                 },
                 {
                   headers: {
-                    'jwt-token':
-                      window.localStorage.getItem('token') ?? undefined,
+                    'jwt-token': window.localStorage.getItem('token') ?? '',
                   },
                 },
               );
@@ -89,7 +88,7 @@ class AdminChannelsPage extends Component<any, { channels: IChannel[] }> {
       `${config.STATS_HOST}/admin/channels`,
       {
         headers: {
-          'jwt-token': window.localStorage.getItem('token') ?? undefined,
+          'jwt-token': window.localStorage.getItem('token') ?? '',
         },
       },
     );

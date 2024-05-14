@@ -15,7 +15,7 @@ export function getAction(id) {
     axios
       .get(`${config.STATS_HOST}/graphs/${id}`, {
         headers: {
-          'jwt-token': window.localStorage.getItem('token') ?? undefined,
+          'jwt-token': window.localStorage.getItem('token') ?? '',
         },
       })
       .then((res) => {

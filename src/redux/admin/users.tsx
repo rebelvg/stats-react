@@ -18,7 +18,7 @@ export function getAction() {
     axios
       .get(`${config.STATS_HOST}/admin/users`, {
         headers: {
-          'jwt-token': window.localStorage.getItem('token') ?? undefined,
+          'jwt-token': window.localStorage.getItem('token') ?? '',
         },
       })
       .then((res) => {
@@ -43,7 +43,7 @@ export function putUser(id, data) {
     axios
       .put(`${config.STATS_HOST}/admin/users/${id}`, data, {
         headers: {
-          'jwt-token': window.localStorage.getItem('token') ?? undefined,
+          'jwt-token': window.localStorage.getItem('token') ?? '',
         },
       })
       .then((res) => {

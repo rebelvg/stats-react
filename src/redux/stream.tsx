@@ -38,13 +38,13 @@ export function getAction(
     Promise.all([
       axios.get(`${config.STATS_HOST}/streams/${id}`, {
         headers: {
-          'jwt-token': window.localStorage.getItem('token') ?? undefined,
+          'jwt-token': window.localStorage.getItem('token') ?? '',
         },
         params,
       }),
       axios.get(`${config.STATS_HOST}/streams/${id}/graph`, {
         headers: {
-          'jwt-token': window.localStorage.getItem('token') ?? undefined,
+          'jwt-token': window.localStorage.getItem('token') ?? '',
         },
         params,
       }),

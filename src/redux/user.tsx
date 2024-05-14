@@ -15,7 +15,7 @@ export function getAction() {
     axios
       .get(`${config.STATS_HOST}/users`, {
         headers: {
-          'jwt-token': window.localStorage.getItem('token') ?? undefined,
+          'jwt-token': window.localStorage.getItem('token') ?? '',
         },
       })
       .then((res) => {
