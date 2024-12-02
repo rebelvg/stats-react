@@ -24,7 +24,7 @@
     "html-webpack-plugin": "^4.5.0",
     "humanize-duration": "^3.12.0",
     "humanize-plus": "^1.8.2",
-    "locutus": "^2.0.9",
+    "locutus": "^2.0.15",
     "lodash": "^4.17.4",
     "moment": "^2.19.2",
     "normalize.css": "^7.0.0",
