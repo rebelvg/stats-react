@@ -128,7 +128,7 @@ class GraphsPage extends Component<any> {
       <div>
         {user && <Alert color="primary">{user.name}</Alert>}
         <div>
-          <BarChart
+          {/* <BarChart
             width={900}
             height={350}
             data={totalDurationStreamsData}
@@ -152,9 +152,9 @@ class GraphsPage extends Component<any> {
               dataKey="value"
               fill="#8884d8"
             />
-          </BarChart>
+          </BarChart> */}
 
-          <BarChart
+          {/* <BarChart
             width={900}
             height={350}
             data={totalDurationSubsData}
@@ -178,7 +178,7 @@ class GraphsPage extends Component<any> {
               dataKey="value"
               fill="#82ca9d"
             />
-          </BarChart>
+          </BarChart> */}
 
           <BarChart
             width={900}
