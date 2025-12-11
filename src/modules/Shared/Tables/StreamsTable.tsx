@@ -130,10 +130,10 @@ function tableConfigOptions(options: any = {}, removeColumns: string[] = []) {
           value={filter ? filter.value : ''}
         />
         <datalist id="apps">
-          <option value="" />
+          {options.apps?.length > 0 ? <option key={0} value="" /> : ''}
           {_.map(options.apps, (app, id) => {
             return (
-              <option key={id} value={app}>
+              <option key={id + 1} value={app}>
                 {app}
               </option>
             );
@@ -156,10 +156,10 @@ function tableConfigOptions(options: any = {}, removeColumns: string[] = []) {
           value={filter ? filter.value : ''}
         />
         <datalist id="channels">
-          <option value="" />
+          {options.channels?.length > 0 ? <option key={0} value="" /> : ''}
           {_.map(options.channels, (channel, id) => {
             return (
-              <option key={id} value={channel}>
+              <option key={id + 1} value={channel}>
                 {channel}
               </option>
             );
@@ -182,10 +182,10 @@ function tableConfigOptions(options: any = {}, removeColumns: string[] = []) {
           value={filter ? filter.value : ''}
         />
         <datalist id="countries">
-          <option value="" />
+          {options.countries?.length > 0 ? <option key={0} value="" /> : ''}
           {_.map(options.countries, (country, id) => {
             return (
-              <option key={id} value={country}>
+              <option key={id + 1} value={country}>
                 {country}
               </option>
             );
