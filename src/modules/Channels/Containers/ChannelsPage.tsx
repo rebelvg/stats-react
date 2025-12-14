@@ -33,44 +33,37 @@ class ChannelsPage extends Component<any, any> {
   }
 
   render() {
-    const { live: servers = [] } = this.props.data;
+    const { channels = [] } = this.props.data;
+
     const { error } = this.props;
 
     if (error) return <Alert color="danger">{error}</Alert>;
 
-    if (servers.length === 0)
-      return <Alert color="info">No servers online.</Alert>;
+    if (channels.length === 0)
+      return <Alert color="info">No channels online.</Alert>;
 
     return (
       <div>
-        {servers.map(({ server, apps }, id) => {
-          if (apps.length === 0) {
+        {channels.map(({ streams }, channelId) => {
+          if (streams.length === 0) {
             return (
-              <Alert key={id} color="info">
-                {server} / apps: {apps.length}
+              <Alert key={channelId} color="info">
+                No streams online.
               </Alert>
             );
           }
 
           return (
-            <div key={id}>
-              <Alert key={id} color="success">
-                {server}
-              </Alert>
-
-              {apps.map(({ app, channels }, serverId) => {
-                return channels.map(
-                  ({ channel, publisher, subscribers }, channelId) => {
-                    return (
-                      <div key={`${server}-${app}-${channel}}`}>
-                        <ChannelWrapper
-                          stream={publisher}
-                          subscribers={subscribers}
-                        />
-                        <br />
-                      </div>
-                    );
-                  },
+            <div key={channelId}>
+              {streams.map((stream, streamId) => {
+                return (
+                  <div key={`${channelId}-${streamId}}`}>
+                    <Alert key={channelId} color="success">
+                      channel/{stream.name}
+                    </Alert>
+                    <ChannelWrapper stream={stream} />
+                    <br />
+                  </div>
                 );
               })}
             </div>
