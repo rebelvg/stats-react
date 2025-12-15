@@ -97,6 +97,7 @@ const tableConfigTemplate = [
       return 'N/A';
     },
     show: true,
+    maxWidth: 80,
   },
   {
     Header: 'Connections',
