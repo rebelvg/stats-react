@@ -44,14 +44,14 @@ const reducer = handleActions(
     [ACTION_GET_SUCCESS]: (state, action) => {
       return {
         ...state,
-        data: action.data,
+        data: action?.data,
         error: null,
       };
     },
     [ACTION_GET_FAILED]: (state, action) => {
       return {
         ...state,
-        error: action.error,
+        error: action?.error,
       };
     },
   },
@@ -61,5 +61,5 @@ const reducer = handleActions(
 export default reducer;
 
 //SELECTORS
-export const getError = (state) => state.channels.error;
-export const getData = (state) => state.channels.data;
+export const getError = (state) => state.channels?.error;
+export const getData = (state) => state.channels?.data;
