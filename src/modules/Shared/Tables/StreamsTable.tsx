@@ -109,6 +109,11 @@ const tableConfigTemplate = [
     accessor: 'peakViewersCount',
     minWidth: 40,
   },
+  {
+    Header: 'Protocol',
+    accessor: 'protocol',
+    minWidth: 40,
+  },
 ];
 
 function tableConfigOptions(options: any = {}, removeColumns: string[] = []) {
@@ -188,6 +193,32 @@ function tableConfigOptions(options: any = {}, removeColumns: string[] = []) {
             return (
               <option key={id + 1} value={country}>
                 {country}
+              </option>
+            );
+          })}
+        </datalist>
+      </div>
+    );
+  }
+
+  let protocolsTableColumn = _.find(tableConfig, ['accessor', 'protocol']);
+
+  if (protocolsTableColumn) {
+    protocolsTableColumn.Filter = ({ filter, onChange }) => (
+      <div>
+        <input
+          list="protocols"
+          name="protocols"
+          onChange={(event) => onChange(event.target.value)}
+          style={{ width: '100%' }}
+          value={filter ? filter.value : ''}
+        />
+        <datalist id="protocols">
+          {options.protocols?.length > 0 ? <option key={0} value="" /> : ''}
+          {_.map(options.protocols, (protocol, id) => {
+            return (
+              <option key={id + 1} value={protocol}>
+                {protocol}
               </option>
             );
           })}

@@ -122,6 +122,14 @@ class ChannelsPage extends Component<any, any> {
                           },
                         },
                         {
+                          Header: 'Protocol',
+                          accessor: 'protocol',
+                          Cell: (props) => {
+                            return props.value || 'N/A';
+                          },
+                          minWidth: 40,
+                        },
+                        {
                           Header: 'User',
                           accessor: 'userName',
                           Cell: (props) => {
