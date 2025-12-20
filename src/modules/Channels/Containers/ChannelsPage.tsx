@@ -68,7 +68,7 @@ class ChannelsPage extends Component<any, any> {
                     <ReactTable
                       columns={[
                         {
-                          Header: 'Connected',
+                          Header: 'Date',
                           accessor: 'connectCreated',
                           Cell: (props) => {
                             return (
@@ -114,7 +114,7 @@ class ChannelsPage extends Component<any, any> {
                           minWidth: 40,
                         },
                         {
-                          Header: 'Viewers',
+                          Header: 'Clients',
                           accessor: 'subscribers',
                           minWidth: 40,
                           Cell: (props) => {

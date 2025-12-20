@@ -6,7 +6,7 @@ import * as jsonwebtoken from 'jsonwebtoken';
 
 const tableConfigTemplate = [
   {
-    Header: 'Time Registered',
+    Header: 'Date',
     accessor: 'createdAt',
     Cell: (props) => {
       return moment(props.value).format('ddd D/MMM/YY HH:mm');
@@ -16,12 +16,13 @@ const tableConfigTemplate = [
     Header: 'Name',
     accessor: 'name',
     Cell: (props) => {
-      return (
-        props.value +
-        (props.original.token === window.localStorage.getItem('token') ?? ''
-          ? ' (You)'
-          : '')
+      const tokenData: any = jsonwebtoken.decode(
+        window.localStorage.getItem('token') ?? '',
       );
+
+      const userId = tokenData.userId;
+
+      return props.value + (props.original._id === userId ? ' (You)' : '');
     },
   },
   {
@@ -86,7 +87,7 @@ function tableConfigOptions(putUser) {
         onClick={() => {
           putUser(props.original._id, {
             isStreamer: !props.value,
-          });
+          }).catch();
         }}
         block
       >

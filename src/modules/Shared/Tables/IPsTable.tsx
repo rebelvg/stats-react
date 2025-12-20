@@ -7,7 +7,7 @@ import humanizeDuration from 'humanize-duration';
 
 const tableConfigTemplate = [
   {
-    Header: 'Time Added',
+    Header: 'Date',
     accessor: 'createdAt',
     Cell: (props) => {
       return moment(props.value).format('ddd D/MMM/YY HH:mm');

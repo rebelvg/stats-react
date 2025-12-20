@@ -7,7 +7,7 @@ import humanizeDuration from 'humanize-duration';
 
 const tableConfigTemplate = [
   {
-    Header: 'Connect Created',
+    Header: 'Date',
     accessor: 'connectCreated',
     Cell: (props) => {
       return (
