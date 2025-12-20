@@ -67,7 +67,7 @@ function tableConfigOptions(putUser) {
         onClick={() => {
           putUser(props.original._id, {
             isAdmin: !props.value,
-          });
+          }).catch();
         }}
         block
         disabled={props.original._id === userId}
