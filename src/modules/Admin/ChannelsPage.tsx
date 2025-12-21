@@ -104,6 +104,15 @@ class AdminChannelsPage extends Component<any, { channels: IChannel[] }> {
     return (
       <div>
         <AdminHeader />
+
+        <button
+          onClick={() => {
+            this.props.getAction();
+          }}
+        >
+          Refresh
+        </button>
+
         <ReactTable
           columns={generateColumns(this.updateData)}
           data={channels}

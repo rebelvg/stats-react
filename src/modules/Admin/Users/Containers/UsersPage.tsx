@@ -33,6 +33,15 @@ class UsersPage extends Component<any, any> {
     return (
       <div>
         <AdminHeader />
+
+        <button
+          onClick={() => {
+            this.props.getAction();
+          }}
+        >
+          Refresh
+        </button>
+
         <ReactTable
           columns={usersTable(this.props.putUser)}
           data={users}

@@ -53,6 +53,14 @@ class StreamsPage extends Component<any, any> {
 
     return (
       <div>
+        <button
+          onClick={() => {
+            this.props.getAction();
+          }}
+        >
+          Refresh
+        </button>
+
         <StreamsWrapper
           streams={streams}
           options={options}
@@ -61,6 +69,14 @@ class StreamsPage extends Component<any, any> {
           searchParams={searchParams}
           isLoading={isLoading}
         />
+
+        <button
+          onClick={() => {
+            this.props.getAction();
+          }}
+        >
+          Refresh
+        </button>
 
         <div>Total Traffic: {humanize.fileSize(totalBytes)}</div>
         <div>
@@ -79,14 +95,6 @@ class StreamsPage extends Component<any, any> {
         <div>Limit: {limit}</div>
         <div>Page: {page}</div>
         <div>Pages: {pages}</div>
-
-        <button
-          onClick={() => {
-            this.props.getAction();
-          }}
-        >
-          Refresh
-        </button>
       </div>
     );
   }

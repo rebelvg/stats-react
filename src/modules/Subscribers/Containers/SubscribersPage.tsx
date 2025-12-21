@@ -47,6 +47,14 @@ class SubscribersPage extends Component<any, any> {
 
     return (
       <div>
+        <button
+          onClick={() => {
+            this.props.getAction();
+          }}
+        >
+          Refresh
+        </button>
+
         <SubscribersWrapper
           subscribers={subscribers}
           options={options}
@@ -55,6 +63,14 @@ class SubscribersPage extends Component<any, any> {
           searchParams={searchParams}
           isLoading={isLoading}
         />
+
+        <button
+          onClick={() => {
+            this.props.getAction();
+          }}
+        >
+          Refresh
+        </button>
 
         <div>Total Traffic: {humanize.fileSize(totalBytes)}</div>
         <div>
@@ -71,14 +87,6 @@ class SubscribersPage extends Component<any, any> {
         <div>Limit: {limit}</div>
         <div>Page: {page}</div>
         <div>Pages: {pages}</div>
-
-        <button
-          onClick={() => {
-            this.props.getAction();
-          }}
-        >
-          Refresh
-        </button>
       </div>
     );
   }

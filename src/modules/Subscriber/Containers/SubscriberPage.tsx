@@ -36,6 +36,16 @@ class SubscriberPage extends Component<any, any> {
 
     return (
       <div>
+        <button
+          onClick={() => {
+            const id = this.props.match.params.id;
+
+            this.props.getAction(id);
+          }}
+        >
+          Refresh
+        </button>
+
         <SubscriberWrapper subscriber={subscriber} streams={streams} />
 
         <button

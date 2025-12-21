@@ -39,6 +39,14 @@ class IPsPage extends Component<any, any> {
 
     return (
       <div>
+        <button
+          onClick={() => {
+            this.props.getAction();
+          }}
+        >
+          Refresh
+        </button>
+
         <IPsWrapper
           ips={ips}
           options={options}
@@ -47,6 +55,14 @@ class IPsPage extends Component<any, any> {
           searchParams={searchParams}
           isLoading={isLoading}
         />
+
+        <button
+          onClick={() => {
+            this.props.getAction();
+          }}
+        >
+          Refresh
+        </button>
 
         <div>Total Counties: {totalCountries}</div>
         <div>Total Cities: {totalCities}</div>
@@ -57,14 +73,6 @@ class IPsPage extends Component<any, any> {
         <div>Limit: {limit}</div>
         <div>Page: {page}</div>
         <div>Pages: {pages}</div>
-
-        <button
-          onClick={() => {
-            this.props.getAction();
-          }}
-        >
-          Refresh
-        </button>
       </div>
     );
   }
