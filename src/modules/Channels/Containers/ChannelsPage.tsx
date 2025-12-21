@@ -114,14 +114,6 @@ class ChannelsPage extends Component<any, any> {
                           minWidth: 40,
                         },
                         {
-                          Header: 'Clients',
-                          accessor: 'subscribers',
-                          minWidth: 40,
-                          Cell: (props) => {
-                            return props.value?.length || 0;
-                          },
-                        },
-                        {
                           Header: 'Protocol',
                           accessor: 'protocol',
                           Cell: (props) => {
@@ -145,6 +137,16 @@ class ChannelsPage extends Component<any, any> {
                     />
                     <ReactTable
                       columns={[
+                        {
+                          Header: '',
+                          accessor: '_id',
+                          Cell: (props) => {
+                            console.log(props);
+
+                            return `#${props.index + 1}`;
+                          },
+                          minWidth: 5,
+                        },
                         {
                           Header: 'Connected',
                           accessor: 'connectCreated',
